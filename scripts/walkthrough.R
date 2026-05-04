@@ -25,12 +25,6 @@ packageVersion("pavo")
 # In RStudio: Session → Set Working Directory → To Source File Location
 # is usually the easiest move.
 #
-# CLOUD LAUNCH (Binder): the project root is /home/rstudio/. RStudio opens
-# the .Rproj at that root, so the working directory is correct out of the
-# box and you do NOT need to setwd(). Verify with getwd() — it should print
-# something like "/home/rstudio".
-#
-# LOCAL: setwd to wherever you unpacked this folder, e.g.:
 # setwd("~/Documents/EEB187-pavo-lab/labs/demo-pavo-week6/")
 
 
@@ -132,7 +126,11 @@ par(mfrow = c(1, 1))
 # Returns the path to the segmented JPG (saved alongside the raw image).
 # Output filename: <original-name>-segmented.jpg
 
-segment_fish <- function(raw_path, out_dir = NULL, max_aspect = 3, quiet = TRUE) {
+segment_fish <- function(raw_path, out_dir = NULL,
+                          target_body  = 1200,
+                          canvas_w     = 1500,
+                          canvas_h     = 800,
+                          quiet        = TRUE) {
   if (!file.exists(raw_path)) {
     stop("Raw image not found: ", raw_path)
   }
@@ -196,35 +194,56 @@ segment_fish <- function(raw_path, out_dir = NULL, max_aspect = 3, quiet = TRUE)
 
   file.remove(tmp_png)
 
-  # Step 3: Aspect-ratio QC. Very long-thin or tall-thin fish images plot
-  # poorly in side-by-side panel layouts. If aspect > max_aspect:1, pad with
-  # white to bring it within bounds. Padding doesn't affect pavo metrics
-  # because it adds more bkgID-excluded background pixels.
+  # Step 3: Standardize the canvas. After magick -trim the JPG is the tight
+  # bounding box of the fish. We do TWO uniform operations:
+  #   (a) aspect-preserving resize so the fish's longer axis = target_body px,
+  #   (b) -extent to pad with white to a fixed canvas (canvas_w x canvas_h),
+  #       fish centered.
+  # The result: every fish that goes through segment_fish() lands on the
+  # same canvas dimensions with the fish at the same physical body length.
+  # This makes adjacent(xpts = N) sample the fish at the SAME density across
+  # species, so A / m / Jc are directly comparable. The white padding gets
+  # masked out by bkgID = "white" downstream.
   # Use 'x' as the separator (not a space) so system2 doesn't split it.
   info <- system2("magick", c("identify", "-format", "%wx%h", out_jpg),
                    stdout = TRUE, stderr = silent)
   dims <- as.integer(strsplit(trimws(info[1]), "x")[[1]])
-  w <- dims[1]; h <- dims[2]
-  ar <- max(w / h, h / w)
-  if (ar > max_aspect) {
-    target_w <- max(w, ceiling(h / max_aspect))
-    target_h <- max(h, ceiling(w / max_aspect))
-    system2("magick", c(shQuote(out_jpg),
-                         "-gravity", "center",
-                         "-background", "white",
-                         "-extent", paste0(target_w, "x", target_h),
-                         shQuote(out_jpg)),
-            stdout = silent, stderr = silent)
-    if (!quiet) {
-      message(sprintf(
-        "QC: aspect %.2f exceeded %.1f cap; padded %dx%d -> %dx%d",
-        ar, max_aspect, w, h, target_w, target_h))
-    } else {
-      # Always surface this — it's important the student knows
-      message(sprintf("Padded to %dx%d (was %dx%d, aspect %.2f)",
-                       target_w, target_h, w, h, ar))
-    }
+  w0 <- dims[1]; h0 <- dims[2]
+
+  # (a) Uniform rescale so longer body axis = target_body. Image::Magick's
+  # `-resize WxH` preserves aspect by default (the bigger of W or H wins),
+  # so giving target_body for both is equivalent to "fit-into-square".
+  resize_status <- system2(
+    "magick",
+    c(shQuote(out_jpg),
+      "-resize", paste0(target_body, "x", target_body),
+      shQuote(out_jpg)),
+    stdout = silent, stderr = silent)
+  if (resize_status != 0) {
+    stop("magick -resize failed in canvas standardization step")
   }
+
+  # (b) Pad to uniform canvas, fish centered. -extent pads with the
+  # -background color (white) without rescaling.
+  extent_status <- system2(
+    "magick",
+    c(shQuote(out_jpg),
+      "-gravity", "center",
+      "-background", "white",
+      "-extent", paste0(canvas_w, "x", canvas_h),
+      shQuote(out_jpg)),
+    stdout = silent, stderr = silent)
+  if (extent_status != 0) {
+    stop("magick -extent failed in canvas standardization step")
+  }
+
+  # Tell the student what happened — useful when reviewing weird inputs.
+  info2 <- system2("magick", c("identify", "-format", "%wx%h", out_jpg),
+                    stdout = TRUE, stderr = silent)
+  dims2 <- as.integer(strsplit(trimws(info2[1]), "x")[[1]])
+  message(sprintf(
+    "Standardized: trimmed %dx%d -> body %dpx -> canvas %dx%d",
+    w0, h0, target_body, dims2[1], dims2[2]))
 
   message("Segmented: ", out_jpg)
   invisible(out_jpg)

@@ -46,21 +46,15 @@ cat(sprintf("R version:      %s\n",
 
 bundle <- "labs/demo-pavo-week6"
 if (!dir.exists(bundle)) {
-  # Try a few common locations. The flat cloud-launch repo has images/ at the
-  # project root, so "." is the bundle there.
+  # Try a few common locations
   for (cand in c("labs/demo-pavo-week6",
                  "../labs/demo-pavo-week6",
-                 "../../labs/demo-pavo-week6",
-                 ".",
-                 "..")) {
-    if (dir.exists(file.path(cand, "images/demo/segmented"))) {
-      bundle <- cand; break
-    }
+                 "../../labs/demo-pavo-week6")) {
+    if (dir.exists(cand)) { bundle <- cand; break }
   }
 }
-if (!dir.exists(file.path(bundle, "images/demo/segmented"))) {
-  cat("FAIL: cannot find images/demo/segmented/ from any expected location.\n")
-  cat("Run from the project root (where images/ lives).\n")
+if (!dir.exists(bundle)) {
+  cat("FAIL: cannot find labs/demo-pavo-week6/. Run from repo root.\n")
   quit(status = 1)
 }
 cat(sprintf("Bundle dir:     %s\n", normalizePath(bundle)))
