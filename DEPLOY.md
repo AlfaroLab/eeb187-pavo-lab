@@ -82,20 +82,9 @@ git add . && git commit -m "Sync lab content from main course repo" && git push
 
 After push, the next Binder launch builds a fresh image (5–10 min). For an instant rebuild, hit the launch URL once yourself to absorb the build wait before students arrive.
 
-## 6. Codespaces fallback (optional, not configured)
+## 6. Codespaces — wired up
 
-If a student needs a longer-running session than Binder's 90 minutes, Codespaces is a drop-in alternative — but it requires a GitHub account and counts against the free tier's monthly hours. To enable, add a `.devcontainer/devcontainer.json` pointing to the same Dockerfile:
-
-```jsonc
-{
-  "name": "EEB 187 pavo lab",
-  "build": { "dockerfile": "../.binder/Dockerfile" },
-  "forwardPorts": [8787],
-  "postAttachCommand": "echo 'Open http://localhost:8787 — user: rstudio, pass: rstudio'"
-}
-```
-
-Not built by default to keep the launcher single-path.
+`.devcontainer/devcontainer.json` is now committed and reuses the same `.binder/Dockerfile`, so any student can click **Code → Codespaces → Create codespace on main** and get the lab running with persistent state. No extra config needed on the maintainer side. To validate after a Dockerfile change, open a codespace yourself and confirm port 8787 forwards RStudio.
 
 ## 7. Local Docker fallback (zero-cloud option)
 

@@ -1,0 +1,17 @@
+{
+  "name": "EEB 187 — PAVO lab (Codespaces / VS Code dev container)",
+  "build": {
+    "context": "..",
+    "dockerfile": "../.binder/Dockerfile"
+  },
+  "forwardPorts": [8787],
+  "portsAttributes": {
+    "8787": {
+      "label": "RStudio Server",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postAttachCommand": "echo 'RStudio Server is on port 8787. user: rstudio, no password.'",
+  "remoteUser": "rstudio",
+  "workspaceFolder": "/home/rstudio"
+}
