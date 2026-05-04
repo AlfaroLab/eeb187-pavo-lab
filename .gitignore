@@ -1,0 +1,10 @@
+.DS_Store
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.quarto/
+_site/
+*-segmented.jpg
+*-rembg-tmp.png
+Rplots.pdf

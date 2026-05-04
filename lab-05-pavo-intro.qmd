@@ -1,0 +1,317 @@
+---
+title: "Lab 5: Introduction to pavo — Quantifying Reef Fish Color Patterns"
+subtitle: "Week 6"
+author: "EEB 187 — Ecology & Evolution of Color"
+format:
+  html:
+    toc: true
+    code-overflow: wrap
+  pdf:
+    toc: false
+---
+
+## Overview
+
+This is the first computational analysis lab of the course. You will use the R package **pavo** to extract color pattern metrics from reef fish photographs.
+
+**Format:** Instructor-led demo on three reef fish from three different families + independent practice on three fish from your group's assigned lineage.
+
+- **Demo + walkthrough** (instructor + Rosamari): 35–40 min
+- **Independent practice** (3 fish from your lineage): 30–35 min
+- **Wrap-up + cross-lineage comparison**: 5–10 min
+
+**Bring:**
+
+- Laptop with R, RStudio, and pavo installed (see `pre-lab-installation.qmd`)
+- The lab bundle: `labs/demo-pavo-week6/` (download from BruinLearn)
+- Three image files from your assigned lineage saved locally before lab — see Part B Step 1
+
+---
+
+## Part A: The demo — three reef fish, three pattern axes
+
+We're starting with three fish from three different families. Each fish has a fundamentally different pattern type. The pedagogical claim of the lab: pavo's adjacency framework can distinguish these patterns in numbers — specifically with the **A statistic** (aspect ratio).
+
+| Demo fish | Family | Pattern | Predicted A |
+|---|---|---|---|
+| Sergeant major (*Abudefduf saxatilis*) | Pomacentridae | Vertical bars | A > 1 |
+| Cleaner wrasse (*Labroides dimidiatus*) | Labridae | Horizontal stripe | A < 1 |
+| Mandarin fish (*Synchiropus splendidus*) | Callionymidae | Reticulate maze | A ≈ 1 |
+
+Follow along with `scripts/walkthrough.R`. Rosamari is presenting the slide deck; the R script is on your laptop.
+
+**Record the demo-fish metrics here for reference later:**
+
+| Metric | Sergeant major | Cleaner wrasse | Mandarin fish |
+|---|---|---|---|
+| k       | | | |
+| m       | | | |
+| **A**   | | | |
+| Jc      | | | |
+| Jt      | | | |
+| m_dS    | | | |
+| m_dL    | | | |
+
+---
+
+## Part B: Your turn — three fish from your assigned lineage
+
+Your group has been assigned a reef fish lineage (typically a family). Today's job: pick **three species from your lineage** that show **three visually different pattern types**. Run all three through the pavo pipeline. Compare your results to the demo fish from Part A.
+
+### Step 1: Pick three fish
+
+Browse the available images for your assigned lineage. (FishView, FishBase, your group's curated set, or `images/student-fish/<your-lineage>/` as fallback.) Pick three species that look as different as you can find — for example:
+
+- One with strong **vertical bars** (you predict A > 1)
+- One with a **horizontal element** like a stripe or band (you predict A < 1)
+- One that's **spotty, reticulate, or solid** (you predict A ≈ 1)
+
+If your lineage doesn't have all three pattern types, pick the three that span the widest pattern range available.
+
+Write your three species here:
+
+> **Lineage:** _________________________________________________
+>
+> **Fish 1** (predict A > 1?): ____________________________________
+>
+> **Fish 2** (predict A < 1?): ____________________________________
+>
+> **Fish 3** (predict A ≈ 1?): ____________________________________
+
+### Step 1.5: SEGMENT — remove the background from each image
+
+This is the most important pre-processing step. Without it, pavo's k-means classify() runs over the WHOLE image including water, reef, and tank glass. Background pixels become "color classes," and the resulting metrics describe the photograph rather than the fish.
+
+The 3 demo fish you saw in Part A were segmented using **rembg**, an AI background-removal tool. The demo's dramatic A values (1.54 / 0.60 / 1.02) depend on this segmentation step. You have two options:
+
+#### Path 1 (recommended): rembg via `segment_fish()` R helper
+
+The `segment_fish()` function in `walkthrough.R` wraps rembg + ImageMagick into one R call. **One-time setup** (you should have done this in pre-lab Step 6):
+
+```bash
+# Install uv (handles rembg's Python + dependencies automatically):
+brew install uv                  # macOS
+curl -LsSf https://astral.sh/uv/install.sh | sh   # Linux
+# Plus ImageMagick:
+brew install imagemagick         # macOS
+sudo apt install imagemagick     # Linux
+```
+
+**Per-fish use** (in R during lab):
+
+```r
+seg_path <- segment_fish("path/to/raw_fish.jpg")
+my_fish  <- getimg(seg_path)
+```
+
+The result is a JPG with the fish on a clean white background, saved as `<name>-segmented.jpg`. If `segment_fish()` errors out, fall back to Path 2.
+
+::: {.callout-warning}
+## If `segment_fish()` fails with "rembg failed (or not installed)"
+
+R may not see your shell's PATH. First confirm the tools work in your terminal:
+
+```bash
+uvx --from "rembg[cpu,cli]" rembg --help
+magick -version
+```
+
+If both work in terminal but `segment_fish()` still fails, R's PATH is incomplete. Check it:
+
+```r
+Sys.getenv("PATH")
+```
+
+If `/opt/homebrew/bin` (Homebrew on macOS) or `~/.local/bin` isn't there, add it to `~/.Renviron`:
+
+```
+PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:~/.local/bin
+```
+
+…and restart RStudio. If you're stuck, use Path 2 below — it always works.
+:::
+
+#### Path 2 (fallback, no extra install): manual crop
+
+Open each fish image in **Preview.app** (or any image editor), drag a selection rectangle as tight to the fish as possible without cutting any fins, then Tools → Crop and save. Load with `getimg("path/to/cropped.jpg")` — skip `segment_fish()`.
+
+::: {.callout-tip}
+## Tradeoff for the manual-crop path
+
+Cropped images still have water/reef in the corners. **Your A values will be less dramatic than the demo** (closer to A=1 for all three) because some background pixels will pollute the k-means classification and the adjacency grid. The directional ordering still holds — vertical-bar fish > 1, horizontal-stripe fish < 1 — just with smaller effect sizes. Note in your worksheet which path you used. The rubric accommodates both.
+
+Step 2 below has a different code block for the manual-crop path: drop the `bkgID = my_bkg, exclude = "background"` arguments since there's no white background class to exclude.
+:::
+
+#### Comparing the three folders for the demo fish
+
+Look at `images/demo/raw/` (uncropped originals) and `images/demo/segmented/` (rembg output) to see exactly what segmentation does. Run `getimg()` on both and compare the resulting classRGB palettes — the raw ones include a "blue water" class; the segmented ones don't.
+
+### Step 1.6: REGISTER each image to left-lateral view
+
+**Standard ichthyology convention**: head on the LEFT, tail on the RIGHT. Before classifying, look at each of your three images and confirm the head is on the left. If a fish is facing the wrong way, flip it horizontally:
+
+```r
+# Defined in walkthrough.R
+flip_to_left_lateral("path/to/my_fish.jpg")
+```
+
+Or from a terminal (macOS / Linux with ImageMagick installed):
+
+```bash
+magick my_fish.jpg -flop my_fish.jpg
+```
+
+This step matters because:
+
+- Predictions like "vertical bars" presume the canonical orientation
+- Cross-fish comparison in the next pavo session expects all images registered the same way
+- Same goes for any biology paper you'll publish with this kind of analysis
+
+Note: horizontal mirroring does NOT change the A, m, Jc, or other adjacency metrics — they're invariant to left/right reflection. Registration is for visual consistency and comparative validity, not metric correctness.
+
+### Step 2: Run the pipeline on each fish
+
+For each of your three segmented + registered fish, run:
+
+```r
+my_fish <- getimg(seg_path)         # path returned by segment_fish() or your crop
+plot(my_fish)
+
+# k = (number of distinct fish colors) + 1 if you used rembg (the +1 is for
+# the white background). For manual-crop path, just the fish-color count.
+my_k    <- 4
+my_class <- classify(my_fish, kcols = my_k)
+plot(my_class)
+
+# Identify and exclude white background (only for rembg path)
+my_bkg <- pick_white_bg(my_class)   # = which.max(rowSums(classRGB))
+my_cd  <- simple_coldists(my_class)
+my_adj <- adjacent(my_class, xpts = 200, xscale = 5, coldists = my_cd,
+                   bkgID = my_bkg, exclude = "background")
+# For the manual-crop path: drop the bkgID + exclude args.
+
+# Pull the metrics
+my_metrics <- tibble(
+  k    = pick_col(my_adj, c("k", "kcols")),
+  m    = pick_col(my_adj, c("m", "m_r")),
+  A    = pick_col(my_adj, c("A", "Asp")),
+  Jc   = pick_col(my_adj, c("Jc")),
+  Jt   = pick_col(my_adj, c("Jt")),
+  m_dS = pick_col(my_adj, c("m_dS", "Cs_dS")),
+  m_dL = pick_col(my_adj, c("m_dL", "Cs_dL")),
+)
+```
+
+`pick_col()`, `simple_coldists()`, `pick_white_bg()`, `segment_fish()`, and `flip_to_left_lateral()` are all defined in `scripts/walkthrough.R` — copy them into your session if you haven't already.
+
+### Step 3: Record your results
+
+| Metric | Fish 1 | Fish 2 | Fish 3 |
+|---|---|---|---|
+| **Species** | | | |
+| **k**     | | | |
+| **m**     | | | |
+| **A**     | | | |
+| **Jc**    | | | |
+| **Jt**    | | | |
+| **m_dS**  | | | |
+| **m_dL**  | | | |
+
+### Step 4: Compare to the demo fish
+
+Look at your three fish's A values vs. the three demo fish (Sergeant major, Cleaner wrasse, Mandarin) from Part A.
+
+**(a) Did the A statistic correctly classify your three fish by pattern orientation?**
+
+> ___ YES — my barred fish has A > 1, my horizontal fish has A < 1, my reticulate/spotty fish has A ≈ 1
+>
+> ___ PARTIALLY — explain which one(s) didn't behave as expected:
+>
+> ___ NO — none of them landed where I predicted. Speculate why:
+
+Notes:
+
+> _______________________________________________________________________________
+>
+> _______________________________________________________________________________
+
+**(b) Cross-lineage comparison.** Pick ONE of your three fish whose pattern most resembles one of the demo fish. Compare their full metric profiles (m, A, Jc, m_dL).
+
+> My fish: ____________________________________________________________________
+>
+> Most similar demo fish: _____________________________________________________
+>
+> What's similar in the metrics:
+>
+> _______________________________________________________________________________
+>
+> What's different in the metrics:
+>
+> _______________________________________________________________________________
+
+### Step 5: Biological interpretation
+
+In 4–6 sentences, answer:
+
+**(a) Within your lineage:** are the three fish you picked more similar to each other in metric space than they are to fish from other families? Or are some of your three fish a closer metric match to the demo fish than to each other? What might that suggest about pattern evolution within vs. across reef fish lineages?
+
+> _______________________________________________________________________________
+>
+> _______________________________________________________________________________
+>
+> _______________________________________________________________________________
+
+**(b) Selection hypothesis:** for ONE of your three fish, propose a selection pressure that might have favored its pattern. Pick from: crypsis, aposematism, species recognition, sexual signaling, predator deflection (eyespots), disruptive coloration, or "I have a hypothesis but I'm uncertain — here's why."
+
+> _______________________________________________________________________________
+>
+> _______________________________________________________________________________
+>
+> _______________________________________________________________________________
+
+---
+
+## Submitting
+
+Submit by end of day to BruinLearn. Either:
+
+- A rendered HTML or PDF of this `.qmd` with your tables filled in, OR
+- A 1-page Word/Google doc with the **3 metric tables** + the **comparison answers** + the **biological interpretation**.
+
+The R code does not need to be polished. The biological reasoning is the assessable part.
+
+---
+
+## What's next
+
+There will be a **second pavo session** later in the term. We'll build a metric matrix across many species per lineage, cluster fish by pattern, and compare the clusters to phylogeny. Today's lab gives you the tool; next time we use it to ask comparative questions.
+
+---
+
+## Common errors and their fixes
+
+**`Error in getimg: cannot open the connection`** — file path is wrong. Use `getwd()` to see where R thinks you are. In RStudio: Session → Set Working Directory → To Source File Location.
+
+**Classify image looks weird (washed out, only 2 colors)** — try a different k. If your fish has 5 visible color regions, k = 5.
+
+**`Error: object 'classify' not found`** — you didn't run `library(pavo)`. Run it.
+
+**Adjacency runs but everything is NA** — your image is empty / all-white / all-black. Re-load with `getimg()` and check `plot(img)` actually shows the fish.
+
+**The metrics table looks empty in some columns** — pavo column names vary by version. The `pick_col()` helper in `walkthrough.R` falls back gracefully; if any metric is `NA`, look at `colnames(my_adj)` to find the actual name in your version.
+
+**My A values for the 3 fish don't match my predictions** — this is real! Common causes: (1) k is too small or too large, collapsing or splitting biological color regions; (2) the image background isn't well-segmented (background bleeds into the analysis); (3) the fish actually doesn't have the pattern you thought it had — pavo is a more sensitive eye than yours. Note this in your interpretation; it's good science.
+
+---
+
+## What this lab is NOT
+
+We are not (yet) doing:
+
+- Spectral analysis from a spectrometer (different pavo functions: `procspec`, `peakshape`, etc.)
+- Visual modeling through a fish's eyes (`vismodel`, `coldist`, JNDs)
+- Many-species comparative analysis (next pavo session)
+- Phylogenetic comparative methods on color (Lab 9, end of term)
+
+Today we extract pattern metrics from three reef fish, predict-and-test, and compare across lineages. That alone is a substantive analytical exercise.

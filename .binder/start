@@ -1,0 +1,5 @@
+#!/bin/bash
+# Binder runs this on session start (before launching RStudio).
+# Ensure uv tools are on PATH so segment_fish() finds rembg.
+export PATH="$HOME/.local/bin:$PATH"
+exec "$@"
