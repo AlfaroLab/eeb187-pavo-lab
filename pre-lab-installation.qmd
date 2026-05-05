@@ -121,9 +121,44 @@ Your fish images need their backgrounds removed before pavo can analyze them cle
 
 ### macOS
 
+::: {.callout-note title="Don't have Homebrew yet? Most students won't."}
+Homebrew (`brew`) is the macOS package manager — a one-time install that makes installing things like ImageMagick a one-liner forever after. **You only need to do this once on your laptop.**
+
+**Install Homebrew (5 minutes):**
+
+1. Open **Terminal** (`Applications → Utilities → Terminal`, or hit ⌘-Space and type "Terminal").
+2. Paste this command and press return:
+
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+3. It will ask for your **macOS password** (the one you use to log into your Mac). Type it — characters won't show as you type, that's normal — and press return.
+4. The installer downloads and configures Homebrew. Watch for a message at the very end labeled **"Next steps"**. On Apple-Silicon Macs (M1/M2/M3/M4) it will tell you to run two more commands that look like this:
+
+   ```bash
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
+
+   **Run those exact commands** (copy from your Terminal output, not from this guide — your username will be different). They put `brew` on your `PATH` so future Terminal sessions can find it.
+
+5. Confirm it works:
+
+   ```bash
+   brew --version           # should print "Homebrew 4.x.x"
+   ```
+
+If `brew --version` says "command not found," your shell hasn't been told about Homebrew yet. **Quit Terminal and reopen it**, then try again. If still no luck, go back and re-do step 4 (the `eval` line).
+
+Full official instructions, in case anything looks different on your machine: <https://brew.sh>
+:::
+
+Once Homebrew is in place:
+
 ```bash
-# In Terminal (Applications → Utilities → Terminal):
-brew install imagemagick                  # if you don't have brew, install from brew.sh first
+# In Terminal:
+brew install imagemagick
 pip install "rembg[cpu,cli]"              # or pipx install "rembg[cpu,cli]"
 ```
 
