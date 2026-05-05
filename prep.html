@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EEB 187 — Pavo Lab Prep (Week 6)</title>
+<style>
+  :root {
+    --bg: #1a1d2e;
+    --bg-mid: #2c3e50;
+    --card: #232841;
+    --gold: #ffc946;
+    --coral: #f76c5e;
+    --teal: #3fb8af;
+    --blue: #5bc0eb;
+    --muted: #a0aab8;
+    --white: #f0f0f2;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  body { padding: 1.5rem; max-width: 880px; margin: 0 auto; }
+  header { border-bottom: 1px solid #333; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  h1 { color: var(--gold); margin: 0 0 .35rem 0; font-size: 1.55rem; }
+  .sub { color: var(--muted); font-size: .95rem; }
+  h2 { color: var(--gold); margin: 1.6rem 0 .5rem 0; font-size: 1.2rem; }
+  h3 { color: var(--white); margin: .8rem 0 .3rem 0; font-size: 1.05rem; }
+  a { color: var(--blue); text-decoration: none; border-bottom: 1px dotted var(--blue); }
+  a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; }
+  code { background: #11141f; padding: .12rem .4rem; border-radius: 3px; font-size: .9em; color: var(--teal); }
+  pre {
+    background: #11141f; padding: .8rem 1rem; border-radius: 6px;
+    overflow-x: auto; font-size: .85rem; line-height: 1.4;
+    border-left: 3px solid var(--teal);
+  }
+  pre code { background: none; padding: 0; color: var(--white); }
+  .badge {
+    display: inline-block; padding: .12rem .55rem; border-radius: 3px;
+    font-size: .72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .04em; margin-left: .5rem;
+  }
+  .badge-cloud { background: var(--teal); color: #11141f; }
+  .badge-local { background: var(--gold); color: #11141f; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (min-width: 720px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+  .card {
+    background: var(--card); border-radius: 8px; padding: 1rem 1.1rem;
+    border-top: 3px solid var(--coral);
+  }
+  .card.teal { border-top-color: var(--teal); }
+  .card.blue { border-top-color: var(--blue); }
+  .card h3 { margin-top: 0; }
+  .card .meta { color: var(--muted); font-size: .82rem; margin-bottom: .6rem; }
+  .launch-btn {
+    display: inline-block; padding: .55rem 1rem; background: var(--gold);
+    color: #11141f; border-radius: 5px; font-weight: 600; font-size: .95rem;
+    margin: .4rem 0 .6rem 0; border: none;
+  }
+  .launch-btn:hover { background: var(--coral); border-bottom: none; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    padding: .35rem 0 .35rem 1.6rem; position: relative; font-size: .94rem;
+  }
+  .checklist li::before {
+    content: "☐"; position: absolute; left: 0; color: var(--gold); font-size: 1.1rem;
+  }
+  .verify { background: #11141f; padding: .6rem .8rem; border-radius: 4px; font-size: .85rem; color: var(--muted); margin-top: .3rem; }
+  .verify code { color: var(--gold); background: none; }
+  ul { padding-left: 1.4rem; }
+  hr { border: none; border-top: 1px solid #333; margin: 2rem 0; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid #333; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>EEB 187 — Pavo Lab Prep</h1>
+  <div class="sub">Wednesday Week 6 · Quantifying reef-fish color patterns</div>
+</header>
+
+<p>You'll spend lab measuring color-pattern metrics on real reef-fish images using the
+<strong>pavo</strong> R package. <strong>Pick one path tonight</strong> and verify it works so you're not
+debugging at 9 AM Wednesday.</p>
+
+<h2>Pick your path</h2>
+
+<div class="grid grid-3">
+
+  <div class="card">
+    <h3>1 · Binder <span class="badge badge-cloud">cloud</span></h3>
+    <div class="meta">no install · 90-min sessions · no persistence</div>
+    <p>Easiest. Click → RStudio loads in 30 s in your browser. Sessions don't persist between visits, so you'll re-load images each time.</p>
+    <a class="launch-btn" href="https://mybinder.org/v2/gh/AlfaroLab/eeb187-pavo-lab/HEAD?urlpath=rstudio">Launch in Binder ↗</a>
+    <div class="verify">
+      <strong>Ready when:</strong> RStudio opens and the file pane shows
+      <code>scripts/walkthrough.R</code>.
+    </div>
+  </div>
+
+  <div class="card teal">
+    <h3>2 · Codespaces <span class="badge badge-cloud">cloud</span></h3>
+    <div class="meta">free GitHub account · 60 hr/mo free · sessions persist</div>
+    <p>Same convenience as Binder, but your work and installed packages survive between sessions. The middle path.</p>
+    <p style="font-size:.88rem">On <a href="https://github.com/AlfaroLab/eeb187-pavo-lab">the repo page</a> click <strong>Code → Codespaces → Create codespace on main</strong>.</p>
+    <div class="verify">
+      <strong>Ready when:</strong> VS Code opens in the browser and an RStudio link appears in the Ports panel (port 8787).
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>3 · Native <span class="badge badge-local">local</span></h3>
+    <div class="meta">30–60 min one-time install · fastest startup forever after</div>
+    <p>The long-term answer. After tonight, RStudio launches in 2 s and you never wait on a build again. What you'll use for everything beyond this course.</p>
+    <p>Walkthrough: <a href="https://github.com/AlfaroLab/eeb187-pavo-lab/blob/main/pre-lab-installation.qmd">pre-lab-installation.qmd</a></p>
+    <div class="verify">
+      <strong>Ready when:</strong> the verify-pipeline R command at the bottom of this page prints <code>4 / 4 hard asserts passed</code>.
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<h2>Fast-path for native install</h2>
+
+<p>The full guide is in <a href="https://github.com/AlfaroLab/eeb187-pavo-lab/blob/main/pre-lab-installation.qmd">pre-lab-installation.qmd</a>; here's the speed-run for confident users:</p>
+
+<h3>macOS</h3>
+<pre><code># 1. R + RStudio Desktop (download from posit.co)
+# 2. ImageMagick + uv via Homebrew
+brew install imagemagick uv
+
+# 3. R packages
+Rscript -e 'install.packages(c("pavo","tidyverse","magick","jpeg","png"))'
+
+# 4. Clone + verify
+git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+Rscript scripts/verify_pipeline.R</code></pre>
+
+<h3>Windows</h3>
+<pre><code># 1. R + RStudio Desktop (download from posit.co)
+# 2. ImageMagick: download installer from imagemagick.org/script/download.php#windows
+# 3. uv: see https://astral.sh/uv (one-line PowerShell installer)
+
+# 4. R packages — same as macOS
+Rscript -e 'install.packages(c("pavo","tidyverse","magick","jpeg","png"))'
+
+# 5. Clone + verify
+git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+Rscript scripts/verify_pipeline.R</code></pre>
+
+<h3>Linux</h3>
+<pre><code>sudo apt install imagemagick libmagick++-dev
+curl -LsSf https://astral.sh/uv/install.sh | sh
+# (R + RStudio Server from posit.co)
+Rscript -e 'install.packages(c("pavo","tidyverse","magick","jpeg","png"))'
+git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+Rscript scripts/verify_pipeline.R</code></pre>
+
+<hr>
+
+<h2>"I'm ready when…" checklist</h2>
+
+<ul class="checklist">
+  <li>I can open <code>scripts/walkthrough.R</code> in RStudio (cloud or local)</li>
+  <li><code>library(pavo)</code> loads without errors</li>
+  <li><code>library(magick)</code> loads without errors</li>
+  <li>I can see the demo fish images in <code>images/demo/segmented/</code></li>
+  <li><code>Rscript scripts/verify_pipeline.R</code> reports <strong>4/4 hard asserts passed</strong></li>
+</ul>
+
+<hr>
+
+<h2>If something breaks</h2>
+
+<p>Most problems and their fixes are documented in the
+<a href="https://github.com/AlfaroLab/eeb187-pavo-lab/blob/main/README.md">README troubleshooting section</a>.
+Common ones:</p>
+
+<ul>
+  <li><strong>"udunits2 missing" on macOS:</strong> <code>brew install udunits</code> then re-run install.packages.</li>
+  <li><strong>"libMagick++" missing on Linux:</strong> <code>sudo apt install libmagick++-dev</code></li>
+  <li><strong>R can't find <code>uvx</code> on PATH:</strong> in R, run <code>Sys.getenv("PATH")</code> and confirm <code>~/.local/bin</code> is listed; if not, restart RStudio.</li>
+</ul>
+
+<p>Still stuck? Post on BruinLearn or come find Rosamari before lab. Don't try to debug it solo at 8:55 AM Wednesday.</p>
+
+<footer>
+  EEB 187 — Ecology & Evolution of Color · Spring 2026 · Prof. Michael Alfaro<br>
+  Repo: <a href="https://github.com/AlfaroLab/eeb187-pavo-lab">github.com/AlfaroLab/eeb187-pavo-lab</a>
+</footer>
+
+</body>
+</html>
