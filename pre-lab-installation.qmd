@@ -18,6 +18,33 @@ If you hit problems, post in the EEB 187 channel — there's almost certainly a 
 
 ---
 
+::: {.callout-tip title="Don't want to install R, ImageMagick, and rembg natively? Use Docker — skip Steps 1–6."}
+If you already use Docker (or are happy to install [Docker Desktop](https://www.docker.com/products/docker-desktop/) once), the entire lab environment is pre-baked: R 4.4 + RStudio Server + pavo + tidyverse + magick + ImageMagick + uv/rembg. **You can skip Steps 1–6 below entirely.** Jump to [Step 7](#step-7-required-identify-three-fish-from-your-assigned-lineage) once your container is running.
+
+```bash
+git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+docker build -t pavo-lab .              # ~10 min the first time, instant after
+docker run --rm -p 8787:8787 \
+  -e PASSWORD=eeb187 \
+  -v "$(pwd):/home/rstudio/lab" \
+  pavo-lab
+```
+
+Open <http://localhost:8787> in your browser. Log in as **`rstudio`** / **`eeb187`**. The lab repo is mounted at `/home/rstudio/lab`, so any files you save there persist on your laptop after the container exits.
+
+To verify the pipeline (same `4/4 hard asserts passed` smoke test as the native path), open the RStudio Terminal tab inside the container and run:
+
+```bash
+cd /home/rstudio/lab
+Rscript scripts/verify_pipeline.R
+```
+
+**Trade-offs:** Docker images are large (~3 GB on disk after the build). Apple Silicon Macs and recent Windows machines run this fine. If your laptop is older or short on disk, prefer one of the cloud paths (Binder/Codespaces) instead.
+:::
+
+---
+
 ## What you need to install
 
 | Tool | Version | Why |

@@ -50,12 +50,15 @@
   .badge-local { background: var(--gold); color: #11141f; }
   .grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1rem 0; }
   @media (min-width: 720px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 720px) { .grid-4 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; } }
   .card {
     background: var(--card); border-radius: 8px; padding: 1rem 1.1rem;
     border-top: 3px solid var(--coral);
   }
   .card.teal { border-top-color: var(--teal); }
   .card.blue { border-top-color: var(--blue); }
+  .card.gold { border-top-color: var(--gold); }
   .card h3 { margin-top: 0; }
   .card .meta { color: var(--muted); font-size: .82rem; margin-bottom: .6rem; }
   .launch-btn {
@@ -91,7 +94,7 @@ debugging at 9 AM Wednesday.</p>
 
 <h2>Pick your path</h2>
 
-<div class="grid grid-3">
+<div class="grid grid-4">
 
   <div class="card">
     <h3>1 · Binder <span class="badge badge-cloud">cloud</span></h3>
@@ -121,6 +124,24 @@ debugging at 9 AM Wednesday.</p>
     <p>Walkthrough: <a href="pre-lab-installation.html">pre-lab-installation</a></p>
     <div class="verify">
       <strong>Ready when:</strong> the verify-pipeline R command at the bottom of this page prints <code>4 / 4 hard asserts passed</code>.
+    </div>
+  </div>
+
+  <div class="card gold">
+    <h3>4 · Docker <span class="badge badge-local">local</span></h3>
+    <div class="meta">~10 min build · skips Homebrew / pip / Rtools entirely</div>
+    <p>Best escape hatch if Homebrew, pip, or Rtools are giving you grief. Everything (R, RStudio, ImageMagick, rembg) is pre-baked. You only need <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.</p>
+    <p>From a terminal:</p>
+    <pre><code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+docker build -t pavo-lab .
+docker run --rm -p 8787:8787 \
+  -e PASSWORD=eeb187 \
+  -v "$(pwd):/home/rstudio/lab" \
+  pavo-lab</code></pre>
+    <p style="font-size:.88rem">Then open <code>http://localhost:8787</code> · login <code>rstudio</code> / <code>eeb187</code>.</p>
+    <div class="verify">
+      <strong>Ready when:</strong> RStudio loads in your browser at port 8787 and <code>library(pavo)</code> works without error.
     </div>
   </div>
 
@@ -166,6 +187,16 @@ Rscript -e 'install.packages(c("pavo","tidyverse","magick","jpeg","png"))'
 git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
 cd eeb187-pavo-lab
 Rscript scripts/verify_pipeline.R</code></pre>
+
+<h3>Docker (any OS — needs Docker Desktop)</h3>
+<pre><code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
+cd eeb187-pavo-lab
+docker build -t pavo-lab .              # ~10 min, one time
+docker run --rm -p 8787:8787 \
+  -e PASSWORD=eeb187 \
+  -v "$(pwd):/home/rstudio/lab" \
+  pavo-lab
+# → open http://localhost:8787  (user: rstudio, password: eeb187)</code></pre>
 
 <hr>
 

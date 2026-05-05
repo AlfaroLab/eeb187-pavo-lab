@@ -1,0 +1,11 @@
+.git
+.Rproj.user
+.Rhistory
+.RData
+*.html
+*.pdf
+pre-lab-installation_files/
+images/raw/
+images/segmented/
+*_files/
+.DS_Store
