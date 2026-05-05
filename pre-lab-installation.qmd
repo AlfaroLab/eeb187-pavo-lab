@@ -124,17 +124,30 @@ Your fish images need their backgrounds removed before pavo can analyze them cle
 ::: {.callout-note title="Don't have Homebrew yet? Most students won't."}
 Homebrew (`brew`) is the macOS package manager — a one-time install that makes installing things like ImageMagick a one-liner forever after. **You only need to do this once on your laptop.**
 
-**Install Homebrew (5 minutes):**
+#### First, install Xcode Command Line Tools
 
-1. Open **Terminal** (`Applications → Utilities → Terminal`, or hit ⌘-Space and type "Terminal").
-2. Paste this command and press return:
+Homebrew depends on Apple's Command Line Tools (the C/C++ compiler and friends). If you've never installed them, **do this first**. In Terminal (`Applications → Utilities → Terminal`):
+
+```bash
+xcode-select --install
+```
+
+A small dialog box will pop up. Click **Install** (not "Get Xcode" — you don't need the full app). It downloads ~3 GB and takes 10–20 minutes depending on your internet. When it finishes, run the same command again — if it says *"command line tools are already installed,"* you're done with this step.
+
+If you've used `git`, compiled anything, or installed Xcode before, you may already have the Command Line Tools — running the command above is harmless either way.
+
+#### Then install Homebrew — pick whichever option you prefer
+
+**Option A — the official installer script (most common, most documentation references this):**
+
+1. Paste this in Terminal and press return:
 
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. It will ask for your **macOS password** (the one you use to log into your Mac). Type it — characters won't show as you type, that's normal — and press return.
-4. The installer downloads and configures Homebrew. Watch for a message at the very end labeled **"Next steps"**. On Apple-Silicon Macs (M1/M2/M3/M4) it will tell you to run two more commands that look like this:
+2. It will ask for your **macOS password** (the one you use to log into your Mac). Type it — characters won't show as you type, that's normal — and press return.
+3. The installer downloads and configures Homebrew. Watch for a message at the very end labeled **"Next steps"**. On Apple-Silicon Macs (M1/M2/M3/M4) it will tell you to run two more commands that look like this:
 
    ```bash
    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -143,13 +156,20 @@ Homebrew (`brew`) is the macOS package manager — a one-time install that makes
 
    **Run those exact commands** (copy from your Terminal output, not from this guide — your username will be different). They put `brew` on your `PATH` so future Terminal sessions can find it.
 
-5. Confirm it works:
+**Option B — the signed `.pkg` installer (point-and-click; nice if you don't want to paste shell commands):**
 
-   ```bash
-   brew --version           # should print "Homebrew 4.x.x"
-   ```
+1. Open <https://github.com/Homebrew/brew/releases/latest> in your browser.
+2. Under **Assets**, download the file ending in `.pkg` (e.g. `Homebrew-4.x.x.pkg`).
+3. Double-click the downloaded `.pkg`. The standard macOS installer opens — click through the prompts, enter your macOS password when asked, and let it finish.
+4. Open a fresh Terminal window. Apple-Silicon users still need to run the two `shellenv` lines from Option A step 3 once — the `.pkg` doesn't always do this automatically.
 
-If `brew --version` says "command not found," your shell hasn't been told about Homebrew yet. **Quit Terminal and reopen it**, then try again. If still no luck, go back and re-do step 4 (the `eval` line).
+#### Verify whichever option you used
+
+```bash
+brew --version           # should print "Homebrew 4.x.x"
+```
+
+If `brew --version` says "command not found," your shell hasn't been told about Homebrew yet. **Quit Terminal and reopen it**, then try again. If still no luck, run the two `shellenv` lines from Option A step 3.
 
 Full official instructions, in case anything looks different on your machine: <https://brew.sh>
 :::

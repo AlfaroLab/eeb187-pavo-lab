@@ -269,52 +269,70 @@ you are ready for Wednesday's lab.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Homebrew (<code>brew</code>) is the macOS package manager — a one-time install that makes installing things like ImageMagick a one-liner forever after. <strong>You only need to do this once on your laptop.</strong></p>
-<p><strong>Install Homebrew (5 minutes):</strong></p>
+<section id="first-install-xcode-command-line-tools" class="level4">
+<h4 class="anchored" data-anchor-id="first-install-xcode-command-line-tools">First, install Xcode Command Line Tools</h4>
+<p>Homebrew depends on Apple’s Command Line Tools (the C/C++ compiler and friends). If you’ve never installed them, <strong>do this first</strong>. In Terminal (<code>Applications → Utilities → Terminal</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A small dialog box will pop up. Click <strong>Install</strong> (not “Get Xcode” — you don’t need the full app). It downloads ~3 GB and takes 10–20 minutes depending on your internet. When it finishes, run the same command again — if it says <em>“command line tools are already installed,”</em> you’re done with this step.</p>
+<p>If you’ve used <code>git</code>, compiled anything, or installed Xcode before, you may already have the Command Line Tools — running the command above is harmless either way.</p>
+</section>
+<section id="then-install-homebrew-pick-whichever-option-you-prefer" class="level4">
+<h4 class="anchored" data-anchor-id="then-install-homebrew-pick-whichever-option-you-prefer">Then install Homebrew — pick whichever option you prefer</h4>
+<p><strong>Option A — the official installer script (most common, most documentation references this):</strong></p>
 <ol type="1">
-<li><p>Open <strong>Terminal</strong> (<code>Applications → Utilities → Terminal</code>, or hit ⌘-Space and type “Terminal”).</p></li>
-<li><p>Paste this command and press return:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Paste this in Terminal and press return:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/bin/bash</span> <span class="at">-c</span> <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p>It will ask for your <strong>macOS password</strong> (the one you use to log into your Mac). Type it — characters won’t show as you type, that’s normal — and press return.</p></li>
 <li><p>The installer downloads and configures Homebrew. Watch for a message at the very end labeled <strong>“Next steps”</strong>. On Apple-Silicon Macs (M1/M2/M3/M4) it will tell you to run two more commands that look like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> <span class="op">&gt;&gt;</span> ~/.zprofile</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">/opt/homebrew/bin/brew</span> shellenv<span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> <span class="op">&gt;&gt;</span> ~/.zprofile</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">/opt/homebrew/bin/brew</span> shellenv<span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Run those exact commands</strong> (copy from your Terminal output, not from this guide — your username will be different). They put <code>brew</code> on your <code>PATH</code> so future Terminal sessions can find it.</p></li>
-<li><p>Confirm it works:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> <span class="at">--version</span>           <span class="co"># should print "Homebrew 4.x.x"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
-<p>If <code>brew --version</code> says “command not found,” your shell hasn’t been told about Homebrew yet. <strong>Quit Terminal and reopen it</strong>, then try again. If still no luck, go back and re-do step 4 (the <code>eval</code> line).</p>
+<p><strong>Option B — the signed <code>.pkg</code> installer (point-and-click; nice if you don’t want to paste shell commands):</strong></p>
+<ol type="1">
+<li>Open <a href="https://github.com/Homebrew/brew/releases/latest" class="uri">https://github.com/Homebrew/brew/releases/latest</a> in your browser.</li>
+<li>Under <strong>Assets</strong>, download the file ending in <code>.pkg</code> (e.g.&nbsp;<code>Homebrew-4.x.x.pkg</code>).</li>
+<li>Double-click the downloaded <code>.pkg</code>. The standard macOS installer opens — click through the prompts, enter your macOS password when asked, and let it finish.</li>
+<li>Open a fresh Terminal window. Apple-Silicon users still need to run the two <code>shellenv</code> lines from Option A step 3 once — the <code>.pkg</code> doesn’t always do this automatically.</li>
+</ol>
+</section>
+<section id="verify-whichever-option-you-used" class="level4">
+<h4 class="anchored" data-anchor-id="verify-whichever-option-you-used">Verify whichever option you used</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> <span class="at">--version</span>           <span class="co"># should print "Homebrew 4.x.x"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If <code>brew --version</code> says “command not found,” your shell hasn’t been told about Homebrew yet. <strong>Quit Terminal and reopen it</strong>, then try again. If still no luck, run the two <code>shellenv</code> lines from Option A step 3.</p>
 <p>Full official instructions, in case anything looks different on your machine: <a href="https://brew.sh" class="uri">https://brew.sh</a></p>
+</section>
 </div>
 </div>
 <p>Once Homebrew is in place:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In Terminal:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install imagemagick</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span>              <span class="co"># or pipx install "rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In Terminal:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install imagemagick</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span>              <span class="co"># or pipx install "rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Verify both work:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">magick</span> <span class="at">-version</span>          <span class="co"># should print "Version: ImageMagick 7.x..."</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rembg</span> <span class="at">--help</span>             <span class="co"># should print rembg's usage text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">magick</span> <span class="at">-version</span>          <span class="co"># should print "Version: ImageMagick 7.x..."</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rembg</span> <span class="at">--help</span>             <span class="co"># should print rembg's usage text</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="windows" class="level3">
 <h3 class="anchored" data-anchor-id="windows">Windows</h3>
 <p>Install <a href="https://imagemagick.org/script/download.php#windows">ImageMagick from the official site</a> (the “Windows Binary Release” installer), then in Command Prompt:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="linux" class="level3">
 <h3 class="anchored" data-anchor-id="linux">Linux</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install imagemagick</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install imagemagick</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rembg[cpu,cli]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="recommended-alternative-install-uv-instead-of-pip-installing-rembg" class="level3">
 <h3 class="anchored" data-anchor-id="recommended-alternative-install-uv-instead-of-pip-installing-rembg">Recommended alternative: install <code>uv</code> instead of pip-installing rembg</h3>
 <p>Several students will have trouble with <code>pip install "rembg[cpu,cli]"</code> because rembg’s deep-learning dependencies (onnxruntime, opencv) don’t always have prebuilt wheels for the latest Python. There’s a much smoother path that <strong>handles all of this automatically</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS:</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install uv</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux:</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sh</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows:</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="ex">powershell</span> <span class="at">-ExecutionPolicy</span> ByPass <span class="at">-c</span> <span class="st">"irm https://astral.sh/uv/install.ps1 | iex"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install uv</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux:</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sh</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows:</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="ex">powershell</span> <span class="at">-ExecutionPolicy</span> ByPass <span class="at">-c</span> <span class="st">"irm https://astral.sh/uv/install.ps1 | iex"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That’s it. With <code>uv</code> installed, the <code>segment_fish()</code> helper in lab will run rembg via <code>uvx --from "rembg[cpu,cli]" rembg ...</code> — uv downloads a compatible Python and rembg automatically the first time you call the helper, and caches both for future calls. <strong>No more pip install errors, no Python version mismatches.</strong></p>
 <p><code>segment_fish()</code> tries <code>uvx</code> first and falls back to a direct <code>rembg</code> binary, so if you got rembg installed via pip and it’s on PATH, that works too.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -341,7 +359,7 @@ you are ready for Wednesday's lab.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>If <code>rembg --help</code> works in your terminal but R says <code>rembg failed (or not installed)</code>: R doesn’t see your full PATH. Check what R sees:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"PATH"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"PATH"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If <code>/opt/homebrew/bin</code> (macOS Homebrew) or <code>~/.local/bin</code> (pip user installs) isn’t in there, <strong>install <code>uv</code> and use that path instead</strong> — <code>uvx</code> is more discoverable. Or set the PATH in <code>~/.Renviron</code>:</p>
 <pre><code>PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.local/bin</code></pre>
 <p>Restart RStudio for the change to take effect.</p>
