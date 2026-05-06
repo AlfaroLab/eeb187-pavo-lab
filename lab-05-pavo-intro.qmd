@@ -138,19 +138,37 @@ If `/opt/homebrew/bin` (Homebrew on macOS) or `~/.local/bin` isn't there, add it
 PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:~/.local/bin
 ```
 
-…and restart RStudio. If you're stuck, use Path 2 below — it always works.
+…and restart RStudio. If you're still stuck, use Path 2 (web tool) or Path 3 (manual crop) below — both work without needing R to find any shell tools.
 :::
 
-#### Path 2 (fallback, no extra install): manual crop
+#### Path 2 (no install, web-based): segment with remove.bg or photoroom.com
 
-Open each fish image in **Preview.app** (or any image editor), drag a selection rectangle as tight to the fish as possible without cutting any fins, then Tools → Crop and save. Load with `getimg("path/to/cropped.jpg")` — skip `segment_fish()`.
+Drag-drop your fish JPG into one of these free tools:
+
+- [**remove.bg**](https://www.remove.bg/) — fastest, no signup
+- [**photoroom.com**](https://www.photoroom.com/tools/background-remover) — also free
+- [**clipdrop.co/remove-background**](https://clipdrop.co/remove-background) — Stability-AI tool
+
+Each returns a transparent PNG. Save the PNG into your `images/student-fish/<your-lineage>/` folder. Then in R, use the `composite_to_white()` helper to add a white background and standardize the canvas:
+
+```r
+source("scripts/walkthrough.R")  # loads composite_to_white()
+seg_path <- composite_to_white("images/student-fish/<lineage>/your-fish.png")
+my_fish  <- getimg(seg_path)
+```
+
+This gives you the same `*-segmented.jpg` you'd get from `segment_fish()` — pavo's classify-with-bkg path will work exactly the same way.
+
+#### Path 3 (fallback, no install, no internet): manual crop
+
+Open each fish image in **Preview.app** (or any image editor), drag a selection rectangle as tight to the fish as possible without cutting any fins, then Tools → Crop and save. Load with `getimg("path/to/cropped.jpg")` — skip both `segment_fish()` and `composite_to_white()`.
 
 ::: {.callout-tip}
-## Tradeoff for the manual-crop path
+## Tradeoff for the manual-crop path (Path 3)
 
-Cropped images still have water/reef in the corners. **Your A values will be less dramatic than the demo** (closer to A=1 for all three) because some background pixels will pollute the k-means classification and the adjacency grid. The directional ordering still holds — vertical-bar fish > 1, horizontal-stripe fish < 1 — just with smaller effect sizes. Note in your worksheet which path you used. The rubric accommodates both.
+Cropped images still have water/reef in the corners. **Your A values will be less dramatic than the demo** (closer to A=1 for all three) because some background pixels will pollute the k-means classification and the adjacency grid. The directional ordering still holds — vertical-bar fish > 1, horizontal-stripe fish < 1 — just with smaller effect sizes. Note in your worksheet which path you used. The rubric accommodates all three.
 
-Step 2 below has a different code block for the manual-crop path: drop the `bkgID = my_bkg, exclude = "background"` arguments since there's no white background class to exclude.
+Step 2 below has a different code block for the manual-crop path: drop the `bkgID = my_bkg, exclude = "background"` arguments since there's no white background class to exclude. (Paths 1 and 2 both produce a white-background JPG and use the standard code block.)
 :::
 
 #### Comparing the three folders for the demo fish

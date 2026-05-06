@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="EEB 187 — Ecology &amp; Evolution of Color">
+<meta name="dcterms.date" content="2026-05-05">
+
+<title>TA Guide — Lab 5: pavo Introduction</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="ta-guide_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ta-guide_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="ta-guide_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="ta-guide_files/libs/quarto-html/popper.min.js"></script>
+<script src="ta-guide_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ta-guide_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ta-guide_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ta-guide_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ta-guide_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ta-guide_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ta-guide_files/libs/bootstrap/bootstrap-e5aac6255e56e914aa88ebe61abbe2ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#purpose-of-this-guide" id="toc-purpose-of-this-guide" class="nav-link active" data-scroll-target="#purpose-of-this-guide">Purpose of this guide</a></li>
+  <li><a href="#part-1-what-the-lab-teaches" id="toc-part-1-what-the-lab-teaches" class="nav-link" data-scroll-target="#part-1-what-the-lab-teaches">Part 1 — What the lab teaches</a>
+  <ul class="collapse">
+  <li><a href="#the-pedagogical-claim" id="toc-the-pedagogical-claim" class="nav-link" data-scroll-target="#the-pedagogical-claim">The pedagogical claim</a></li>
+  <li><a href="#whats-not-in-scope-today" id="toc-whats-not-in-scope-today" class="nav-link" data-scroll-target="#whats-not-in-scope-today">What’s NOT in scope today</a></li>
+  </ul></li>
+  <li><a href="#part-2-conceptual-primer" id="toc-part-2-conceptual-primer" class="nav-link" data-scroll-target="#part-2-conceptual-primer">Part 2 — Conceptual primer</a>
+  <ul class="collapse">
+  <li><a href="#the-endler-2012-framework" id="toc-the-endler-2012-framework" class="nav-link" data-scroll-target="#the-endler-2012-framework">2.1 The Endler 2012 framework</a></li>
+  <li><a href="#why-segmentation-matters-step-1.5-of-walkthrough" id="toc-why-segmentation-matters-step-1.5-of-walkthrough" class="nav-link" data-scroll-target="#why-segmentation-matters-step-1.5-of-walkthrough">2.2 Why segmentation matters (Step 1.5 of walkthrough)</a></li>
+  <li><a href="#what-classify-actually-does" id="toc-what-classify-actually-does" class="nav-link" data-scroll-target="#what-classify-actually-does">2.3 What <code>classify()</code> actually does</a></li>
+  <li><a href="#what-adjacent-actually-does" id="toc-what-adjacent-actually-does" class="nav-link" data-scroll-target="#what-adjacent-actually-does">2.4 What <code>adjacent()</code> actually does</a></li>
+  <li><a href="#why-coldists-matters-for-m_ds-and-m_dl" id="toc-why-coldists-matters-for-m_ds-and-m_dl" class="nav-link" data-scroll-target="#why-coldists-matters-for-m_ds-and-m_dl">2.5 Why <code>coldists</code> matters for <code>m_dS</code> and <code>m_dL</code></a></li>
+  <li><a href="#the-three-demo-fish-what-to-expect" id="toc-the-three-demo-fish-what-to-expect" class="nav-link" data-scroll-target="#the-three-demo-fish-what-to-expect">2.6 The three demo fish — what to expect</a></li>
+  </ul></li>
+  <li><a href="#part-3-step-by-step-walkthrough-of-scriptswalkthrough.r" id="toc-part-3-step-by-step-walkthrough-of-scriptswalkthrough.r" class="nav-link" data-scroll-target="#part-3-step-by-step-walkthrough-of-scriptswalkthrough.r">Part 3 — Step-by-step walkthrough of <code>scripts/walkthrough.R</code></a>
+  <ul class="collapse">
+  <li><a href="#step-0-setup" id="toc-step-0-setup" class="nav-link" data-scroll-target="#step-0-setup">Step 0 — Setup</a></li>
+  <li><a href="#step-1-load-the-three-demo-fish-segmented" id="toc-step-1-load-the-three-demo-fish-segmented" class="nav-link" data-scroll-target="#step-1-load-the-three-demo-fish-segmented">Step 1 — Load the three demo fish (segmented)</a></li>
+  <li><a href="#step-1.5-segmentation-the-conceptual-punchline" id="toc-step-1.5-segmentation-the-conceptual-punchline" class="nav-link" data-scroll-target="#step-1.5-segmentation-the-conceptual-punchline">Step 1.5 — Segmentation (the conceptual punchline)</a></li>
+  <li><a href="#step-2-classify-each-image" id="toc-step-2-classify-each-image" class="nav-link" data-scroll-target="#step-2-classify-each-image">Step 2 — Classify each image</a></li>
+  <li><a href="#step-3-adjacency-the-heart-of-the-lab" id="toc-step-3-adjacency-the-heart-of-the-lab" class="nav-link" data-scroll-target="#step-3-adjacency-the-heart-of-the-lab">Step 3 — Adjacency (the heart of the lab)</a></li>
+  <li><a href="#step-4-extract-metrics" id="toc-step-4-extract-metrics" class="nav-link" data-scroll-target="#step-4-extract-metrics">Step 4 — Extract metrics</a></li>
+  <li><a href="#step-5-predict-vs.-measure-visualization" id="toc-step-5-predict-vs.-measure-visualization" class="nav-link" data-scroll-target="#step-5-predict-vs.-measure-visualization">Step 5 — Predict vs.&nbsp;measure visualization</a></li>
+  <li><a href="#step-6-now-you-try-student-practice" id="toc-step-6-now-you-try-student-practice" class="nav-link" data-scroll-target="#step-6-now-you-try-student-practice">Step 6 — “Now you try” — student practice</a></li>
+  </ul></li>
+  <li><a href="#part-4-pedagogical-playbook" id="toc-part-4-pedagogical-playbook" class="nav-link" data-scroll-target="#part-4-pedagogical-playbook">Part 4 — Pedagogical playbook</a>
+  <ul class="collapse">
+  <li><a href="#time-budget-for-the-90-minute-lab" id="toc-time-budget-for-the-90-minute-lab" class="nav-link" data-scroll-target="#time-budget-for-the-90-minute-lab">4.1 Time budget for the 90-minute lab</a></li>
+  <li><a href="#what-to-emphasize-in-part-a" id="toc-what-to-emphasize-in-part-a" class="nav-link" data-scroll-target="#what-to-emphasize-in-part-a">4.2 What to emphasize in Part A</a></li>
+  <li><a href="#what-to-emphasize-in-part-b" id="toc-what-to-emphasize-in-part-b" class="nav-link" data-scroll-target="#what-to-emphasize-in-part-b">4.3 What to emphasize in Part B</a></li>
+  <li><a href="#where-students-get-stuck-and-what-to-do" id="toc-where-students-get-stuck-and-what-to-do" class="nav-link" data-scroll-target="#where-students-get-stuck-and-what-to-do">4.4 Where students get stuck (and what to do)</a></li>
+  </ul></li>
+  <li><a href="#part-5-worksheet-rubric-suggested" id="toc-part-5-worksheet-rubric-suggested" class="nav-link" data-scroll-target="#part-5-worksheet-rubric-suggested">Part 5 — Worksheet rubric (suggested)</a></li>
+  <li><a href="#part-6-pre-lab-and-day-of-checklist" id="toc-part-6-pre-lab-and-day-of-checklist" class="nav-link" data-scroll-target="#part-6-pre-lab-and-day-of-checklist">Part 6 — Pre-lab and day-of checklist</a>
+  <ul class="collapse">
+  <li><a href="#two-days-before-lab" id="toc-two-days-before-lab" class="nav-link" data-scroll-target="#two-days-before-lab">Two days before lab</a></li>
+  <li><a href="#day-before-lab" id="toc-day-before-lab" class="nav-link" data-scroll-target="#day-before-lab">Day before lab</a></li>
+  <li><a href="#morning-of-lab" id="toc-morning-of-lab" class="nav-link" data-scroll-target="#morning-of-lab">Morning of lab</a></li>
+  <li><a href="#in-lab-90-min" id="toc-in-lab-90-min" class="nav-link" data-scroll-target="#in-lab-90-min">In lab (90 min)</a></li>
+  </ul></li>
+  <li><a href="#appendix-a-glossary-of-metrics" id="toc-appendix-a-glossary-of-metrics" class="nav-link" data-scroll-target="#appendix-a-glossary-of-metrics">Appendix A — Glossary of metrics</a></li>
+  <li><a href="#appendix-b-pre-loaded-student-fish-library" id="toc-appendix-b-pre-loaded-student-fish-library" class="nav-link" data-scroll-target="#appendix-b-pre-loaded-student-fish-library">Appendix B — Pre-loaded student-fish library</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../ta-guide.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TA Guide — Lab 5: pavo Introduction</h1>
+<p class="subtitle lead">Quantifying reef-fish color patterns (Week 6)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>EEB 187 — Ecology &amp; Evolution of Color </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 5, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="purpose-of-this-guide" class="level1 unnumbered">
+<h1 class="unnumbered">Purpose of this guide</h1>
+<p>This document is for <strong>Rosamari</strong> (and any future TA stepping into Lab 5). It pairs with three other things:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Artifact</th>
+<th>Where</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>scripts/walkthrough.R</code></td>
+<td>repo root</td>
+<td>the live-coded R script you and the class will run together</td>
+</tr>
+<tr class="even">
+<td><code>lab-05-pavo-intro.qmd</code></td>
+<td>repo root</td>
+<td>the student worksheet with Part A (demo) + Part B (their three fish)</td>
+</tr>
+<tr class="odd">
+<td><code>pre-lab-installation.qmd</code></td>
+<td>repo root</td>
+<td>what students were asked to install before lab</td>
+</tr>
+</tbody>
+</table>
+<p>This guide goes <strong>deeper than the slide deck</strong> on the conceptual basis for everything in <code>walkthrough.R</code>, then walks through the script step by step with <strong>(a) what it computes, (b) why it matters biologically, (c) student questions to expect, and (d) troubleshooting for the errors you will actually see in lab.</strong></p>
+<p>Read this <em>before</em> the first time you teach the lab. Skim it again the morning of, especially the troubleshooting boxes. Total reading time: ~45 minutes.</p>
+<hr>
+</section>
+<section id="part-1-what-the-lab-teaches" class="level1">
+<h1>Part 1 — What the lab teaches</h1>
+<section id="the-pedagogical-claim" class="level2">
+<h2 class="anchored" data-anchor-id="the-pedagogical-claim">The pedagogical claim</h2>
+<blockquote class="blockquote">
+<p>Color <em>patterns</em> — vertical bars, horizontal stripes, reticulate spots — can be reduced to a small set of numbers that distinguish them automatically. The single most important number is the <strong>A statistic</strong> (aspect ratio).</p>
+</blockquote>
+<p>By the end of lab the students should be able to:</p>
+<ol type="1">
+<li>Predict the rough A value of a fish from looking at its photo (<code>A &gt; 1</code>, <code>A &lt; 1</code>, <code>A ≈ 1</code>).</li>
+<li>Run the pipeline themselves on a new fish image (segment → classify → adjacent → metrics).</li>
+<li>Explain to a peer <em>why</em> <code>A</code> distinguishes vertical from horizontal patterns — at the level of “we count adjacent pixel pairs and direction matters.”</li>
+<li>Critique a result. When they get unexpected metrics, they should be able to point to <em>which step</em> (segmentation, k choice, white-background exclusion) is the likely culprit.</li>
+</ol>
+</section>
+<section id="whats-not-in-scope-today" class="level2">
+<h2 class="anchored" data-anchor-id="whats-not-in-scope-today">What’s NOT in scope today</h2>
+<p>These come later in the term:</p>
+<ul>
+<li>Spectral analysis from spectrometers (<code>procspec</code>, <code>peakshape</code>)</li>
+<li>Visual modeling through animal eyes (<code>vismodel</code>, <code>coldist</code>, JNDs) — Lab 6</li>
+<li>Many-species comparative analysis with phylogeny — Lab 9</li>
+<li>Endler’s saturation/luminance space arguments at the <em>receiver</em> level — Lecture 14–16</li>
+</ul>
+<p>If a student asks “but what does the <em>fish that’s looking at this fish</em> see?” — that’s the right question, and the answer is “we’ll get there in Lab 6 with <code>vismodel()</code>.” For today, every metric is <strong>photographic</strong>, not perceptual.</p>
+<hr>
+</section>
+</section>
+<section id="part-2-conceptual-primer" class="level1">
+<h1>Part 2 — Conceptual primer</h1>
+<p>This is the layer below the slide deck — the math and the <em>why</em>. Students don’t need all of this. You do.</p>
+<section id="the-endler-2012-framework" class="level2">
+<h2 class="anchored" data-anchor-id="the-endler-2012-framework">2.1 The Endler 2012 framework</h2>
+<p>The whole pipeline is built on John Endler’s 2012 <em>Biol. J. Linn. Soc.</em> paper “A framework for analysing colour pattern geometry: adjacent colours.” The core move:</p>
+<ol type="1">
+<li><strong>Discretize</strong> the image into a small number of color classes (k-means in RGB).</li>
+<li><strong>Sample</strong> the classified image on a regular grid.</li>
+<li><strong>Count</strong> transitions between color classes between adjacent grid cells — separately for horizontal vs.&nbsp;vertical adjacency.</li>
+<li><strong>Summarize</strong> the transition matrix with a small set of geometry-aware statistics.</li>
+</ol>
+<p>Step 4 produces the metrics students will see:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>What it measures</th>
+<th>Intuition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>k</strong></td>
+<td>number of color classes</td>
+<td>how many “colors” the fish has</td>
+</tr>
+<tr class="even">
+<td><strong>m</strong></td>
+<td>transition density (off-diagonal mass / total)</td>
+<td>how <em>busy</em> the pattern is per unit area</td>
+</tr>
+<tr class="odd">
+<td><strong>A</strong></td>
+<td>vertical edges / horizontal edges (the <strong>aspect ratio</strong>)</td>
+<td>direction — bars vs.&nbsp;stripes vs.&nbsp;isotropic</td>
+</tr>
+<tr class="even">
+<td><strong>Jc</strong></td>
+<td>color heterogeneity (Simpson on color-class areas)</td>
+<td>how <em>evenly</em> the colors are used</td>
+</tr>
+<tr class="odd">
+<td><strong>Jt</strong></td>
+<td>transition heterogeneity (Simpson on transitions)</td>
+<td>how diverse the <em>boundaries</em> are</td>
+</tr>
+<tr class="even">
+<td><strong>m_dS</strong></td>
+<td>mean chromatic boundary strength</td>
+<td>how <em>saturated</em> a typical edge is</td>
+</tr>
+<tr class="odd">
+<td><strong>m_dL</strong></td>
+<td>mean luminance boundary strength</td>
+<td>how <em>bright/dark</em> a typical edge is</td>
+</tr>
+</tbody>
+</table>
+<p>The A statistic is the headline because:</p>
+<ul>
+<li>It cleanly distinguishes <strong>bars (A &gt; 1)</strong>, <strong>stripes (A &lt; 1)</strong>, and <strong>isotropic patterns (A ≈ 1)</strong> in three lines of R.</li>
+<li>It’s invariant to color choice — a yellow-and-black bar code and a red-and-white bar code give the same A.</li>
+<li>It’s a <em>geometric</em> claim about pattern, not a perceptual one — so it’s a clean entry point before we add receiver biology in Lab 6.</li>
+</ul>
+</section>
+<section id="why-segmentation-matters-step-1.5-of-walkthrough" class="level2">
+<h2 class="anchored" data-anchor-id="why-segmentation-matters-step-1.5-of-walkthrough">2.2 Why segmentation matters (Step 1.5 of walkthrough)</h2>
+<p>The full pipeline is <code>image → classify → adjacent → metrics</code>. Every step downstream of <code>classify()</code> is poisoned by background pixels:</p>
+<ul>
+<li><strong>k-means</strong> allocates color classes to <em>whatever pixels exist</em>. If half the photo is blue water, one of your <em>k</em> classes will be water, and you’ll have one less class for the fish.</li>
+<li><strong>Adjacent grid sampling</strong> drops a regular xpts × ypts grid over the <em>whole image</em>. Long uniform stretches of background drown out the fish’s directional signal and pull A toward 1.</li>
+</ul>
+<p>Three demo fish on uncropped photos will give A ≈ 1 across the board — the lab’s punchline disappears. <strong>The dramatic A values (1.54 / 0.60 / 1.02) are entirely a product of segmentation.</strong> This is why the demo fish are pre-segmented and why Step 1.5 has three Paths.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="The white-background trick">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The white-background trick
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We segment to a white background and then <em>include</em> white as a +1 in the k argument: <code>kcols = (fish_colors + 1)</code>. The white class becomes one of the k centroids, and <code>bkgID + exclude = "background"</code> tells <code>adjacent()</code> to ignore transitions involving white. Net effect: same as analyzing only the fish, but in one R call without a polygon mask.</p>
+</div>
+</div>
+</section>
+<section id="what-classify-actually-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-classify-actually-does">2.3 What <code>classify()</code> actually does</h2>
+<p><code>classify(img, kcols = k)</code> runs <strong>k-means on each pixel’s RGB triplet</strong>:</p>
+<ol type="1">
+<li>Treats each pixel as a point in 3D color space (R, G, B).</li>
+<li>Initializes k centroids randomly.</li>
+<li>Iteratively assigns each pixel to its nearest centroid, then moves each centroid to the centroid of its assigned pixels. Repeats until stable.</li>
+<li>Returns an integer-valued array (the “classified image”), plus a <code>classRGB</code> attribute giving the k centroid colors.</li>
+</ol>
+<p>This is a <em>purely color-based</em> clustering — it knows nothing about spatial structure. A 3-pixel red dot in the corner gets the same class as a 3-pixel red dot on the body. Spatial structure enters at the <em>next</em> step.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="k-means is non-deterministic without a seed">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>k-means is non-deterministic without a seed
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>k-means initializes centroids randomly. Two runs on the same image with the same k can produce slightly different palettes. pavo’s <code>classify()</code> uses a fixed seed under the hood for reproducibility, but if students compare each other’s runs, the <em>order</em> of color classes (class 1, 2, 3, …) may differ even when the colors themselves are the same.</p>
+<p><strong>Practical implication:</strong> when comparing two students’ fish, compare RGB centroids in <code>classRGB</code>, not class indices.</p>
+</div>
+</div>
+</section>
+<section id="what-adjacent-actually-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-adjacent-actually-does">2.4 What <code>adjacent()</code> actually does</h2>
+<p><code>adjacent()</code> is the heart of the pipeline. It does five things in one call:</p>
+<ol type="1">
+<li><strong>Drops a grid</strong> of <code>xpts</code> × <code>xpts</code> sample points over the classified image. xpts = 200 means a 200 × 200 grid.</li>
+<li><strong>Visits each grid cell</strong> and reads its color class.</li>
+<li><strong>Builds a transition matrix T</strong>: for each pair of horizontally-adjacent grid cells, increment <code>T[c1, c2]</code>. Then for each vertically-adjacent pair, increment <code>T[c1, c2]</code> again — but kept as a <em>separate</em> horizontal-T and vertical-T.</li>
+<li><strong>Excludes background</strong> (if <code>bkgID + exclude</code> set): drops the row + column for the white-bg class.</li>
+<li><strong>Computes the seven Endler metrics</strong> from the (filtered) horizontal-T and vertical-T.</li>
+</ol>
+<p>The A statistic is just <code>sum(off_diag(vertical_T)) / sum(off_diag(horizontal_T))</code>:</p>
+<ul>
+<li>A vertical-bar fish has lots of yellow-to-black horizontal transitions but very few vertical transitions within a bar. Vertical edges (between bars) &gt;&gt; horizontal edges within bars. <strong>A &gt; 1.</strong></li>
+<li>A horizontal-stripe fish: opposite. <strong>A &lt; 1.</strong></li>
+<li>A reticulate / spotty fish: roughly equal in both directions. <strong>A ≈ 1.</strong></li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled" title="Why xpts = 200, not 50, not 1000?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why xpts = 200, not 50, not 1000?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>xpts = 50</strong> → too sparse; the grid skips small features (e.g., the cleaner wrasse stripe is only ~20% of the body, so at 50 pts you sample it at maybe 10 cells, with high variance).</li>
+<li><strong>xpts = 1000</strong> → expensive (400× more work) and over-samples noise; small JPEG artifacts start showing up as transitions.</li>
+<li><strong>xpts = 200</strong> → empirically robust on Endler’s example datasets and our test fish. This is the default in his 2012 paper.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="why-coldists-matters-for-m_ds-and-m_dl" class="level2">
+<h2 class="anchored" data-anchor-id="why-coldists-matters-for-m_ds-and-m_dl">2.5 Why <code>coldists</code> matters for <code>m_dS</code> and <code>m_dL</code></h2>
+<p>Without a <code>coldists</code> table, <code>adjacent()</code> returns NA for the boundary-strength metrics. The reason: <code>m_dS</code> (mean chromatic boundary strength) is the <em>average chromatic distance across edges, weighted by edge frequency</em>. To compute that you need to know the chromatic distance between every pair of color classes — that’s <code>coldists</code>.</p>
+<p>In <code>walkthrough.R</code> we compute a <em>photographic</em> <code>coldists</code> from RGB (Euclidean distance in RGB space). This is a stand-in for <em>perceptual</em> coldists, which would come from <code>vismodel() %&gt;% coldist()</code> once we have a fish-eye visual model in Lab 6.</p>
+<p>So: the m_dS and m_dL students will see today are “geometric saturation steps in RGB,” not “JNDs as a fish would see them.” Be ready for the question; flag the upgrade in Lab 6.</p>
+</section>
+<section id="the-three-demo-fish-what-to-expect" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-demo-fish-what-to-expect">2.6 The three demo fish — what to expect</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Demo fish</th>
+<th>Family</th>
+<th>Pattern</th>
+<th style="text-align: right;">Predicted A</th>
+<th style="text-align: right;">Measured A (typical)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sergeant major</td>
+<td>Pomacentridae</td>
+<td>Vertical bars</td>
+<td style="text-align: right;">A &gt; 1</td>
+<td style="text-align: right;"><strong>~1.5</strong></td>
+</tr>
+<tr class="even">
+<td>Cleaner wrasse</td>
+<td>Labridae</td>
+<td>Horizontal stripe</td>
+<td style="text-align: right;">A &lt; 1</td>
+<td style="text-align: right;"><strong>~0.6</strong></td>
+</tr>
+<tr class="odd">
+<td>Mandarin fish</td>
+<td>Callionymidae</td>
+<td>Reticulate</td>
+<td style="text-align: right;">A ≈ 1</td>
+<td style="text-align: right;"><strong>~1.0</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Tiny variation between runs (±0.05) is normal — k-means seeds and slight differences in xpts grid alignment.</p>
+<hr>
+</section>
+</section>
+<section id="part-3-step-by-step-walkthrough-of-scriptswalkthrough.r" class="level1">
+<h1>Part 3 — Step-by-step walkthrough of <code>scripts/walkthrough.R</code></h1>
+<p>This is the section to keep open while you teach. Each subsection is one numbered step in the script.</p>
+<section id="step-0-setup" class="level2">
+<h2 class="anchored" data-anchor-id="step-0-setup">Step 0 — Setup</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening:</strong> loading the three packages plus checking we’re on pavo ≥ 2.9. The <code>magick</code> package is the image-IO backend pavo uses internally; <code>tidyverse</code> is for <code>bind_rows</code>, <code>tibble</code>, <code>pivot_longer</code>, <code>ggplot</code>.</p>
+<p><strong>Why this matters:</strong> if any of these errors out, nothing downstream works. Get students to “all three loaded clean” before proceeding.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 0">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 0
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>there is no package called 'pavo'</code></td>
+<td>install never ran or hit an error</td>
+<td><code>install.packages("pavo")</code> and watch for non-zero exit status; check <code>R --version</code> ≥ 4.3</td>
+</tr>
+<tr class="even">
+<td><code>unable to load shared object … magick.so</code></td>
+<td>system ImageMagick missing</td>
+<td>macOS: <code>brew install imagemagick</code>; Linux: <code>sudo apt install libmagick++-dev</code>. Then <em>reinstall</em> the R <code>magick</code> package so it relinks</td>
+</tr>
+<tr class="odd">
+<td><code>package 'pavo' was built under R version 4.X</code> warning</td>
+<td>pavo binary built on newer R than running</td>
+<td>warning only, ignore — works fine</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-1-load-the-three-demo-fish-segmented" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-load-the-three-demo-fish-segmented">Step 1 — Load the three demo fish (segmented)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sergeant_major <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/sergeant-major.jpg"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cleaner_wrasse <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/cleaner-wrasse.jpg"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mandarin_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/mandarin-fish.jpg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening:</strong> <code>getimg()</code> reads a JPG into pavo’s <code>rimg</code> class — internally a 3D array (height × width × {R, G, B}) with a few attributes (<code>imgname</code>, the original filename).</p>
+<p><strong>Why three fish, why these three:</strong> they were curated specifically to span the A axis cleanly. The sergeant major has near-perfect verticality (bars top-to-bottom of the body); the cleaner wrasse has a dominant horizontal black stripe with weak vertical structure; the mandarin’s labyrinthine pattern is roughly isotropic in horizontal vs.&nbsp;vertical edges. If a student asks why we don’t pick X — the answer is “the demo is calibrated for clean teaching; in Part B you’ll see messier real-world A values.”</p>
+<p><strong>Plot the three side-by-side:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sergeant_major); <span class="fu">title</span>(<span class="st">"sergeant major"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cleaner_wrasse); <span class="fu">title</span>(<span class="st">"cleaner wrasse"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mandarin_fish);  <span class="fu">title</span>(<span class="st">"mandarin fish"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pause here. <strong>Have students predict A</strong> before computing anything. This is the pedagogical hook — they need to commit to a prediction before seeing the answer.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Calling on students at this point">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Calling on students at this point
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pick any student and ask: “Which one will have the highest A? Why?” If they say “the bars one because vertical edges,” you have a class that’s tracking. If they hedge, push: “What does A measure?” Get them to surface the definition before you reveal numbers.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cannot open the connection</code> / <code>cannot open file</code></td>
+<td>working directory is wrong</td>
+<td><code>getwd()</code> to see where R thinks it is; <code>setwd()</code> to the lab folder, or use <strong>Session → Set Working Directory → To Source File Location</strong></td>
+</tr>
+<tr class="even">
+<td>Image loads but <code>plot()</code> shows it black or distorted</td>
+<td>rare — corrupted JPG</td>
+<td>re-clone the repo; check the file is non-empty (<code>file.size("images/demo/segmented/sergeant-major.jpg")</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>Error: object 'getimg' not found</code></td>
+<td><code>library(pavo)</code> skipped</td>
+<td>back to Step 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-1.5-segmentation-the-conceptual-punchline" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.5-segmentation-the-conceptual-punchline">Step 1.5 — Segmentation (the conceptual punchline)</h2>
+<p>This is <em>the</em> step to spend time on. Most lab questions trace back to a misunderstanding here.</p>
+<p><strong>The visual demo:</strong> open three images side-by-side from <code>images/demo/</code>:</p>
+<ul>
+<li><code>images/demo/raw/sergeant-major.jpg</code> — what came off Wikipedia</li>
+<li><code>images/demo/sergeant-major.jpg</code> (if present — cropped to bounding box)</li>
+<li><code>images/demo/segmented/sergeant-major.jpg</code> — what we use</li>
+</ul>
+<p>Walk through visually: each step strips more of “the photograph” away from “the fish.” The metrics get cleaner as the photo gets cleaner.</p>
+<p><strong>Conceptual explanation to give students</strong> (use your own words; this is the gist):</p>
+<blockquote class="blockquote">
+<p>If we ran classify() on the raw photo, k-means would happily allocate one or two of our <em>k</em> classes to the blue water and the rocks. We’d lose those classes for the actual fish patterning. And when adjacent() drops its grid, half of the cells would land in featureless background and just dilute the directional signal. <strong>Segmentation isn’t a cosmetic clean-up — it’s the difference between measuring the fish and measuring the photograph.</strong></p>
+</blockquote>
+<p><strong>Three paths students can use</strong> (worksheet has all three; we use Path 1 for the demo):</p>
+<ol type="1">
+<li><strong><code>segment_fish()</code></strong> in R — wraps rembg + ImageMagick. Best quality.</li>
+<li><strong>Web tool + <code>composite_to_white()</code></strong> — remove.bg → transparent PNG → magick composites onto white in R.</li>
+<li><strong>Manual crop</strong> in Preview.app — fastest fallback, slightly weaker metrics.</li>
+</ol>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 1.5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 1.5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>segment_fish()</code> errors with “rembg failed”</td>
+<td><code>uvx</code> and <code>rembg</code> neither on PATH</td>
+<td>confirm <code>uvx --help</code> works in terminal; if yes, in R run <code>Sys.getenv("PATH")</code> — if <code>~/.local/bin</code> missing, restart RStudio; still failing, fall back to Path 2 (web tool)</td>
+</tr>
+<tr class="even">
+<td><code>magick: not authorized</code> (Linux)</td>
+<td>Debian’s ImageMagick policy.xml blocks JPG by default</td>
+<td>the <code>.binder/Dockerfile</code> patches this; for native Linux, <code>sudo nano /etc/ImageMagick-6/policy.xml</code> and change <code>rights="none"</code> to <code>rights="read|write"</code> for JPEG and PNG</td>
+</tr>
+<tr class="odd">
+<td>Output JPG looks like the fish has been “hollowed out”</td>
+<td>rembg’s u2net model failed on this fish (rare for fish but happens for unusual angles)</td>
+<td>fall back to Path 3 (manual crop); note the rembg model is trained on humans + objects, not fish-specific</td>
+</tr>
+<tr class="even">
+<td>Web tool returns transparent PNG, but <code>getimg()</code> says “image is empty”</td>
+<td>student forgot <code>composite_to_white()</code> and tried to load PNG directly</td>
+<td><code>composite_to_white()</code> first, then <code>getimg()</code> on the resulting <code>*-segmented.jpg</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-2-classify-each-image" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-classify-each-image">Step 2 — Classify each image</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sm_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(sergeant_major, <span class="at">kcols =</span> <span class="dv">4</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cw_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(cleaner_wrasse, <span class="at">kcols =</span> <span class="dv">4</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mf_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(mandarin_fish,  <span class="at">kcols =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening:</strong> k-means on RGB. Each pixel snapped to one of <em>k</em> color centroids. Returns an <code>rimg</code> of integers (1 to k) with a <code>classRGB</code> attribute.</p>
+<p><strong>Why these particular k values:</strong></p>
+<ul>
+<li><strong>Sergeant major (k=4):</strong> yellow body + black bar + pale belly + white background = 4</li>
+<li><strong>Cleaner wrasse (k=4):</strong> dark stripe + mid-blue body + light belly + white bg = 4</li>
+<li><strong>Mandarin (k=6):</strong> orange + deep blue + mid blue + dark + accent + white bg = 6 (more colors → more classes)</li>
+</ul>
+<p><strong>The +1 rule:</strong> segment-to-white means we add 1 to <em>k</em> relative to the number of fish colors, to give the white background its own class.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Live-coding tip — show classify on the wrong k">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Live-coding tip — show classify on the wrong k
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run <code>classify(sergeant_major, kcols = 2)</code> and plot it. Students will see the yellow-and-black bars become <strong>one</strong> class with white as the other — the pattern is destroyed. Then run with k=4 and show how the bar structure pops back. This makes the “k matters” claim visceral.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Classified image looks washed out / 2 colors when k=4</td>
+<td>one class collapsed because its mean was very close to another</td>
+<td>re-run; k-means random init can occasionally land on a degenerate minimum</td>
+</tr>
+<tr class="even">
+<td><code>classRGB</code> shows two near-identical rows (e.g., two pale grays)</td>
+<td>k is too high for the actual color diversity</td>
+<td>reduce k by 1</td>
+</tr>
+<tr class="odd">
+<td><code>Error: 'kcols' missing</code></td>
+<td>typo, e.g., <code>kcol = 4</code></td>
+<td>spelled <code>kcols</code> (with the s)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Inspect the palettes:</strong> the white-bg class is “the one with R≈G≈B≈1.” We use this fact in Step 3 to find and exclude it automatically with <code>pick_white_bg()</code>.</p>
+</section>
+<section id="step-3-adjacency-the-heart-of-the-lab" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-adjacency-the-heart-of-the-lab">Step 3 — Adjacency (the heart of the lab)</h2>
+<p>This is the step that produces the numbers. Students don’t need to follow every line — they need to follow the <em>concept</em>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sm_cd <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(sm_class)        <span class="co"># pairwise RGB distances</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sm_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(sm_class)         <span class="co"># which class is white</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sm_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(sm_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> sm_cd,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">bkgID =</span> sm_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening, in three sentences:</strong></p>
+<ol type="1">
+<li><code>simple_coldists()</code> computes pairwise RGB Euclidean distances between every pair of color classes. Tells <code>adjacent()</code> what counts as a “big” boundary vs.&nbsp;a “small” one.</li>
+<li><code>pick_white_bg()</code> finds the brightest class (highest R+G+B sum) and returns its index. That’s the white-background class.</li>
+<li><code>adjacent()</code> drops a 200×200 grid, counts horizontal and vertical color-class transitions, <em>excludes</em> the white-bg class from the count, and computes the seven metrics.</li>
+</ol>
+<p><strong>The xscale = 5 argument:</strong> ostensibly the body length in cm. <em>Only matters if you care about distance metrics in real-world units.</em> For this lab we care about ratios (A) and density (m), so xscale could be 1 or 100 with no effect. Tell students “leave it at 5; doesn’t change the lab.”</p>
+<p><strong>Why exclude “background”:</strong> without this, the long uniform stretches of white pad the transition counts with within-white-bg pairs (which are zero transitions, but the area inflates the denominator of m). A drops; m drops; the contrast between the three fish gets muddier.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="If a student asks 'why not just crop the white off and skip exclude?'">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If a student asks ‘why not just crop the white off and skip exclude?’
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cropping to the fish’s bounding box leaves white CORNERS still in the image (any non-rectangular fish silhouette has them). The exclude approach handles arbitrary-shaped fish silhouettes correctly. It’s also faster than re-cropping every fish.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>m_dS</code> and <code>m_dL</code> return NA</td>
+<td><code>coldists</code> not passed</td>
+<td>check <code>simple_coldists(class_img)</code> ran and was assigned to <code>*_cd</code></td>
+</tr>
+<tr class="even">
+<td>All metrics look weird, A way off</td>
+<td><code>bkgID</code> set to the <em>wrong</em> class index</td>
+<td>check <code>pick_white_bg(class_img)</code> actually points to white. Compare <code>attr(class_img, "classRGB")[bkg_idx, ]</code> — should be ~(1, 1, 1)</td>
+</tr>
+<tr class="odd">
+<td><code>Error: bkgID must be in 1:kcols</code></td>
+<td>bkgID computed for one fish was used on another</td>
+<td>re-compute <code>*_bkg</code> from each fish’s own classified image</td>
+</tr>
+<tr class="even">
+<td><code>xpts = 200</code> runs slowly (~5 sec per fish)</td>
+<td>normal on a laptop</td>
+<td>mention to class — bigger grids = slower. 200 is the speed/accuracy sweet spot</td>
+</tr>
+<tr class="odd">
+<td>Result has weird column names</td>
+<td>older pavo version uses <code>Asp</code> instead of <code>A</code></td>
+<td><code>pick_col()</code> already handles this; students see the metric name from the tibble printout</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-4-extract-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-extract-metrics">Step 4 — Extract metrics</h2>
+<p>The <code>pick_col()</code> helper grabs the seven metrics across all three fish into a single tibble. <strong>Nothing computational happens here — it’s just data wrangling.</strong> Students don’t need to follow every line; they need to read the resulting tibble and confirm A goes 1.5 / 0.6 / 1.0.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Show the print-out and pause">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Show the print-out and pause
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre><code># A tibble: 3 × 9
+  fish           family       k     m       A    Jc    Jt   m_dS   m_dL
+  &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 sergeant_major Pomacent…     4 0.42   1.54   0.71  …      …      …
+2 cleaner_wrasse Labridae      4 0.31   0.60   0.62  …      …      …
+3 mandarin_fish  Callionym…    6 0.55   1.02   0.81  …      …      …</code></pre>
+<p>Stop and let this sink in. Ask: “Did the prediction hold?” Get a verbal yes from the class before moving on to the visualization.</p>
+</div>
+</div>
+</section>
+<section id="step-5-predict-vs.-measure-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-predict-vs.-measure-visualization">Step 5 — Predict vs.&nbsp;measure visualization</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(m, A, Jc, m_dL), <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fish, <span class="at">y =</span> value, <span class="at">fill =</span> family)) <span class="sc">+</span> …</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening:</strong> four metric values × three fish = a 4-panel grouped bar plot. Visual confirmation of what the table already showed.</p>
+<p><strong>Why this matters pedagogically:</strong> numbers tell, plots sell. The bar chart with A on its own panel is the moment students see the pattern claim made visible. The three families each get a distinct color → easy comparison.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Troubleshooting Step 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plot is empty / no bars</td>
+<td><code>pivot_longer</code> operated on wrong column names</td>
+<td>check <code>colnames(metrics)</code> — m, A, Jc, m_dL must all be present</td>
+</tr>
+<tr class="even">
+<td>Plot displays but axes are weird</td>
+<td>NA values in some metrics (e.g., m_dS missing)</td>
+<td>the plot will skip NAs — note in narration if it happens</td>
+</tr>
+<tr class="odd">
+<td><code>Error: object 'pivot_longer' not found</code></td>
+<td><code>library(tidyverse)</code> skipped</td>
+<td>back to Step 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-6-now-you-try-student-practice" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-now-you-try-student-practice">Step 6 — “Now you try” — student practice</h2>
+<p>This is where students take over and you become the help desk. <strong>The Step 6 template in <code>walkthrough.R</code> now points at a real pre-loaded path</strong> (<code>images/student-fish/chaetodontidae/chaetodon-auriga.jpg</code>) so students can run the template as-is to verify their pipeline works, then swap in their assigned-lineage species.</p>
+<p>The most common student errors during Step 6 are:</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Top 5 student questions during Step 6 (in order of frequency)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Top 5 student questions during Step 6 (in order of frequency)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>“My A came back as 0.4 but I thought it would be 1.2!”</strong> — Almost always either a wrong k value or wrong bkgID. Walk over, ask <code>attr(my_class, "classRGB")</code> — does class 1 look like white? If not, <code>pick_white_bg(my_class)</code> to find which class IS white.</li>
+<li><strong>“<code>segment_fish()</code> is hanging”</strong> — rembg’s u2net model is being downloaded for the first time (~150 MB). Tell them to wait 60 seconds. If it still hangs, fall back to Path 2 (web tool).</li>
+<li><strong>“My fish image is too small / pixelated”</strong> — the xpts=200 grid is too dense for tiny images. Either find a larger source image, or the metrics are unreliable (note this in worksheet).</li>
+<li><strong>“I picked three vertical-bar fish — what now?”</strong> — they need diverse pattern types. Send them back to FishView / their lineage folder to find one of each pattern.</li>
+<li><strong>“<code>getimg()</code> says cannot open file”</strong> — file path. <code>getwd()</code> in R; <code>setwd()</code> to lab folder.</li>
+</ol>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="part-4-pedagogical-playbook" class="level1">
+<h1>Part 4 — Pedagogical playbook</h1>
+<section id="time-budget-for-the-90-minute-lab" class="level2">
+<h2 class="anchored" data-anchor-id="time-budget-for-the-90-minute-lab">4.1 Time budget for the 90-minute lab</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th style="text-align: right;">Time</th>
+<th>What you’re doing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Demo Part A — walkthrough.R Steps 0–5</td>
+<td style="text-align: right;">35 min</td>
+<td>live-code with the three demo fish; pause at each prediction point</td>
+</tr>
+<tr class="even">
+<td>Transition + Q</td>
+<td style="text-align: right;">5 min</td>
+<td>“Now your turn” — read worksheet Part B Step 1 with the class</td>
+</tr>
+<tr class="odd">
+<td>Independent Part B</td>
+<td style="text-align: right;">35 min</td>
+<td>students run pipeline on their three fish; you triage</td>
+</tr>
+<tr class="even">
+<td>Wrap-up + cross-lineage discussion</td>
+<td style="text-align: right;">10 min</td>
+<td>pick 2–3 groups to share; compare their A values to the demo</td>
+</tr>
+<tr class="odd">
+<td>Submit reminder</td>
+<td style="text-align: right;">5 min</td>
+<td>due-by-EOD reminder, point to BruinLearn</td>
+</tr>
+</tbody>
+</table>
+<p>If you run long on demo, drop the <code>m_dS</code> / <code>m_dL</code> discussion (they can read it in the worksheet). Don’t drop A — it’s the headline.</p>
+</section>
+<section id="what-to-emphasize-in-part-a" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-emphasize-in-part-a">4.2 What to emphasize in Part A</h2>
+<p>The two ideas the lab pivots on:</p>
+<ol type="1">
+<li><strong>Segmentation is structural, not cosmetic.</strong> Dwell on Step 1.5. Students who skip this skim of the lab end up with confused metrics in Part B and they don’t understand why.</li>
+<li><strong>A is a directional signal.</strong> Spend two minutes on the <em>intuition</em> — “vertical edges divided by horizontal edges, weighted by where they appear” — before showing the computed A values.</li>
+</ol>
+<p>Everything else is bookkeeping (k choice, white-bg exclusion, simple_coldists).</p>
+</section>
+<section id="what-to-emphasize-in-part-b" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-emphasize-in-part-b">4.3 What to emphasize in Part B</h2>
+<p>In their independent practice, push students to:</p>
+<ol type="1">
+<li><strong>Predict before computing.</strong> Have them write down their predicted A for each of their three fish <em>in the worksheet</em> before running adjacent(). Then have them update it after measurement.</li>
+<li><strong>Reason about disagreements.</strong> When a fish’s measured A doesn’t match their prediction, that’s the most pedagogically valuable moment of the lab. Don’t let them just write “the A came out at 0.9, weird.” Push for “I predicted A &gt; 1 because I saw bars, but the bars are partial / oblique / contiguous with the dorsal stripe, which adds horizontal edges I didn’t count.”</li>
+<li><strong>Compare across the room.</strong> In the wrap-up, compare three students from three different lineages. Did the A statistic recover the same pattern dimensions across families that haven’t seen each other in 100M years? (Spoiler: yes, because A is geometric, not phylogenetic.)</li>
+</ol>
+</section>
+<section id="where-students-get-stuck-and-what-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="where-students-get-stuck-and-what-to-do">4.4 Where students get stuck (and what to do)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stuck on</th>
+<th>What’s actually wrong</th>
+<th>Your move</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“It’s not running”</td>
+<td>almost always a typo or missing <code>library(pavo)</code></td>
+<td>run their session’s <code>search()</code> to confirm pavo is loaded</td>
+</tr>
+<tr class="even">
+<td>“k-means feels arbitrary”</td>
+<td>they’re right — it is, partially</td>
+<td>tell them so. The lab teaches reproducible measurement, not an oracle. Different <em>k</em> gives different metrics; they pick the <em>k</em> that matches the visible color count, then defend their choice</td>
+</tr>
+<tr class="odd">
+<td>“What does the metric <em>mean</em>?”</td>
+<td>conflating measurement with interpretation</td>
+<td>A <em>measures</em> edge-direction ratio. <em>Interpretation</em> — “does this fish look striped to a predator?” — needs Lab 6’s <code>vismodel()</code>. Be explicit about the layering</td>
+</tr>
+<tr class="even">
+<td>“My fish doesn’t have an A pattern type”</td>
+<td>they picked three reticulate fish from the same family</td>
+<td>normal for some lineages (e.g., Acanthuridae has lots of disruptive coloration). Tell them: pick the three that show the most contrast in pattern within their lineage; the A values may all cluster, and that’s a finding worth noting</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="part-5-worksheet-rubric-suggested" class="level1">
+<h1>Part 5 — Worksheet rubric (suggested)</h1>
+<p>The worksheet has three assessable sections. Suggested scoring out of 10:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th style="text-align: right;">Points</th>
+<th>What you’re looking for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Three completed metric tables (Part B Step 3)</td>
+<td style="text-align: right;">3</td>
+<td>tables filled, all 7 metrics present, k chosen reasonably for each fish</td>
+</tr>
+<tr class="even">
+<td>Comparison answers — A prediction vs measurement (Part B Step 4a)</td>
+<td style="text-align: right;">2</td>
+<td>honest yes/partially/no answer with a <em>reason</em>; “no, because” is fine if reasoned</td>
+</tr>
+<tr class="odd">
+<td>Cross-lineage comparison (Part B Step 4b)</td>
+<td style="text-align: right;">2</td>
+<td>identifies a similar demo fish, names <em>which metrics</em> are similar/different, not just “they both look striped”</td>
+</tr>
+<tr class="even">
+<td>Biological interpretation (Part B Step 5)</td>
+<td style="text-align: right;">3</td>
+<td>proposes a plausible selection pressure linked to the <em>measured</em> metrics; doesn’t have to be correct, but must be reasoned. “I’m uncertain — here’s why” answers full marks if the reasoning is solid</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common reasons to deduct:</strong></p>
+<ul>
+<li>Tables half-empty with no explanation</li>
+<li>“A &lt; 1, A &gt; 1, A ≈ 1, just like the prediction” with no interpretation when the values disagreed</li>
+<li>Selection hypothesis that doesn’t reference any of their measured metrics (“disruptive coloration” with no link to high m or high m_dS)</li>
+<li>Wholesale reliance on the demo fish without any engagement with their own three</li>
+</ul>
+<p><strong>What to praise (write inline):</strong></p>
+<ul>
+<li>A student who notices their A values are <em>less dramatic</em> than the demo and traces it to the segmentation choice they made</li>
+<li>A student who picks a “boring” reticulate fish, gets A ≈ 1 as predicted, and reasons about why their lineage favors disruptive coloration</li>
+<li>Anyone who refers back to a lecture concept (Lec 11–12 material on cell palette + pattern mechanism) when interpreting their fish</li>
+</ul>
+<hr>
+</section>
+<section id="part-6-pre-lab-and-day-of-checklist" class="level1">
+<h1>Part 6 — Pre-lab and day-of checklist</h1>
+<section id="two-days-before-lab" class="level2">
+<h2 class="anchored" data-anchor-id="two-days-before-lab">Two days before lab</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Confirm Binder is warm — visit <code>https://mybinder.org/v2/gh/AlfaroLab/eeb187-pavo-lab/HEAD?urlpath=rstudio</code> and let it build. Subsequent students hitting the same commit get cached builds.</label></li>
+<li><label><input type="checkbox">Re-render <code>lab-05-pavo-intro.qmd</code> and <code>pre-lab-installation.qmd</code> if anything changed. Confirm the PDFs exist.</label></li>
+<li><label><input type="checkbox">Spot-check one student’s installation per launch path (Native, Docker, Binder, Codespaces) is achievable end-to-end.</label></li>
+</ul>
+</section>
+<section id="day-before-lab" class="level2">
+<h2 class="anchored" data-anchor-id="day-before-lab">Day before lab</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Walk through <code>scripts/walkthrough.R</code> top-to-bottom yourself in a fresh RStudio session. Time how long it takes — should be ~25 minutes at a steady pace.</label></li>
+<li><label><input type="checkbox">Have the three pre-rendered metric tables (sergeant major / cleaner wrasse / mandarin) memorized so you can reveal them on demand.</label></li>
+<li><label><input type="checkbox">Print or have open this guide’s Part 4 (pedagogical playbook).</label></li>
+</ul>
+</section>
+<section id="morning-of-lab" class="level2">
+<h2 class="anchored" data-anchor-id="morning-of-lab">Morning of lab</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Restart your laptop’s RStudio. Run <code>library(pavo); library(magick); library(tidyverse)</code> to confirm everything still loads.</label></li>
+<li><label><input type="checkbox">Test <code>segment_fish()</code> on one of the demo fish to confirm rembg + magick are still on PATH. If <code>uvx</code> was last used &gt; 1 month ago, the model cache may have been GC’d; running it once now downloads it.</label></li>
+<li><label><input type="checkbox">Take 5 student-fish images (3 you’ll demo + 2 you’ll reserve for “what if” student questions) and run them through the full pipeline as a smoke test.</label></li>
+</ul>
+</section>
+<section id="in-lab-90-min" class="level2">
+<h2 class="anchored" data-anchor-id="in-lab-90-min">In lab (90 min)</h2>
+<ul>
+<li>See the time-budget table in §4.1.</li>
+<li><strong>Don’t fall behind.</strong> If demo Part A is ticking past 40 minutes, skip the m_dS/m_dL panel of Step 5 and let students read it in the worksheet.</li>
+<li><strong>Take notes on student questions</strong> that surfaced. We update the troubleshooting boxes in this guide based on what comes up in real labs.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="appendix-a-glossary-of-metrics" class="level1">
+<h1>Appendix A — Glossary of metrics</h1>
+<p>For when a student asks “what does X mean?” in the middle of lab and you want a single sentence:</p>
+<ul>
+<li><strong>k</strong> — number of color classes the image was reduced to.</li>
+<li><strong>m</strong> — fraction of grid cells that are at a color boundary, i.e., adjacent to a cell of a <em>different</em> class. High m = busy pattern. Low m = uniform pattern.</li>
+<li><strong>A</strong> — vertical-edge frequency divided by horizontal-edge frequency. <strong>A &gt; 1 = bars; A &lt; 1 = stripes; A ≈ 1 = isotropic.</strong></li>
+<li><strong>Jc</strong> — Simpson diversity of <em>color-class areas</em>. High Jc = many colors, evenly distributed. Low Jc = one or two colors dominate.</li>
+<li><strong>Jt</strong> — Simpson diversity of <em>transitions</em>. High Jt = many different boundary types. Low Jt = pattern is dominated by one or two boundary types (e.g., black-yellow over and over).</li>
+<li><strong>m_dS</strong> — average chromatic (saturation/hue) distance across edges. High m_dS = saturated, contrasty edges; low m_dS = subtle ones.</li>
+<li><strong>m_dL</strong> — same as m_dS but for luminance (brightness). High m_dL = bright/dark contrast at edges.</li>
+</ul>
+</section>
+<section id="appendix-b-pre-loaded-student-fish-library" class="level1">
+<h1>Appendix B — Pre-loaded student-fish library</h1>
+<p>Students assigned to each lineage have these 5 species pre-loaded in the repo at <code>images/student-fish/&lt;lineage&gt;/</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th>Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chaetodontidae (butterflyfish)</td>
+<td><em>Chaetodon auriga</em>, <em>C. lunulatus</em>, <em>Forcipiger flavissimus</em>, <em>Hemitaurichthys polylepis</em>, <em>Heniochus acuminatus</em></td>
+</tr>
+<tr class="even">
+<td>Pomacanthidae (angelfish)</td>
+<td><em>Centropyge bicolor</em>, <em>Holacanthus ciliaris</em>, <em>Pomacanthus imperator</em>, <em>P. paru</em>, <em>Pygoplites diacanthus</em></td>
+</tr>
+<tr class="odd">
+<td>Balistidae (triggerfish)</td>
+<td><em>Balistoides conspicillum</em>, <em>Melichthys indicus</em>, <em>Odonus niger</em>, <em>Pseudobalistes fuscus</em>, <em>Rhinecanthus aculeatus</em></td>
+</tr>
+<tr class="even">
+<td>Acanthuridae (surgeonfish)</td>
+<td><em>Acanthurus lineatus</em>, <em>Naso lituratus</em>, <em>Paracanthurus hepatus</em>, <em>Zebrasoma flavescens</em>, <em>Z. xanthurum</em></td>
+</tr>
+</tbody>
+</table>
+<p>Students can use any three of their lineage’s pre-loaded species without uploading anything. Or they can bring their own JPG and add it alongside the pre-loaded ones (see worksheet Part B Step 1 for image-folder instructions per OS).</p>
+<hr>
+<p><em>Questions, errors, or improvements: post in the EEB 187 channel or PR against this file.</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

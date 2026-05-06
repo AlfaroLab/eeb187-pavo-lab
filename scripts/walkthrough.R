@@ -256,6 +256,50 @@ segment_fish <- function(raw_path, out_dir = NULL,
 
 
 # -----------------------------------------------------------------------------
+# composite_to_white() — for fish you segmented OUTSIDE R using a web tool
+# -----------------------------------------------------------------------------
+# If you used remove.bg, photoroom.com, or ClipDrop to remove the background
+# before lab, you have a transparent PNG. pavo's classify-with-bkg approach
+# wants a JPG with a SOLID white background. This helper composites your
+# transparent PNG onto white and saves it as a JPG — same end product as
+# segment_fish(), without needing rembg installed locally.
+#
+# Usage:
+#   white_jpg <- composite_to_white("images/student-fish/.../my-fish.png")
+#   my_fish   <- getimg(white_jpg)
+#
+# Requires only the R `magick` package (already installed for pavo).
+
+composite_to_white <- function(transparent_png, out_path = NULL,
+                               canvas_w = 1500, canvas_h = 800,
+                               target_body = 1200) {
+  if (!requireNamespace("magick", quietly = TRUE)) {
+    stop("Install the 'magick' R package first: install.packages('magick')")
+  }
+  if (!file.exists(transparent_png)) {
+    stop("Image not found: ", transparent_png)
+  }
+  if (is.null(out_path)) {
+    base    <- tools::file_path_sans_ext(basename(transparent_png))
+    out_path <- file.path(dirname(transparent_png),
+                          paste0(base, "-segmented.jpg"))
+  }
+
+  img <- magick::image_read(transparent_png)
+  img <- magick::image_trim(img)
+  img <- magick::image_background(img, "white", flatten = TRUE)
+  img <- magick::image_resize(img,
+                              paste0(target_body, "x", target_body))
+  img <- magick::image_extent(img,
+                              paste0(canvas_w, "x", canvas_h),
+                              color = "white", gravity = "center")
+  magick::image_write(img, out_path, format = "jpeg")
+  message("Composited to white: ", out_path)
+  invisible(out_path)
+}
+
+
+# -----------------------------------------------------------------------------
 # Step 1.6 — REGISTRATION: confirm left-lateral view (head on left)
 # -----------------------------------------------------------------------------
 # Standard ichthyology convention is "left-lateral view" — the fish facing

@@ -298,11 +298,62 @@ If your lineage doesn't span all three pattern types, pick the three with the mo
 
 **Image source — use whichever your group has been working with:**
 
+- **Fastest path — already done for you:** the lab bundle includes pre-curated images at `images/student-fish/<your-lineage>/` — five species per lineage, ready to use. Skip downloading and segmentation entirely if you pick three of these.
 - **FishView server** — if your group has been curating images there, use that
 - **FishBase** ([fishbase.se](https://fishbase.se)) or **Wikimedia Commons** — search by species name; download a clear, lateral-view photo
-- **Fallback:** the lab bundle includes pre-curated images at `images/student-fish/<your-lineage>/` — five species per lineage, ready to use
 
-Save your three images locally before lab — either in your `EEB187-pavo-lab` folder or somewhere you can find them quickly. **Don't show up empty-handed.** If you don't know your lineage assignment, ask in the channel by Tuesday evening.
+### Step 7a: Where to put your images
+
+**Use one consistent folder so all your `getimg()` calls use short, predictable paths.** The convention we recommend:
+
+| OS | Recommended path |
+|---|---|
+| **macOS** | `~/Documents/eeb187-pavo-lab/images/student-fish/<your-lineage>/` |
+| **Windows** | `Documents\eeb187-pavo-lab\images\student-fish\<your-lineage>\` |
+| **Linux** | `~/eeb187-pavo-lab/images/student-fish/<your-lineage>/` |
+| **Binder / Codespaces** | `images/student-fish/<your-lineage>/` (use the RStudio Files-pane *Upload* button) |
+
+If you cloned the repo with `git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git`, that folder *already exists* with the 5 starter species in it — just drop your own JPGs in alongside them.
+
+::: {.callout-tip title="Why this convention?"}
+Every code example in `walkthrough.R` and the worksheet uses paths like `images/student-fish/chaetodontidae/chaetodon-auriga.jpg`. If your folder layout matches, every code block works copy-paste with one filename change. If it doesn't, you'll be debugging file paths instead of biology.
+:::
+
+### Step 7b: Image naming convention
+
+Use lowercase, hyphenated filenames so the helper functions and your code are robust:
+
+- `genus-species.jpg` — e.g. `chaetodon-auriga.jpg`, `pomacanthus-imperator.jpg`
+- For multiple photos of the same species: `genus-species-1.jpg`, `genus-species-2.jpg`
+- **Avoid spaces, capital letters, parentheses, and special characters** — they break R file paths on some platforms
+
+### Step 7c (RECOMMENDED): Segment your fish images BEFORE lab
+
+If you can pre-segment your 3 fish images at home, you'll spend lab time on the *biology* (predict-and-test, comparison) instead of on image processing. **Two paths, both fine:**
+
+**Path A — local with `segment_fish()` (best quality):** if your install of `uv` + `imagemagick` worked above, you already have the tool. Just run in R:
+
+```r
+source("scripts/walkthrough.R")    # loads the segment_fish() helper
+segment_fish("images/student-fish/<your-lineage>/your-fish.jpg")
+# Repeat for fish 2 and 3. Output: <name>-segmented.jpg in the same folder.
+```
+
+**Path B — web tool (no install needed):** drag-drop your fish JPG to one of these:
+
+- [**remove.bg**](https://www.remove.bg/) — best known, free for low-res output (fine for this lab), no signup needed
+- [**photoroom.com**](https://www.photoroom.com/tools/background-remover) — free, no signup
+- [**clipdrop.co/remove-background**](https://clipdrop.co/remove-background) — free, no signup
+
+The output is a transparent PNG. Save it next to the original (e.g., `chaetodon-auriga.png`). Then in R, use the `composite_to_white()` helper from `walkthrough.R` to convert the transparent PNG to a white-background JPG that pavo expects:
+
+```r
+source("scripts/walkthrough.R")
+composite_to_white("images/student-fish/<your-lineage>/chaetodon-auriga.png")
+# Output: chaetodon-auriga-segmented.jpg in the same folder.
+```
+
+Either way, you arrive at lab with three `<species>-segmented.jpg` files ready for `getimg()`. **Don't show up empty-handed.** If you don't know your lineage assignment, ask in the channel by Tuesday evening.
 
 ---
 

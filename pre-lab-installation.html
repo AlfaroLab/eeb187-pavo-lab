@@ -100,7 +100,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#recommended-alternative-install-uv-instead-of-pip-installing-rembg" id="toc-recommended-alternative-install-uv-instead-of-pip-installing-rembg" class="nav-link" data-scroll-target="#recommended-alternative-install-uv-instead-of-pip-installing-rembg">Recommended alternative: install <code>uv</code> instead of pip-installing rembg</a></li>
   <li><a href="#if-install-fails-entirely" id="toc-if-install-fails-entirely" class="nav-link" data-scroll-target="#if-install-fails-entirely">If install fails entirely</a></li>
   </ul></li>
-  <li><a href="#step-7-required-identify-three-fish-from-your-assigned-lineage" id="toc-step-7-required-identify-three-fish-from-your-assigned-lineage" class="nav-link" data-scroll-target="#step-7-required-identify-three-fish-from-your-assigned-lineage">Step 7 (REQUIRED): Identify three fish from your assigned lineage</a></li>
+  <li><a href="#step-7-required-identify-three-fish-from-your-assigned-lineage" id="toc-step-7-required-identify-three-fish-from-your-assigned-lineage" class="nav-link" data-scroll-target="#step-7-required-identify-three-fish-from-your-assigned-lineage">Step 7 (REQUIRED): Identify three fish from your assigned lineage</a>
+  <ul class="collapse">
+  <li><a href="#step-7a-where-to-put-your-images" id="toc-step-7a-where-to-put-your-images" class="nav-link" data-scroll-target="#step-7a-where-to-put-your-images">Step 7a: Where to put your images</a></li>
+  <li><a href="#step-7b-image-naming-convention" id="toc-step-7b-image-naming-convention" class="nav-link" data-scroll-target="#step-7b-image-naming-convention">Step 7b: Image naming convention</a></li>
+  <li><a href="#step-7c-recommended-segment-your-fish-images-before-lab" id="toc-step-7c-recommended-segment-your-fish-images-before-lab" class="nav-link" data-scroll-target="#step-7c-recommended-segment-your-fish-images-before-lab">Step 7c (RECOMMENDED): Segment your fish images BEFORE lab</a></li>
+  </ul></li>
   <li><a href="#common-errors-and-fixes" id="toc-common-errors-and-fixes" class="nav-link" data-scroll-target="#common-errors-and-fixes">Common errors and fixes</a></li>
   <li><a href="#what-well-do-in-lab" id="toc-what-well-do-in-lab" class="nav-link" data-scroll-target="#what-well-do-in-lab">What we’ll do in lab</a></li>
   <li><a href="#need-help" id="toc-need-help" class="nav-link" data-scroll-target="#need-help">Need help?</a></li>
@@ -422,12 +427,87 @@ you are ready for Wednesday's lab.</code></pre>
 <p>If your lineage doesn’t span all three pattern types, pick the three with the most different patterns you can find in it.</p>
 <p><strong>Image source — use whichever your group has been working with:</strong></p>
 <ul>
+<li><strong>Fastest path — already done for you:</strong> the lab bundle includes pre-curated images at <code>images/student-fish/&lt;your-lineage&gt;/</code> — five species per lineage, ready to use. Skip downloading and segmentation entirely if you pick three of these.</li>
 <li><strong>FishView server</strong> — if your group has been curating images there, use that</li>
 <li><strong>FishBase</strong> (<a href="https://fishbase.se">fishbase.se</a>) or <strong>Wikimedia Commons</strong> — search by species name; download a clear, lateral-view photo</li>
-<li><strong>Fallback:</strong> the lab bundle includes pre-curated images at <code>images/student-fish/&lt;your-lineage&gt;/</code> — five species per lineage, ready to use</li>
 </ul>
-<p>Save your three images locally before lab — either in your <code>EEB187-pavo-lab</code> folder or somewhere you can find them quickly. <strong>Don’t show up empty-handed.</strong> If you don’t know your lineage assignment, ask in the channel by Tuesday evening.</p>
+<section id="step-7a-where-to-put-your-images" class="level3">
+<h3 class="anchored" data-anchor-id="step-7a-where-to-put-your-images">Step 7a: Where to put your images</h3>
+<p><strong>Use one consistent folder so all your <code>getimg()</code> calls use short, predictable paths.</strong> The convention we recommend:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>OS</th>
+<th>Recommended path</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>macOS</strong></td>
+<td><code>~/Documents/eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;/</code></td>
+</tr>
+<tr class="even">
+<td><strong>Windows</strong></td>
+<td><code>Documents\eeb187-pavo-lab\images\student-fish\&lt;your-lineage&gt;\</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Linux</strong></td>
+<td><code>~/eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;/</code></td>
+</tr>
+<tr class="even">
+<td><strong>Binder / Codespaces</strong></td>
+<td><code>images/student-fish/&lt;your-lineage&gt;/</code> (use the RStudio Files-pane <em>Upload</em> button)</td>
+</tr>
+</tbody>
+</table>
+<p>If you cloned the repo with <code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git</code>, that folder <em>already exists</em> with the 5 starter species in it — just drop your own JPGs in alongside them.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Why this convention?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why this convention?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every code example in <code>walkthrough.R</code> and the worksheet uses paths like <code>images/student-fish/chaetodontidae/chaetodon-auriga.jpg</code>. If your folder layout matches, every code block works copy-paste with one filename change. If it doesn’t, you’ll be debugging file paths instead of biology.</p>
+</div>
+</div>
+</section>
+<section id="step-7b-image-naming-convention" class="level3">
+<h3 class="anchored" data-anchor-id="step-7b-image-naming-convention">Step 7b: Image naming convention</h3>
+<p>Use lowercase, hyphenated filenames so the helper functions and your code are robust:</p>
+<ul>
+<li><code>genus-species.jpg</code> — e.g.&nbsp;<code>chaetodon-auriga.jpg</code>, <code>pomacanthus-imperator.jpg</code></li>
+<li>For multiple photos of the same species: <code>genus-species-1.jpg</code>, <code>genus-species-2.jpg</code></li>
+<li><strong>Avoid spaces, capital letters, parentheses, and special characters</strong> — they break R file paths on some platforms</li>
+</ul>
+</section>
+<section id="step-7c-recommended-segment-your-fish-images-before-lab" class="level3">
+<h3 class="anchored" data-anchor-id="step-7c-recommended-segment-your-fish-images-before-lab">Step 7c (RECOMMENDED): Segment your fish images BEFORE lab</h3>
+<p>If you can pre-segment your 3 fish images at home, you’ll spend lab time on the <em>biology</em> (predict-and-test, comparison) instead of on image processing. <strong>Two paths, both fine:</strong></p>
+<p><strong>Path A — local with <code>segment_fish()</code> (best quality):</strong> if your install of <code>uv</code> + <code>imagemagick</code> worked above, you already have the tool. Just run in R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/walkthrough.R"</span>)    <span class="co"># loads the segment_fish() helper</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">segment_fish</span>(<span class="st">"images/student-fish/&lt;your-lineage&gt;/your-fish.jpg"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat for fish 2 and 3. Output: &lt;name&gt;-segmented.jpg in the same folder.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Path B — web tool (no install needed):</strong> drag-drop your fish JPG to one of these:</p>
+<ul>
+<li><a href="https://www.remove.bg/"><strong>remove.bg</strong></a> — best known, free for low-res output (fine for this lab), no signup needed</li>
+<li><a href="https://www.photoroom.com/tools/background-remover"><strong>photoroom.com</strong></a> — free, no signup</li>
+<li><a href="https://clipdrop.co/remove-background"><strong>clipdrop.co/remove-background</strong></a> — free, no signup</li>
+</ul>
+<p>The output is a transparent PNG. Save it next to the original (e.g., <code>chaetodon-auriga.png</code>). Then in R, use the <code>composite_to_white()</code> helper from <code>walkthrough.R</code> to convert the transparent PNG to a white-background JPG that pavo expects:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/walkthrough.R"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;your-lineage&gt;/chaetodon-auriga.png"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: chaetodon-auriga-segmented.jpg in the same folder.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Either way, you arrive at lab with three <code>&lt;species&gt;-segmented.jpg</code> files ready for <code>getimg()</code>. <strong>Don’t show up empty-handed.</strong> If you don’t know your lineage assignment, ask in the channel by Tuesday evening.</p>
 <hr>
+</section>
 </section>
 <section id="common-errors-and-fixes" class="level2">
 <h2 class="anchored" data-anchor-id="common-errors-and-fixes">Common errors and fixes</h2>
