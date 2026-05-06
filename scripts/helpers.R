@@ -7,6 +7,21 @@
 #
 #   source("scripts/helpers.R")
 #
+# IMPORTANT: source()ing helpers.R is NOT a substitute for library(pavo).
+# Helpers like segment_fish() are defined here, but pavo functions like
+# getimg() / classify() / adjacent() are part of the pavo package and
+# require library(pavo) separately. After every R session restart, Step 0
+# of walkthrough.R must be run in full:
+#
+#   library(pavo)
+#   library(magick)
+#   library(tidyverse)
+#   source("scripts/helpers.R")
+#
+# All FOUR are needed. Skipping any of them produces "could not find
+# function" errors mid-pipeline. See teaching/ta-guide.qmd Step 0
+# troubleshooting for which line maps to which error.
+#
 # Six functions are defined below:
 #
 #   segment_fish()        — wrap rembg + ImageMagick into one R call so a

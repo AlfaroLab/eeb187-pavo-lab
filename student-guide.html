@@ -330,17 +330,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-0-load-packages-and-helpers" class="level1">
 <h1>3. Step 0 — Load packages and helpers</h1>
 <p>This is the <strong>most-skipped step</strong> that causes 80% of student errors. Run it first, every time.</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="ALL FOUR lines must run after every session start">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>ALL FOUR lines must run after every session start
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you restart R (e.g., <strong>Session → Restart R</strong>, or Docker container restart, or you reload Binder), the entire global environment is wiped — every package, every variable, every helper. You must re-run Step 0 in full. Running just <em>one</em> of the four lines is the most common reason students get “could not find function” errors mid-pipeline:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Line you skipped</th>
+<th>Error you’ll get</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>library(pavo)</code></td>
+<td><code>Error: could not find function "getimg"</code> (also <code>classify</code>, <code>adjacent</code>)</td>
+</tr>
+<tr class="even">
+<td><code>library(magick)</code></td>
+<td><code>unable to load shared object … magick.so</code> (or some plotting errors)</td>
+</tr>
+<tr class="odd">
+<td><code>library(tidyverse)</code></td>
+<td><code>Error: could not find function "bind_rows"</code> (or <code>pivot_longer</code>, <code>ggplot</code>)</td>
+</tr>
+<tr class="even">
+<td><code>source("scripts/helpers.R")</code></td>
+<td><code>Error: could not find function "simple_coldists"</code> (also <code>pick_white_bg</code>, <code>segment_fish</code>, <code>composite_to_white</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>In the Console (or by clicking through the script in the Source pane):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)               <span class="co"># loads getimg(), classify(), adjacent()</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)             <span class="co"># image I/O backend pavo uses</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)          <span class="co"># bind_rows, pivot_longer, ggplot</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>) <span class="co"># segment_fish, simple_coldists, pick_white_bg, …</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>What you should see:</strong></p>
 <pre><code>Linking to ImageMagick 6.9.12.98 …
 ── Attaching core tidyverse packages …
 [1] '2.9.0'</code></pre>
-<p>The four lines above all need to run cleanly. The <code>source("scripts/helpers.R")</code> line is silent (no output unless something’s wrong) — but it’s loading 6 helper functions you need later: <code>segment_fish</code>, <code>composite_to_white</code>, <code>flip_to_left_lateral</code>, <code>simple_coldists</code>, <code>pick_white_bg</code>, <code>pick_col</code>. <strong>Skip it and Step 3 of the analysis will fail.</strong></p>
+<p>The four <code>library</code> / <code>source</code> lines above all need to run cleanly. The <code>source("scripts/helpers.R")</code> line is silent (no output unless something’s wrong) — but it’s loading 6 helper functions: <code>segment_fish</code>, <code>composite_to_white</code>, <code>flip_to_left_lateral</code>, <code>simple_coldists</code>, <code>pick_white_bg</code>, <code>pick_col</code>. <strong>Skip it and Step 3 of the analysis will fail.</strong></p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Pro tip">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Pro tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At the top of <code>walkthrough.R</code> you’ll see these four lines as block comments. Highlight all four lines in the Source pane (or the whole Step 0 block) and press <strong>Cmd-Enter</strong> (Mac) / <strong>Ctrl-Enter</strong> (Windows / Linux) to send them all to the Console at once.</p>
+</div>
+</div>
 <div class="callout callout-style-simple callout-warning callout-titled" title="If Step 0 didn't work">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -852,9 +908,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
+<td><code>could not find function "getimg"</code> (or <code>classify</code>, <code>adjacent</code>)</td>
+<td>You didn’t <code>library(pavo)</code> after a session restart</td>
+<td>Re-run Step 0 in full — all four lines</td>
+</tr>
+<tr class="even">
 <td><code>could not find function "simple_coldists"</code> (or <code>pick_white_bg</code>, <code>pick_col</code>, <code>segment_fish</code>)</td>
 <td>You didn’t <code>source("scripts/helpers.R")</code> at session start</td>
-<td>Run it in the Console. Now.</td>
+<td>Re-run Step 0 in full — all four lines</td>
+</tr>
+<tr class="odd">
+<td><code>could not find function "bind_rows"</code> (or <code>pivot_longer</code>, <code>ggplot</code>)</td>
+<td>You didn’t <code>library(tidyverse)</code></td>
+<td>Re-run Step 0 in full — all four lines</td>
 </tr>
 <tr class="even">
 <td><code>cannot open the connection</code> from <code>getimg()</code></td>

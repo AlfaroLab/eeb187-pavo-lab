@@ -435,15 +435,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is the section to keep open while you teach. Each subsection is one numbered step in the script.</p>
 <section id="step-0-setup" class="level2">
 <h2 class="anchored" data-anchor-id="step-0-setup">Step 0 — Setup</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)     <span class="co"># ← critical: loads simple_coldists,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="co">#   pick_white_bg, pick_col, segment_fish,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="co">#   composite_to_white, flip_to_left_lateral</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)               <span class="co"># loads getimg(), classify(), adjacent()</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)             <span class="co"># image I/O backend pavo uses</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)          <span class="co"># bind_rows, pivot_longer, ggplot</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>) <span class="co"># ← critical: loads simple_coldists,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#   pick_white_bg, pick_col, segment_fish,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#   composite_to_white, flip_to_left_lateral</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>What’s happening:</strong> loading the three packages plus checking we’re on pavo ≥ 2.9. The <code>magick</code> package is the image-IO backend pavo uses internally; <code>tidyverse</code> is for <code>bind_rows</code>, <code>tibble</code>, <code>pivot_longer</code>, <code>ggplot</code>. The <code>source("scripts/helpers.R")</code> call brings in every function used downstream — without it, the first call to <code>simple_coldists()</code> errors with “could not find function”.</p>
-<p><strong>Why this matters:</strong> if any of these errors out, nothing downstream works. Get students to “all four loaded clean” before proceeding. The <code>source()</code> line is the one students forget when they jump into Part B from a fresh session — emphasize it.</p>
+<p><strong>What’s happening:</strong> loading the three packages plus the helpers, plus checking we’re on pavo ≥ 2.9. Each line carries different functions — see the troubleshooting table below for which “could not find function” error means which line was skipped.</p>
+<p><strong>Why this matters:</strong> if any of these errors out, nothing downstream works. Get students to “all four loaded clean” before proceeding.</p>
+<p><strong>The two pedagogical moments to emphasize:</strong></p>
+<ol type="1">
+<li><p><strong>The <code>source("scripts/helpers.R")</code> line.</strong> Students forget this when they jump into Part B from a fresh session. Most “could not find function ‘simple_coldists’” errors trace back to it.</p></li>
+<li><p><strong>The “after Restart R” rule.</strong> Restarting R (Session → Restart R, container restart, Binder reload) wipes the entire environment. Students often try to recover by re-running just one or two lines of Step 0 — but they need ALL four. The <code>library(pavo)</code> line in particular is the one they re-skip because the immediate previous error was about a helper function, so they assume the problem is helpers-only.</p></li>
+</ol>
 <div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 0">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -550,14 +555,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>re-clone the repo; check the file is non-empty (<code>file.size("images/demo/segmented/sergeant-major.jpg")</code>)</td>
 </tr>
 <tr class="odd">
-<td><code>Error: object 'getimg' not found</code></td>
-<td><code>library(pavo)</code> skipped</td>
-<td>back to Step 0</td>
+<td><code>Error: could not find function "getimg"</code> (or <code>classify</code>, <code>adjacent</code>)</td>
+<td><code>library(pavo)</code> skipped (often after Session → Restart R)</td>
+<td>back to Step 0 — re-run <strong>all four</strong> lines</td>
 </tr>
 <tr class="even">
 <td><code>Error: could not find function "simple_coldists"</code> (or <code>pick_white_bg</code>, etc.)</td>
 <td><code>source("scripts/helpers.R")</code> skipped</td>
-<td>back to Step 0; this is the most common Step 3 error in our test runs</td>
+<td>back to Step 0 — re-run <strong>all four</strong> lines. This is the most common Step 3 error in our test runs</td>
+</tr>
+<tr class="odd">
+<td><code>Error: could not find function "bind_rows"</code> (or <code>pivot_longer</code>, <code>ggplot</code>)</td>
+<td><code>library(tidyverse)</code> skipped</td>
+<td>back to Step 0 — re-run <strong>all four</strong> lines</td>
 </tr>
 </tbody>
 </table>

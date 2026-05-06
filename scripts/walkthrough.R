@@ -12,16 +12,23 @@
 # -----------------------------------------------------------------------------
 # Step 0 — Setup: load packages, helpers, and confirm the environment
 # -----------------------------------------------------------------------------
+# IMPORTANT: ALL FOUR LINES BELOW must run after every R session start
+# (and after Session → Restart R). They split responsibility:
+#
+#   library(pavo)               loads getimg(), classify(), adjacent(), etc.
+#   library(magick)              image-IO backend pavo uses internally
+#   library(tidyverse)           bind_rows / pivot_longer / ggplot
+#   source("scripts/helpers.R")  loads segment_fish(), simple_coldists(),
+#                                pick_white_bg(), pick_col(), and friends
+#
+# If you skip library(pavo): getimg() etc. error with "could not find function".
+# If you skip source(helpers): simple_coldists() etc. error with the same.
+# You need ALL FOUR. Run them top-to-bottom before any analysis line.
 
-library(pavo)         # color analysis
+library(pavo)         # color analysis  (getimg, classify, adjacent)
 library(magick)       # image I/O backend
 library(tidyverse)    # data wrangling + ggplot
-
-# Load helper functions: segment_fish(), composite_to_white(),
-# flip_to_left_lateral(), simple_coldists(), pick_white_bg(), pick_col().
-# Defined in scripts/helpers.R, sourced here so every block below "just
-# works" — no need to step through function definitions in order.
-source("scripts/helpers.R")
+source("scripts/helpers.R")   # segment_fish, simple_coldists, pick_white_bg, …
 
 # Sanity check — should print 2.9.0 or higher
 packageVersion("pavo")

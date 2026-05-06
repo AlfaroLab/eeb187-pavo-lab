@@ -142,13 +142,24 @@ Where to put them depends on your launch path:
 
 This is the **most-skipped step** that causes 80% of student errors. Run it first, every time.
 
+::: {.callout-warning title="ALL FOUR lines must run after every session start"}
+If you restart R (e.g., **Session → Restart R**, or Docker container restart, or you reload Binder), the entire global environment is wiped — every package, every variable, every helper. You must re-run Step 0 in full. Running just *one* of the four lines is the most common reason students get "could not find function" errors mid-pipeline:
+
+| Line you skipped | Error you'll get |
+|---|---|
+| `library(pavo)` | `Error: could not find function "getimg"` (also `classify`, `adjacent`) |
+| `library(magick)` | `unable to load shared object … magick.so` (or some plotting errors) |
+| `library(tidyverse)` | `Error: could not find function "bind_rows"` (or `pivot_longer`, `ggplot`) |
+| `source("scripts/helpers.R")` | `Error: could not find function "simple_coldists"` (also `pick_white_bg`, `segment_fish`, `composite_to_white`) |
+:::
+
 In the Console (or by clicking through the script in the Source pane):
 
 ```r
-library(pavo)
-library(magick)
-library(tidyverse)
-source("scripts/helpers.R")
+library(pavo)               # loads getimg(), classify(), adjacent()
+library(magick)             # image I/O backend pavo uses
+library(tidyverse)          # bind_rows, pivot_longer, ggplot
+source("scripts/helpers.R") # segment_fish, simple_coldists, pick_white_bg, …
 packageVersion("pavo")
 ```
 
@@ -160,7 +171,11 @@ Linking to ImageMagick 6.9.12.98 …
 [1] '2.9.0'
 ```
 
-The four lines above all need to run cleanly. The `source("scripts/helpers.R")` line is silent (no output unless something's wrong) — but it's loading 6 helper functions you need later: `segment_fish`, `composite_to_white`, `flip_to_left_lateral`, `simple_coldists`, `pick_white_bg`, `pick_col`. **Skip it and Step 3 of the analysis will fail.**
+The four `library` / `source` lines above all need to run cleanly. The `source("scripts/helpers.R")` line is silent (no output unless something's wrong) — but it's loading 6 helper functions: `segment_fish`, `composite_to_white`, `flip_to_left_lateral`, `simple_coldists`, `pick_white_bg`, `pick_col`. **Skip it and Step 3 of the analysis will fail.**
+
+::: {.callout-tip title="Pro tip"}
+At the top of `walkthrough.R` you'll see these four lines as block comments. Highlight all four lines in the Source pane (or the whole Step 0 block) and press **Cmd-Enter** (Mac) / **Ctrl-Enter** (Windows / Linux) to send them all to the Console at once.
+:::
 
 ::: {.callout-warning title="If Step 0 didn't work"}
 | Error | Fix |
@@ -535,7 +550,9 @@ Submit on BruinLearn by end of day.
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| `could not find function "simple_coldists"` (or `pick_white_bg`, `pick_col`, `segment_fish`) | You didn't `source("scripts/helpers.R")` at session start | Run it in the Console. Now. |
+| `could not find function "getimg"` (or `classify`, `adjacent`) | You didn't `library(pavo)` after a session restart | Re-run Step 0 in full — all four lines |
+| `could not find function "simple_coldists"` (or `pick_white_bg`, `pick_col`, `segment_fish`) | You didn't `source("scripts/helpers.R")` at session start | Re-run Step 0 in full — all four lines |
+| `could not find function "bind_rows"` (or `pivot_longer`, `ggplot`) | You didn't `library(tidyverse)` | Re-run Step 0 in full — all four lines |
 | `cannot open the connection` from `getimg()` | Working directory wrong | `getwd()` should print the lab repo path. Fix per [Section 1](#1.-orient-yourself-in-rstudio). |
 | Classified image is just two colors | k too small | Increase k by 1 |
 | Classified palette has duplicate-looking rows | k too large | Decrease k by 1 |
