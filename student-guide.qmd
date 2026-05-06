@@ -101,40 +101,104 @@ Open the **Files pane** (bottom-right). You should see (among others):
 
 # 2. Get your images in place
 
-The lab uses two sets of images:
+The lab uses two sets of images: the three **demo fish** (already loaded) and **your three lineage fish** (you'll either use the pre-loaded library or upload your own).
 
-## Demo fish (already loaded — nothing to do)
+## Demo fish — already loaded, nothing to do
 
 Three demo fish — sergeant major, cleaner wrasse, mandarin fish — live at `images/demo/segmented/`. They're pre-segmented (background removed, white-padded, standardized canvas). You'll use these in **Part A** of the worksheet.
 
-## Your lineage's fish (Part B)
+## Your lineage's fish — pick one of two paths
 
-You have two options:
+### Path A — Use the pre-loaded library (zero uploading, recommended)
 
-### Option A — Use the pre-loaded library (zero work)
+The lab repo already includes **5 starter species per lineage** in `images/student-fish/<lineage>/`. If three of those span the pattern types you want (vertical bars, horizontal stripe, reticulate/spotty), you don't need to upload anything.
 
-Each lineage already has 5 starter species in `images/student-fish/<lineage>/`. To see what's in yours, in the Console:
+In the R Console, list what's in your lineage:
 
 ```r
 list.files("images/student-fish/chaetodontidae")    # change lineage as needed
 ```
 
-Pick three that span pattern types — one with vertical bars, one with horizontal stripe, one spotty/reticulate.
+Pick three, write their filenames in your worksheet, and skip Path B.
 
-### Option B — Bring your own JPGs
+### Path B — Bring your own fish photos
 
-Save raw fish photos with **lowercase, hyphenated** filenames (e.g., `pomacanthus-imperator.jpg`, NOT `Pomacanthus Imperator.JPG` or anything with spaces).
+**You'll do this in two steps:** (1) name your photo correctly, (2) get it into the lab folder. The "how" is different per launch path.
 
-Where to put them depends on your launch path:
+#### Step B1 — Name your file properly
 
-| Launch | Where |
-|---|---|
-| **Native** | drop into your local `eeb187-pavo-lab/images/student-fish/<lineage>/` folder — no upload needed |
-| **Docker** | drop into the same folder on your host (the bind mount makes them appear at `~/lab/images/student-fish/<lineage>/` inside the container automatically) |
-| **Binder** | RStudio's Files pane (bottom-right) → navigate to `images/student-fish/<lineage>/` → click **Upload** → drop your JPGs |
-| **Codespaces** | drag-drop into the VS Code file explorer at `images/student-fish/<lineage>/` |
+Filename rules — these matter because R is sensitive to spaces and capital letters:
 
-**If you have raw photos that still have water/reef in the background**, segment them first — see [Section 8](#segment-your-own-fish-part-b-step-1).
+✅ **Good:** `pomacanthus-imperator.jpg`, `chaetodon-auriga.jpg`
+❌ **Bad:** `Pomacanthus Imperator.JPG` (capitals + space), `IMG_1234.jpeg` (uninformative), `cool fish.png` (space, .png will need extra step)
+
+Format: lowercase, hyphenated, **`.jpg` extension**, named after the species (`genus-species.jpg`).
+
+If you're not sure of the species name, look it up on FishBase or Wikipedia first. If you have multiple photos of the same species, append a number: `chaetodon-auriga-1.jpg`, `chaetodon-auriga-2.jpg`.
+
+#### Step B2 — Get the file into your lab folder
+
+::: {.callout-tip title="Docker users — the path of least resistance"}
+Your lab repo on your Mac and the RStudio session inside the container are connected. **Anything you save into the host folder appears inside RStudio automatically. No "upload" needed.**
+
+Step-by-step (Mac):
+
+1. Open **Finder**.
+2. From the top menu: **Go → Home** (or press `Cmd-Shift-H`). You see your home folder.
+3. Double-click **`eeb187-pavo-lab`** → **`images`** → **`student-fish`** → your lineage folder (e.g., `chaetodontidae`).
+4. **Drag your renamed JPG into that folder.**
+5. Switch back to RStudio in your browser. In the Files pane (bottom-right), click the small refresh icon (🔄). You should see the new JPG appear.
+6. **Verify** in the R Console:
+
+   ```r
+   list.files("images/student-fish/chaetodontidae")
+   ```
+
+   Your file should be in the list.
+
+For Windows, replace step 2 with **Open File Explorer → `Documents → eeb187-pavo-lab → images → student-fish → <lineage>`**.
+
+For Linux, use your file manager to navigate to `~/eeb187-pavo-lab/images/student-fish/<lineage>/`.
+:::
+
+::: {.callout-tip title="Binder users — use the Upload button"}
+Binder is cloud-based, so you can't drag files into a Mac/Windows folder. Instead use RStudio's built-in upload:
+
+1. In RStudio's **Files pane** (bottom-right), click the folder names to navigate: `images` → `student-fish` → your lineage (e.g., `chaetodontidae`). The breadcrumb at the top of the Files pane should now read `Home > images > student-fish > chaetodontidae`.
+2. In the same Files pane toolbar, click **Upload** (third button, has an upward arrow icon).
+3. A dialog appears. Click **Choose File**, pick your JPG from your computer, then click **OK**.
+4. The file uploads and appears in the file list.
+
+**For multiple files at once**: zip them on your computer first (right-click on Mac → *Compress*; on Windows → *Send to → Compressed (zipped) folder*). Upload the .zip — RStudio auto-extracts it.
+
+⚠️ **90-minute session limit:** Binder sessions evaporate after 90 minutes of inactivity, **deleting any files you uploaded**. Finish your analysis in one sitting, or — better — use the Docker path (recommended) which has no timeout.
+:::
+
+::: {.callout-tip title="Codespaces users"}
+Same as Docker — drag-drop the JPG into the VS Code file explorer at `images/student-fish/<lineage>/`. Files persist between visits.
+:::
+
+::: {.callout-tip title="Native (local R + RStudio) users"}
+You already have everything on your laptop. Drop your JPG into `~/eeb187-pavo-lab/images/student-fish/<lineage>/` using Finder/File Explorer/your file manager — same as your everyday file workflow.
+:::
+
+#### Step B3 — Confirm you can see your file from R
+
+Whichever path you used, after the file is in place, run this in the R Console:
+
+```r
+list.files("images/student-fish/<your-lineage>/")
+```
+
+You should see your filename in the output. If not:
+
+- **Docker:** check the file is actually in `~/eeb187-pavo-lab/images/student-fish/<lineage>/` on your Mac/PC (use Finder/File Explorer)
+- **Binder:** check the file appears in the RStudio Files pane (you may need to click the refresh icon)
+- **Both:** verify you spelled the lineage folder name correctly (`chaetodontidae`, `pomacanthidae`, `balistidae`, `acanthuridae`)
+
+#### Step B4 — Segment the photo (background removal)
+
+If your photo still has water, reef, tank glass, or any non-fish background, you need to remove the background before pavo can analyze it. Three paths to do this — see [Section 9 below](#9.-part-b-your-three-fish) for the full instructions.
 
 ---
 

@@ -59,6 +59,24 @@
   .card.teal { border-top-color: var(--teal); }
   .card.blue { border-top-color: var(--blue); }
   .card.gold { border-top-color: var(--gold); }
+  .card.recommended {
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 0 2px rgba(255, 201, 70, .25);
+    position: relative;
+  }
+  .card.recommended::before {
+    content: "★ RECOMMENDED";
+    position: absolute; top: -10px; right: 12px;
+    background: var(--gold); color: #11141f;
+    padding: 2px 10px; border-radius: 3px;
+    font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+  }
+  .recommend-banner {
+    background: linear-gradient(90deg, rgba(255,201,70,.12) 0%, rgba(255,201,70,.04) 100%);
+    border-left: 4px solid var(--gold);
+    padding: .8rem 1.1rem; border-radius: 5px; margin: 1rem 0 1.5rem 0;
+  }
+  .recommend-banner strong { color: var(--gold); }
   .card h3 { margin-top: 0; }
   .card .meta { color: var(--muted); font-size: .82rem; margin-bottom: .6rem; }
   .launch-btn {
@@ -94,6 +112,10 @@ debugging at 9 AM Wednesday.</p>
 
 <h2>Pick your path</h2>
 
+<div class="recommend-banner">
+<strong>Most students should pick Docker (path 4 below).</strong> It's the single recipe we've tested end-to-end — installs ~10 minutes, then runs the lab forever. Other paths work too if Docker doesn't fit your laptop, but they involve more moving parts.
+</div>
+
 <div class="grid grid-4">
 
   <div class="card">
@@ -128,7 +150,7 @@ debugging at 9 AM Wednesday.</p>
     </div>
   </div>
 
-  <div class="card gold">
+  <div class="card gold recommended">
     <h3>4 · Docker <span class="badge badge-local">local</span></h3>
     <div class="meta">~2 min pull · skips Homebrew / pip / Rtools entirely</div>
     <p>Best escape hatch if Homebrew, pip, or Rtools are giving you grief. Everything (R, RStudio, ImageMagick, rembg) is pre-baked. You only need <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.</p>

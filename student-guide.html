@@ -93,11 +93,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#get-your-images-in-place" id="toc-get-your-images-in-place" class="nav-link" data-scroll-target="#get-your-images-in-place">2. Get your images in place</a>
   <ul class="collapse">
-  <li><a href="#demo-fish-already-loaded-nothing-to-do" id="toc-demo-fish-already-loaded-nothing-to-do" class="nav-link" data-scroll-target="#demo-fish-already-loaded-nothing-to-do">Demo fish (already loaded — nothing to do)</a></li>
-  <li><a href="#your-lineages-fish-part-b" id="toc-your-lineages-fish-part-b" class="nav-link" data-scroll-target="#your-lineages-fish-part-b">Your lineage’s fish (Part B)</a>
+  <li><a href="#demo-fish-already-loaded-nothing-to-do" id="toc-demo-fish-already-loaded-nothing-to-do" class="nav-link" data-scroll-target="#demo-fish-already-loaded-nothing-to-do">Demo fish — already loaded, nothing to do</a></li>
+  <li><a href="#your-lineages-fish-pick-one-of-two-paths" id="toc-your-lineages-fish-pick-one-of-two-paths" class="nav-link" data-scroll-target="#your-lineages-fish-pick-one-of-two-paths">Your lineage’s fish — pick one of two paths</a>
   <ul class="collapse">
-  <li><a href="#option-a-use-the-pre-loaded-library-zero-work" id="toc-option-a-use-the-pre-loaded-library-zero-work" class="nav-link" data-scroll-target="#option-a-use-the-pre-loaded-library-zero-work">Option A — Use the pre-loaded library (zero work)</a></li>
-  <li><a href="#option-b-bring-your-own-jpgs" id="toc-option-b-bring-your-own-jpgs" class="nav-link" data-scroll-target="#option-b-bring-your-own-jpgs">Option B — Bring your own JPGs</a></li>
+  <li><a href="#path-a-use-the-pre-loaded-library-zero-uploading-recommended" id="toc-path-a-use-the-pre-loaded-library-zero-uploading-recommended" class="nav-link" data-scroll-target="#path-a-use-the-pre-loaded-library-zero-uploading-recommended">Path A — Use the pre-loaded library (zero uploading, recommended)</a></li>
+  <li><a href="#path-b-bring-your-own-fish-photos" id="toc-path-b-bring-your-own-fish-photos" class="nav-link" data-scroll-target="#path-b-bring-your-own-fish-photos">Path B — Bring your own fish photos</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#step-0-load-packages-and-helpers" id="toc-step-0-load-packages-and-helpers" class="nav-link" data-scroll-target="#step-0-load-packages-and-helpers">3. Step 0 — Load packages and helpers</a></li>
@@ -274,56 +274,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-your-images-in-place" class="level1">
 <h1>2. Get your images in place</h1>
-<p>The lab uses two sets of images:</p>
+<p>The lab uses two sets of images: the three <strong>demo fish</strong> (already loaded) and <strong>your three lineage fish</strong> (you’ll either use the pre-loaded library or upload your own).</p>
 <section id="demo-fish-already-loaded-nothing-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="demo-fish-already-loaded-nothing-to-do">Demo fish (already loaded — nothing to do)</h2>
+<h2 class="anchored" data-anchor-id="demo-fish-already-loaded-nothing-to-do">Demo fish — already loaded, nothing to do</h2>
 <p>Three demo fish — sergeant major, cleaner wrasse, mandarin fish — live at <code>images/demo/segmented/</code>. They’re pre-segmented (background removed, white-padded, standardized canvas). You’ll use these in <strong>Part A</strong> of the worksheet.</p>
 </section>
-<section id="your-lineages-fish-part-b" class="level2">
-<h2 class="anchored" data-anchor-id="your-lineages-fish-part-b">Your lineage’s fish (Part B)</h2>
-<p>You have two options:</p>
-<section id="option-a-use-the-pre-loaded-library-zero-work" class="level3">
-<h3 class="anchored" data-anchor-id="option-a-use-the-pre-loaded-library-zero-work">Option A — Use the pre-loaded library (zero work)</h3>
-<p>Each lineage already has 5 starter species in <code>images/student-fish/&lt;lineage&gt;/</code>. To see what’s in yours, in the Console:</p>
+<section id="your-lineages-fish-pick-one-of-two-paths" class="level2">
+<h2 class="anchored" data-anchor-id="your-lineages-fish-pick-one-of-two-paths">Your lineage’s fish — pick one of two paths</h2>
+<section id="path-a-use-the-pre-loaded-library-zero-uploading-recommended" class="level3">
+<h3 class="anchored" data-anchor-id="path-a-use-the-pre-loaded-library-zero-uploading-recommended">Path A — Use the pre-loaded library (zero uploading, recommended)</h3>
+<p>The lab repo already includes <strong>5 starter species per lineage</strong> in <code>images/student-fish/&lt;lineage&gt;/</code>. If three of those span the pattern types you want (vertical bars, horizontal stripe, reticulate/spotty), you don’t need to upload anything.</p>
+<p>In the R Console, list what’s in your lineage:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-fish/chaetodontidae"</span>)    <span class="co"># change lineage as needed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Pick three that span pattern types — one with vertical bars, one with horizontal stripe, one spotty/reticulate.</p>
+<p>Pick three, write their filenames in your worksheet, and skip Path B.</p>
 </section>
-<section id="option-b-bring-your-own-jpgs" class="level3">
-<h3 class="anchored" data-anchor-id="option-b-bring-your-own-jpgs">Option B — Bring your own JPGs</h3>
-<p>Save raw fish photos with <strong>lowercase, hyphenated</strong> filenames (e.g., <code>pomacanthus-imperator.jpg</code>, NOT <code>Pomacanthus Imperator.JPG</code> or anything with spaces).</p>
-<p>Where to put them depends on your launch path:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Launch</th>
-<th>Where</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Native</strong></td>
-<td>drop into your local <code>eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code> folder — no upload needed</td>
-</tr>
-<tr class="even">
-<td><strong>Docker</strong></td>
-<td>drop into the same folder on your host (the bind mount makes them appear at <code>~/lab/images/student-fish/&lt;lineage&gt;/</code> inside the container automatically)</td>
-</tr>
-<tr class="odd">
-<td><strong>Binder</strong></td>
-<td>RStudio’s Files pane (bottom-right) → navigate to <code>images/student-fish/&lt;lineage&gt;/</code> → click <strong>Upload</strong> → drop your JPGs</td>
-</tr>
-<tr class="even">
-<td><strong>Codespaces</strong></td>
-<td>drag-drop into the VS Code file explorer at <code>images/student-fish/&lt;lineage&gt;/</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>If you have raw photos that still have water/reef in the background</strong>, segment them first — see <a href="#segment-your-own-fish-part-b-step-1">Section 8</a>.</p>
+<section id="path-b-bring-your-own-fish-photos" class="level3">
+<h3 class="anchored" data-anchor-id="path-b-bring-your-own-fish-photos">Path B — Bring your own fish photos</h3>
+<p><strong>You’ll do this in two steps:</strong> (1) name your photo correctly, (2) get it into the lab folder. The “how” is different per launch path.</p>
+<section id="step-b1-name-your-file-properly" class="level4">
+<h4 class="anchored" data-anchor-id="step-b1-name-your-file-properly">Step B1 — Name your file properly</h4>
+<p>Filename rules — these matter because R is sensitive to spaces and capital letters:</p>
+<p>✅ <strong>Good:</strong> <code>pomacanthus-imperator.jpg</code>, <code>chaetodon-auriga.jpg</code> ❌ <strong>Bad:</strong> <code>Pomacanthus Imperator.JPG</code> (capitals + space), <code>IMG_1234.jpeg</code> (uninformative), <code>cool fish.png</code> (space, .png will need extra step)</p>
+<p>Format: lowercase, hyphenated, <strong><code>.jpg</code> extension</strong>, named after the species (<code>genus-species.jpg</code>).</p>
+<p>If you’re not sure of the species name, look it up on FishBase or Wikipedia first. If you have multiple photos of the same species, append a number: <code>chaetodon-auriga-1.jpg</code>, <code>chaetodon-auriga-2.jpg</code>.</p>
+</section>
+<section id="step-b2-get-the-file-into-your-lab-folder" class="level4">
+<h4 class="anchored" data-anchor-id="step-b2-get-the-file-into-your-lab-folder">Step B2 — Get the file into your lab folder</h4>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Docker users — the path of least resistance">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Docker users — the path of least resistance
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your lab repo on your Mac and the RStudio session inside the container are connected. <strong>Anything you save into the host folder appears inside RStudio automatically. No “upload” needed.</strong></p>
+<p>Step-by-step (Mac):</p>
+<ol type="1">
+<li><p>Open <strong>Finder</strong>.</p></li>
+<li><p>From the top menu: <strong>Go → Home</strong> (or press <code>Cmd-Shift-H</code>). You see your home folder.</p></li>
+<li><p>Double-click <strong><code>eeb187-pavo-lab</code></strong> → <strong><code>images</code></strong> → <strong><code>student-fish</code></strong> → your lineage folder (e.g., <code>chaetodontidae</code>).</p></li>
+<li><p><strong>Drag your renamed JPG into that folder.</strong></p></li>
+<li><p>Switch back to RStudio in your browser. In the Files pane (bottom-right), click the small refresh icon (🔄). You should see the new JPG appear.</p></li>
+<li><p><strong>Verify</strong> in the R Console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-fish/chaetodontidae"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Your file should be in the list.</p></li>
+</ol>
+<p>For Windows, replace step 2 with <strong>Open File Explorer → <code>Documents → eeb187-pavo-lab → images → student-fish → &lt;lineage&gt;</code></strong>.</p>
+<p>For Linux, use your file manager to navigate to <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Binder users — use the Upload button">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Binder users — use the Upload button
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Binder is cloud-based, so you can’t drag files into a Mac/Windows folder. Instead use RStudio’s built-in upload:</p>
+<ol type="1">
+<li>In RStudio’s <strong>Files pane</strong> (bottom-right), click the folder names to navigate: <code>images</code> → <code>student-fish</code> → your lineage (e.g., <code>chaetodontidae</code>). The breadcrumb at the top of the Files pane should now read <code>Home &gt; images &gt; student-fish &gt; chaetodontidae</code>.</li>
+<li>In the same Files pane toolbar, click <strong>Upload</strong> (third button, has an upward arrow icon).</li>
+<li>A dialog appears. Click <strong>Choose File</strong>, pick your JPG from your computer, then click <strong>OK</strong>.</li>
+<li>The file uploads and appears in the file list.</li>
+</ol>
+<p><strong>For multiple files at once</strong>: zip them on your computer first (right-click on Mac → <em>Compress</em>; on Windows → <em>Send to → Compressed (zipped) folder</em>). Upload the .zip — RStudio auto-extracts it.</p>
+<p>⚠️ <strong>90-minute session limit:</strong> Binder sessions evaporate after 90 minutes of inactivity, <strong>deleting any files you uploaded</strong>. Finish your analysis in one sitting, or — better — use the Docker path (recommended) which has no timeout.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Codespaces users">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Codespaces users
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Same as Docker — drag-drop the JPG into the VS Code file explorer at <code>images/student-fish/&lt;lineage&gt;/</code>. Files persist between visits.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Native (local R + RStudio) users">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Native (local R + RStudio) users
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You already have everything on your laptop. Drop your JPG into <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code> using Finder/File Explorer/your file manager — same as your everyday file workflow.</p>
+</div>
+</div>
+</section>
+<section id="step-b3-confirm-you-can-see-your-file-from-r" class="level4">
+<h4 class="anchored" data-anchor-id="step-b3-confirm-you-can-see-your-file-from-r">Step B3 — Confirm you can see your file from R</h4>
+<p>Whichever path you used, after the file is in place, run this in the R Console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-fish/&lt;your-lineage&gt;/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You should see your filename in the output. If not:</p>
+<ul>
+<li><strong>Docker:</strong> check the file is actually in <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code> on your Mac/PC (use Finder/File Explorer)</li>
+<li><strong>Binder:</strong> check the file appears in the RStudio Files pane (you may need to click the refresh icon)</li>
+<li><strong>Both:</strong> verify you spelled the lineage folder name correctly (<code>chaetodontidae</code>, <code>pomacanthidae</code>, <code>balistidae</code>, <code>acanthuridae</code>)</li>
+</ul>
+</section>
+<section id="step-b4-segment-the-photo-background-removal" class="level4">
+<h4 class="anchored" data-anchor-id="step-b4-segment-the-photo-background-removal">Step B4 — Segment the photo (background removal)</h4>
+<p>If your photo still has water, reef, tank glass, or any non-fish background, you need to remove the background before pavo can analyze it. Three paths to do this — see <a href="#9.-part-b-your-three-fish">Section 9 below</a> for the full instructions.</p>
 <hr>
+</section>
 </section>
 </section>
 </section>
@@ -374,11 +440,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In the Console (or by clicking through the script in the Source pane):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)               <span class="co"># loads getimg(), classify(), adjacent()</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)             <span class="co"># image I/O backend pavo uses</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)          <span class="co"># bind_rows, pivot_longer, ggplot</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>) <span class="co"># segment_fish, simple_coldists, pick_white_bg, …</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)               <span class="co"># loads getimg(), classify(), adjacent()</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)             <span class="co"># image I/O backend pavo uses</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)          <span class="co"># bind_rows, pivot_longer, ggplot</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>) <span class="co"># segment_fish, simple_coldists, pick_white_bg, …</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>What you should see:</strong></p>
 <pre><code>Linking to ImageMagick 6.9.12.98 …
 ── Attaching core tidyverse packages …
@@ -440,20 +506,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1-load-the-three-demo-fish" class="level1">
 <h1>4. Step 1 — Load the three demo fish</h1>
 <p>The 3 demo fish are in <code>images/demo/segmented/</code>. In the Console:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sergeant_major <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/sergeant-major.jpg"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cleaner_wrasse <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/cleaner-wrasse.jpg"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mandarin_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/mandarin-fish.jpg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sergeant_major <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/sergeant-major.jpg"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cleaner_wrasse <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/cleaner-wrasse.jpg"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mandarin_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/demo/segmented/mandarin-fish.jpg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>getimg()</code> reads each JPG into pavo’s <code>rimg</code> object — a 3D array (height × width × {R, G, B}). <strong>You should not see any output</strong> — silent success means it worked.</p>
 <p>Confirm by inspecting one:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sergeant_major)         <span class="co"># "rimg" "array"</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sergeant_major)           <span class="co"># height × width × 3</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(sergeant_major, <span class="st">"imgname"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sergeant_major)         <span class="co"># "rimg" "array"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sergeant_major)           <span class="co"># height × width × 3</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(sergeant_major, <span class="st">"imgname"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Plot all three side-by-side:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sergeant_major); <span class="fu">title</span>(<span class="st">"sergeant major"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cleaner_wrasse); <span class="fu">title</span>(<span class="st">"cleaner wrasse"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mandarin_fish);  <span class="fu">title</span>(<span class="st">"mandarin fish"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sergeant_major); <span class="fu">title</span>(<span class="st">"sergeant major"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cleaner_wrasse); <span class="fu">title</span>(<span class="st">"cleaner wrasse"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mandarin_fish);  <span class="fu">title</span>(<span class="st">"mandarin fish"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The plots appear in the <strong>Plots tab</strong> (bottom-right pane, below the Files tab).</p>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Predict before you measure">
 <div class="callout-header d-flex align-content-center">
@@ -518,18 +584,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>5. Step 2 — Classify each image into k color classes</h1>
 <p><code>classify(img, kcols = k)</code> runs <strong>k-means on every pixel’s RGB triplet</strong>. Each pixel gets snapped to one of k color centroids; the result is a “classified image” where the pattern is reduced to k discrete regions.</p>
 <p>Choose k based on visible color count + 1 (the +1 is for the white background that segmentation added):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sm_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(sergeant_major, <span class="at">kcols =</span> <span class="dv">4</span>)   <span class="co"># yellow, black, pale belly, WHITE bg</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>cw_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(cleaner_wrasse, <span class="at">kcols =</span> <span class="dv">4</span>)   <span class="co"># dark stripe, mid blue, light, WHITE bg</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mf_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(mandarin_fish,  <span class="at">kcols =</span> <span class="dv">6</span>)   <span class="co"># 5 fish colors + WHITE bg</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sm_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(sergeant_major, <span class="at">kcols =</span> <span class="dv">4</span>)   <span class="co"># yellow, black, pale belly, WHITE bg</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>cw_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(cleaner_wrasse, <span class="at">kcols =</span> <span class="dv">4</span>)   <span class="co"># dark stripe, mid blue, light, WHITE bg</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mf_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(mandarin_fish,  <span class="at">kcols =</span> <span class="dv">6</span>)   <span class="co"># 5 fish colors + WHITE bg</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You’ll see <code>Image classification in progress...</code> while each runs (~5 seconds each).</p>
 <p><strong>Inspect the palettes:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(sm_class, <span class="st">"classRGB"</span>)    <span class="co"># 4 rows of (R, G, B) values, one per class</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(sm_class, <span class="st">"classRGB"</span>)    <span class="co"># 4 rows of (R, G, B) values, one per class</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>One row will have R ≈ G ≈ B ≈ 1 — that’s the <strong>white background</strong> class. Note its row number (1, 2, 3, or 4) — we’ll need it in Step 3.</p>
 <p><strong>Plot before / after for one fish:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sergeant_major); <span class="fu">title</span>(<span class="st">"Sergeant major — original"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sm_class);       <span class="fu">title</span>(<span class="st">"Sergeant major — classified, k = 4"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sergeant_major); <span class="fu">title</span>(<span class="st">"Sergeant major — original"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sm_class);       <span class="fu">title</span>(<span class="st">"Sergeant major — classified, k = 4"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You should see the original photo replaced by 4 flat-color regions. The black bars should still be visible as a discrete class; the white background should be a uniform region.</p>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Why k matters">
 <div class="callout-header d-flex align-content-center">
@@ -594,31 +660,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The <strong>white background class index</strong> (so adjacent() can exclude it)</li>
 <li>The actual <code>adjacent()</code> call</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sergeant major</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sm_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(sm_class)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sm_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(sm_class)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>sm_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(sm_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> sm_cd, <span class="at">bkgID =</span> sm_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaner wrasse</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>cw_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(cw_class)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>cw_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(cw_class)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>cw_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(cw_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> cw_cd, <span class="at">bkgID =</span> cw_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Mandarin fish</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>mf_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(mf_class)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>mf_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(mf_class)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>mf_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(mf_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> mf_cd, <span class="at">bkgID =</span> mf_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sergeant major</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sm_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(sm_class)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sm_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(sm_class)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sm_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(sm_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> sm_cd, <span class="at">bkgID =</span> sm_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaner wrasse</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>cw_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(cw_class)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>cw_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(cw_class)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>cw_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(cw_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> cw_cd, <span class="at">bkgID =</span> cw_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Mandarin fish</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>mf_cd  <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(mf_class)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>mf_bkg <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(mf_class)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>mf_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(mf_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">coldists =</span> mf_cd, <span class="at">bkgID =</span> mf_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>xpts = 200</code> means a 200×200 sample grid. <code>xscale = 5</code> is the body length in cm — only matters for distance metrics.</p>
 <p><strong>Each <code>adjacent()</code> call returns a one-row data frame with ~30 columns</strong> of metrics. Stack them:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fish_adj <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sergeant_major =</span> sm_adj,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cleaner_wrasse =</span> cw_adj,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mandarin_fish  =</span> mf_adj,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">"fish"</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fish_adj <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sergeant_major =</span> sm_adj,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cleaner_wrasse =</span> cw_adj,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mandarin_fish  =</span> mf_adj,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">"fish"</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-simple callout-warning callout-titled" title="If Step 3 didn't work">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -708,18 +774,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish   =</span> <span class="fu">c</span>(<span class="st">"sergeant_major"</span>, <span class="st">"cleaner_wrasse"</span>, <span class="st">"mandarin_fish"</span>),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">c</span>(<span class="st">"Pomacentridae"</span>, <span class="st">"Labridae"</span>, <span class="st">"Callionymidae"</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish   =</span> <span class="fu">c</span>(<span class="st">"sergeant_major"</span>, <span class="st">"cleaner_wrasse"</span>, <span class="st">"mandarin_fish"</span>),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">c</span>(<span class="st">"Pomacentridae"</span>, <span class="st">"Labridae"</span>, <span class="st">"Callionymidae"</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(fish_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>pick_col()</code> accepts a vector of candidate names and returns the first one that exists — pavo’s column names vary slightly between releases, this makes the code robust.</p>
 <p><strong>You should see something like:</strong></p>
 <pre><code># A tibble: 3 × 9
@@ -734,19 +800,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-5-visualize-the-comparison" class="level1">
 <h1>8. Step 5 — Visualize the comparison</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(m, A, Jc, m_dL), <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fish, <span class="at">y =</span> value, <span class="at">fill =</span> family)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Pomacentridae"</span> <span class="ot">=</span> <span class="st">"#5BC0EB"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Labridae"</span>      <span class="ot">=</span> <span class="st">"#3FB8AF"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Callionymidae"</span> <span class="ot">=</span> <span class="st">"#FFC946"</span>)) <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pattern metrics across three reef families"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"metric value"</span>) <span class="sc">+</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>metrics <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(m, A, Jc, m_dL), <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fish, <span class="at">y =</span> value, <span class="at">fill =</span> family)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Pomacentridae"</span> <span class="ot">=</span> <span class="st">"#5BC0EB"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Labridae"</span>      <span class="ot">=</span> <span class="st">"#3FB8AF"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Callionymidae"</span> <span class="ot">=</span> <span class="st">"#FFC946"</span>)) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pattern metrics across three reef families"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"metric value"</span>) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Four panels, three fish each. The <strong>A panel</strong> is the punchline — bars highest, stripe lowest, reticulate in the middle.</p>
 <p>This completes <strong>Part A</strong> of the worksheet.</p>
 <hr>
@@ -770,14 +836,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you brought a raw photo with water/reef in the background, segment it first — pick the path that works for your install:</p>
 <section id="path-1-local-with-segment_fish" class="level3">
 <h3 class="anchored" data-anchor-id="path-1-local-with-segment_fish">Path 1 — Local with <code>segment_fish()</code></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.jpg"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.jpg"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="path-2-web-tool" class="level3">
 <h3 class="anchored" data-anchor-id="path-2-web-tool">Path 2 — Web tool</h3>
 <p>Drag-drop your fish JPG into <a href="https://www.remove.bg/">remove.bg</a>, <a href="https://www.photoroom.com/tools/background-remover">photoroom.com</a>, or <a href="https://clipdrop.co/remove-background">clipdrop.co/remove-background</a>. Save the transparent PNG into the same folder. Then:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.png"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.png"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="path-3-manual-crop" class="level3">
 <h3 class="anchored" data-anchor-id="path-3-manual-crop">Path 3 — Manual crop</h3>
@@ -786,30 +852,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-b.3-run-the-same-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="step-b.3-run-the-same-pipeline">Step B.3 — Run the same pipeline</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)                <span class="co"># path from Step B.2</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_fish)                                <span class="co"># confirm head on LEFT (left-lateral)</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="co"># if not: flip_to_left_lateral(seg_path); my_fish &lt;- getimg(seg_path)</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>my_k     <span class="ot">&lt;-</span> <span class="dv">4</span>                                <span class="co"># = visible fish colors + 1 (for white bg)</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>my_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(my_fish, <span class="at">kcols =</span> my_k)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_class)                               <span class="co"># does this match the original pattern?</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>my_cd    <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(my_class)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>my_bkg   <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(my_class)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>my_adj   <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">coldists =</span> my_cd, <span class="at">bkgID =</span> my_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>my_metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish =</span> <span class="st">"your_species_name"</span>,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)                <span class="co"># path from Step B.2</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_fish)                                <span class="co"># confirm head on LEFT (left-lateral)</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="co"># if not: flip_to_left_lateral(seg_path); my_fish &lt;- getimg(seg_path)</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>my_k     <span class="ot">&lt;-</span> <span class="dv">4</span>                                <span class="co"># = visible fish colors + 1 (for white bg)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>my_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(my_fish, <span class="at">kcols =</span> my_k)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_class)                               <span class="co"># does this match the original pattern?</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>my_cd    <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(my_class)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>my_bkg   <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(my_class)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>my_adj   <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">coldists =</span> my_cd, <span class="at">bkgID =</span> my_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>my_metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish =</span> <span class="st">"your_species_name"</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Do this <strong>three times</strong> (once per fish), record the values in the worksheet’s Part B metric table.</p>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Manual-crop fallback uses different code">
 <div class="callout-header d-flex align-content-center">
@@ -822,7 +888,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <p>If you used <strong>Path 3 (manual crop)</strong> in Step B.2, your image doesn’t have a white background class. <strong>Drop the <code>bkgID = my_bkg, exclude = "background"</code> arguments from <code>adjacent()</code></strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>my_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>, <span class="at">coldists =</span> my_cd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>my_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>, <span class="at">coldists =</span> my_cd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Your A values will be slightly less dramatic than the demo (closer to 1) because background pixels pollute the analysis. Note this in your worksheet — the rubric accommodates it.</p>
 </div>
 </div>
