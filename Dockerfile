@@ -62,6 +62,15 @@ RUN R -e "suppressPackageStartupMessages({library(pavo); library(magick); librar
 # (~150 MB ONNX model). Best-effort — skip if offline at build time.
 RUN uvx --quiet --from "rembg[cpu,cli]" rembg --help >/dev/null 2>&1 || true
 
+# RStudio Server defaults to /home/rstudio as the working directory, but the
+# lab repo is bind-mounted at /home/rstudio/lab. Without help, every R command
+# students copy from walkthrough.R fails with "cannot open file" until they
+# remember to setwd("~/lab"). This .Rprofile auto-cds them on session start
+# IFF the lab is mounted, so the recipe in prep.html / pre-lab "just works".
+RUN printf 'if (interactive() && dir.exists("~/lab/images/demo/segmented")) {\n  setwd("~/lab")\n  message("Working directory set to ", getwd())\n}\n' \
+        > /home/rstudio/.Rprofile \
+    && chown rstudio:rstudio /home/rstudio/.Rprofile
+
 # RStudio user defaults (rocker convention)
 ENV USER=rstudio
 EXPOSE 8787
