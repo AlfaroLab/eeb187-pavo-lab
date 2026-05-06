@@ -60,7 +60,17 @@ Your group has been assigned a reef fish lineage (typically a family). Today's j
 
 ### Step 1: Pick three fish
 
-Browse the available images for your assigned lineage. (FishView, FishBase, your group's curated set, or `images/student-fish/<your-lineage>/` as fallback.) Pick three species that look as different as you can find — for example:
+::: {.callout-note title="Where to find images depending on your launch path"}
+**Zero-hassle option (works in every launch path including Binder/Codespaces):** the repo ships with 5 species per assigned lineage in `images/student-fish/<your-lineage>/`. Pick 3 of those and you're done — no uploading, no internet hunting.
+
+If you want to use a fish that isn't pre-loaded:
+
+- **Native install / Docker:** save the JPG anywhere on your laptop and pass the full path to `segment_fish()` (e.g., `~/Downloads/my_fish.jpg`). Your work persists between RStudio sessions.
+- **Binder (cloud, ephemeral):** in RStudio's *Files* pane (bottom-right by default), click the **Upload** button → pick your JPG → upload it into the project root or `images/student-fish/<your-lineage>/`. Then refer to it as `"images/student-fish/<your-lineage>/my_fish.jpg"`. **Important — Binder sessions expire after 90 minutes of inactivity and uploaded files are NOT saved.** Finish your worksheet in one sitting, or download the segmented JPG (Files pane → check the box → *More* → *Export*) before logging off.
+- **Codespaces (cloud, persistent):** drag-drop the JPG into the VS Code file explorer, then refer to it by relative path. Files persist between visits, so you can come back later.
+:::
+
+Browse the available images for your assigned lineage. (FishView, FishBase, your group's curated set, or `images/student-fish/<your-lineage>/` which is pre-loaded for every launch path.) Pick three species that look as different as you can find — for example:
 
 - One with strong **vertical bars** (you predict A > 1)
 - One with a **horizontal element** like a stripe or band (you predict A < 1)
