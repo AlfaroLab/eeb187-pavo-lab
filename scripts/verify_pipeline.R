@@ -44,17 +44,21 @@ cat(sprintf("R version:      %s\n",
 
 # ---- Locate the lab bundle ------------------------------------------------
 
-bundle <- "labs/demo-pavo-week6"
-if (!dir.exists(bundle)) {
-  # Try a few common locations
-  for (cand in c("labs/demo-pavo-week6",
-                 "../labs/demo-pavo-week6",
-                 "../../labs/demo-pavo-week6")) {
-    if (dir.exists(cand)) { bundle <- cand; break }
+# Two supported layouts:
+#   (1) standalone eeb187-pavo-lab repo: images/demo/segmented/ at the root
+#   (2) parent EEB187 repo with the lab nested at labs/demo-pavo-week6/
+bundle <- NA_character_
+for (cand in c(".",
+               "labs/demo-pavo-week6",
+               "../labs/demo-pavo-week6",
+               "../../labs/demo-pavo-week6")) {
+  if (dir.exists(file.path(cand, "images/demo/segmented"))) {
+    bundle <- cand; break
   }
 }
-if (!dir.exists(bundle)) {
-  cat("FAIL: cannot find labs/demo-pavo-week6/. Run from repo root.\n")
+if (is.na(bundle)) {
+  cat("FAIL: cannot find images/demo/segmented/. Run from the lab repo root\n")
+  cat("      (either eeb187-pavo-lab/ or the parent EEB187 repo).\n")
   quit(status = 1)
 }
 cat(sprintf("Bundle dir:     %s\n", normalizePath(bundle)))
