@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#in-lab-90-min" id="toc-in-lab-90-min" class="nav-link" data-scroll-target="#in-lab-90-min">In lab (90 min)</a></li>
   </ul></li>
   <li><a href="#appendix-a-glossary-of-metrics" id="toc-appendix-a-glossary-of-metrics" class="nav-link" data-scroll-target="#appendix-a-glossary-of-metrics">Appendix A — Glossary of metrics</a></li>
-  <li><a href="#appendix-b-pre-loaded-student-fish-library" id="toc-appendix-b-pre-loaded-student-fish-library" class="nav-link" data-scroll-target="#appendix-b-pre-loaded-student-fish-library">Appendix B — Pre-loaded student-fish library</a></li>
+  <li><a href="#appendix-b-image-folders" id="toc-appendix-b-image-folders" class="nav-link" data-scroll-target="#appendix-b-image-folders">Appendix B — Image folders</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../ta-guide.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="ta-guide.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
 </div>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="purpose-of-this-guide" class="level1 unnumbered">
 <h1 class="unnumbered">Purpose of this guide</h1>
-<p>This document is for <strong>Rosamari</strong> (and any future TA stepping into Lab 5). It pairs with three other things:</p>
+<p>This document is for <strong>Rosamari</strong> (and any future TA stepping into Lab 5). It pairs with four other things:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -189,9 +189,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>the live-coded R script you and the class will run together</td>
 </tr>
 <tr class="even">
+<td><code>scripts/helpers.R</code></td>
+<td>repo root</td>
+<td>helper functions students source at session start</td>
+</tr>
+<tr class="odd">
 <td><code>lab-05-pavo-intro.qmd</code></td>
 <td>repo root</td>
 <td>the student worksheet with Part A (demo) + Part B (their three fish)</td>
+</tr>
+<tr class="even">
+<td><code>student-guide.qmd</code></td>
+<td>repo root</td>
+<td>self-paced step-by-step guide students follow during/after lab</td>
 </tr>
 <tr class="odd">
 <td><code>pre-lab-installation.qmd</code></td>
@@ -200,6 +210,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-simple callout-note callout-titled" title="Recommended student launch path: Docker">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Recommended student launch path: Docker
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Students were told (in the BruinLearn announcement and on the prep page) to use <strong>Docker</strong> as their primary path. The <code>ghcr.io/alfarolab/eeb187-pavo-lab:latest</code> image is pre-baked and verified end-to-end. Other paths (Native, Binder, Codespaces) work too — Binder has been independently verified after this morning’s fixes — but Docker is the recipe everyone should default to.</p>
+<p>The other paths are kept around as fallbacks; if a student says <em>“Docker isn’t working,”</em> recommend they try Binder (https://mybinder.org/v2/gh/AlfaroLab/eeb187-pavo-lab/HEAD?urlpath=rstudio) — it’s a 2-minute fallback that requires zero install.</p>
+</div>
+</div>
 <p>This guide goes <strong>deeper than the slide deck</strong> on the conceptual basis for everything in <code>walkthrough.R</code>, then walks through the script step by step with <strong>(a) what it computes, (b) why it matters biologically, (c) student questions to expect, and (d) troubleshooting for the errors you will actually see in lab.</strong></p>
 <p>Read this <em>before</em> the first time you teach the lab. Skim it again the morning of, especially the troubleshooting boxes. Total reading time: ~45 minutes.</p>
 <hr>
@@ -546,8 +570,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><code>cannot open the connection</code> / <code>cannot open file</code></td>
-<td>working directory is wrong</td>
-<td><code>getwd()</code> to see where R thinks it is; <code>setwd()</code> to the lab folder, or use <strong>Session → Set Working Directory → To Source File Location</strong></td>
+<td>working directory is wrong, OR the file is in the wrong folder</td>
+<td>First check <code>getwd()</code>. Docker/Binder: should be <code>/home/rstudio/lab</code>. Native: the local repo path. Then <code>list.files("images/student-images")</code> and <code>list.files("images/student-fish/&lt;lineage&gt;")</code> — confirm their file is in one of them. Most common cause: student dropped the JPG into <code>~/Downloads</code> and tried to load with a relative path. Move it to <code>images/student-images/</code>.</td>
 </tr>
 <tr class="even">
 <td>Image loads but <code>plot()</code> shows it black or distorted</td>
@@ -874,23 +898,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-6-now-you-try-student-practice" class="level2">
 <h2 class="anchored" data-anchor-id="step-6-now-you-try-student-practice">Step 6 — “Now you try” — student practice</h2>
 <p>This is where students take over and you become the help desk. <strong>The Step 6 template in <code>walkthrough.R</code> now points at a real pre-loaded path</strong> (<code>images/student-fish/chaetodontidae/chaetodon-auriga.jpg</code>) so students can run the template as-is to verify their pipeline works, then swap in their assigned-lineage species.</p>
-<p>The most common student errors during Step 6 are:</p>
-<div class="callout callout-style-simple callout-warning callout-titled" title="Top 5 student questions during Step 6 (in order of frequency)">
+<div class="callout callout-style-simple callout-important callout-titled" title="Two image folders — know which is which when triaging">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Top 5 student questions during Step 6 (in order of frequency)
+<span class="screen-reader-only">Important</span>Two image folders — know which is which when triaging
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The repo has TWO Part-B image folders, and you’ll get questions about both:</p>
+<ul>
+<li><strong><code>images/student-fish/&lt;lineage&gt;/</code></strong> — pre-loaded starter species (5 per lineage). Read-only by convention; if a student is dropping their own files here, redirect them to <code>student-images/</code>.</li>
+<li><strong><code>images/student-images/</code></strong> — dedicated folder for student uploads. This is where their custom fish should go.</li>
+</ul>
+<p>When a student says <em>“my fish isn’t showing up,”</em> first ask <strong>which folder did you put it in?</strong> Most often the file is in <code>~/Downloads</code> (Native), or floating at the project root, or in the wrong lineage subfolder. Direct them to move it to <code>images/student-images/</code>.</p>
+</div>
+</div>
+<p>The most common student errors during Step 6 are:</p>
+<div class="callout callout-style-simple callout-warning callout-titled" title="Top student questions during Step 6 (in order of frequency)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Top student questions during Step 6 (in order of frequency)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><strong>“My A came back as 0.4 but I thought it would be 1.2!”</strong> — Almost always either a wrong k value or wrong bkgID. Walk over, ask <code>attr(my_class, "classRGB")</code> — does class 1 look like white? If not, <code>pick_white_bg(my_class)</code> to find which class IS white.</li>
+<li><strong>“How do I write the path to my fish?”</strong> — Three quick wins to teach them:
+<ul>
+<li>In Files pane, click the file then <strong>More → Copy Path…</strong> (RStudio puts the relative path on clipboard)</li>
+<li>In Console, type <code>"i</code> then press <strong>Tab</strong> — RStudio offers folder/file completions</li>
+<li><code>list.files("images/student-images")</code> — prints filenames they can copy</li>
+</ul></li>
 <li><strong>“<code>segment_fish()</code> is hanging”</strong> — rembg’s u2net model is being downloaded for the first time (~150 MB). Tell them to wait 60 seconds. If it still hangs, fall back to Path 2 (web tool).</li>
 <li><strong>“My fish image is too small / pixelated”</strong> — the xpts=200 grid is too dense for tiny images. Either find a larger source image, or the metrics are unreliable (note this in worksheet).</li>
 <li><strong>“I picked three vertical-bar fish — what now?”</strong> — they need diverse pattern types. Send them back to FishView / their lineage folder to find one of each pattern.</li>
-<li><strong>“<code>getimg()</code> says cannot open file”</strong> — file path. <code>getwd()</code> in R; <code>setwd()</code> to lab folder.</li>
+<li><strong>“<code>getimg()</code> says cannot open file”</strong> — file path or working directory. Have them run <code>getwd()</code> (should print <code>/home/rstudio/lab</code> for Docker/Binder, or the local repo path for Native), then <code>list.files("images/student-images")</code> to confirm the file is where they think.</li>
 </ol>
 </div>
 </div>
@@ -1106,9 +1154,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>m_dL</strong> — same as m_dS but for luminance (brightness). High m_dL = bright/dark contrast at edges.</li>
 </ul>
 </section>
-<section id="appendix-b-pre-loaded-student-fish-library" class="level1">
-<h1>Appendix B — Pre-loaded student-fish library</h1>
-<p>Students assigned to each lineage have these 5 species pre-loaded in the repo at <code>images/student-fish/&lt;lineage&gt;/</code>:</p>
+<section id="appendix-b-image-folders" class="level1">
+<h1>Appendix B — Image folders</h1>
+<p>The repo’s <code>images/</code> directory has THREE folders, and students will ask about all of them:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Folder</th>
+<th>What’s in it</th>
+<th>Who puts files there</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>images/demo/</code></td>
+<td>The 3 demo fish for Part A (sergeant major, cleaner wrasse, mandarin)</td>
+<td>Instructor (don’t touch in lab)</td>
+</tr>
+<tr class="even">
+<td><code>images/student-fish/&lt;lineage&gt;/</code></td>
+<td>5 pre-loaded starter species per assigned lineage</td>
+<td>Already curated — read-only by convention</td>
+</tr>
+<tr class="odd">
+<td><code>images/student-images/</code></td>
+<td>Student uploads (custom fish photos)</td>
+<td>Students put their JPGs here</td>
+</tr>
+</tbody>
+</table>
+<p>Pre-loaded <code>student-fish/&lt;lineage&gt;/</code> species:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">

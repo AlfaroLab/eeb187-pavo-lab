@@ -20,13 +20,21 @@ format:
 
 # Purpose of this guide {.unnumbered}
 
-This document is for **Rosamari** (and any future TA stepping into Lab 5). It pairs with three other things:
+This document is for **Rosamari** (and any future TA stepping into Lab 5). It pairs with four other things:
 
 | Artifact | Where | Purpose |
 |---|---|---|
 | `scripts/walkthrough.R` | repo root | the live-coded R script you and the class will run together |
+| `scripts/helpers.R` | repo root | helper functions students source at session start |
 | `lab-05-pavo-intro.qmd` | repo root | the student worksheet with Part A (demo) + Part B (their three fish) |
+| `student-guide.qmd` | repo root | self-paced step-by-step guide students follow during/after lab |
 | `pre-lab-installation.qmd` | repo root | what students were asked to install before lab |
+
+::: {.callout-note title="Recommended student launch path: Docker"}
+Students were told (in the BruinLearn announcement and on the prep page) to use **Docker** as their primary path. The `ghcr.io/alfarolab/eeb187-pavo-lab:latest` image is pre-baked and verified end-to-end. Other paths (Native, Binder, Codespaces) work too — Binder has been independently verified after this morning's fixes — but Docker is the recipe everyone should default to.
+
+The other paths are kept around as fallbacks; if a student says *"Docker isn't working,"* recommend they try Binder (https://mybinder.org/v2/gh/AlfaroLab/eeb187-pavo-lab/HEAD?urlpath=rstudio) — it's a 2-minute fallback that requires zero install.
+:::
 
 This guide goes **deeper than the slide deck** on the conceptual basis for everything in `walkthrough.R`, then walks through the script step by step with **(a) what it computes, (b) why it matters biologically, (c) student questions to expect, and (d) troubleshooting for the errors you will actually see in lab.**
 
@@ -228,7 +236,7 @@ Pick any student and ask: "Which one will have the highest A? Why?" If they say 
 ::: {.callout-warning title="Troubleshooting Step 1"}
 | Symptom | Cause | Fix |
 |---|---|---|
-| `cannot open the connection` / `cannot open file` | working directory is wrong | `getwd()` to see where R thinks it is; `setwd()` to the lab folder, or use **Session → Set Working Directory → To Source File Location** |
+| `cannot open the connection` / `cannot open file` | working directory is wrong, OR the file is in the wrong folder | First check `getwd()`. Docker/Binder: should be `/home/rstudio/lab`. Native: the local repo path. Then `list.files("images/student-images")` and `list.files("images/student-fish/<lineage>")` — confirm their file is in one of them. Most common cause: student dropped the JPG into `~/Downloads` and tried to load with a relative path. Move it to `images/student-images/`. |
 | Image loads but `plot()` shows it black or distorted | rare — corrupted JPG | re-clone the repo; check the file is non-empty (`file.size("images/demo/segmented/sergeant-major.jpg")`) |
 | `Error: could not find function "getimg"` (or `classify`, `adjacent`) | `library(pavo)` skipped (often after Session → Restart R) | back to Step 0 — re-run **all four** lines |
 | `Error: could not find function "simple_coldists"` (or `pick_white_bg`, etc.) | `source("scripts/helpers.R")` skipped | back to Step 0 — re-run **all four** lines. This is the most common Step 3 error in our test runs |
@@ -375,14 +383,27 @@ metrics %>%
 
 This is where students take over and you become the help desk. **The Step 6 template in `walkthrough.R` now points at a real pre-loaded path** (`images/student-fish/chaetodontidae/chaetodon-auriga.jpg`) so students can run the template as-is to verify their pipeline works, then swap in their assigned-lineage species.
 
+::: {.callout-important title="Two image folders — know which is which when triaging"}
+The repo has TWO Part-B image folders, and you'll get questions about both:
+
+- **`images/student-fish/<lineage>/`** — pre-loaded starter species (5 per lineage). Read-only by convention; if a student is dropping their own files here, redirect them to `student-images/`.
+- **`images/student-images/`** — dedicated folder for student uploads. This is where their custom fish should go.
+
+When a student says *"my fish isn't showing up,"* first ask **which folder did you put it in?** Most often the file is in `~/Downloads` (Native), or floating at the project root, or in the wrong lineage subfolder. Direct them to move it to `images/student-images/`.
+:::
+
 The most common student errors during Step 6 are:
 
-::: {.callout-warning title="Top 5 student questions during Step 6 (in order of frequency)"}
+::: {.callout-warning title="Top student questions during Step 6 (in order of frequency)"}
 1. **"My A came back as 0.4 but I thought it would be 1.2!"** — Almost always either a wrong k value or wrong bkgID. Walk over, ask `attr(my_class, "classRGB")` — does class 1 look like white? If not, `pick_white_bg(my_class)` to find which class IS white.
-2. **"`segment_fish()` is hanging"** — rembg's u2net model is being downloaded for the first time (~150 MB). Tell them to wait 60 seconds. If it still hangs, fall back to Path 2 (web tool).
-3. **"My fish image is too small / pixelated"** — the xpts=200 grid is too dense for tiny images. Either find a larger source image, or the metrics are unreliable (note this in worksheet).
-4. **"I picked three vertical-bar fish — what now?"** — they need diverse pattern types. Send them back to FishView / their lineage folder to find one of each pattern.
-5. **"`getimg()` says cannot open file"** — file path. `getwd()` in R; `setwd()` to lab folder.
+2. **"How do I write the path to my fish?"** — Three quick wins to teach them:
+   - In Files pane, click the file then **More → Copy Path...** (RStudio puts the relative path on clipboard)
+   - In Console, type `"i` then press **Tab** — RStudio offers folder/file completions
+   - `list.files("images/student-images")` — prints filenames they can copy
+3. **"`segment_fish()` is hanging"** — rembg's u2net model is being downloaded for the first time (~150 MB). Tell them to wait 60 seconds. If it still hangs, fall back to Path 2 (web tool).
+4. **"My fish image is too small / pixelated"** — the xpts=200 grid is too dense for tiny images. Either find a larger source image, or the metrics are unreliable (note this in worksheet).
+5. **"I picked three vertical-bar fish — what now?"** — they need diverse pattern types. Send them back to FishView / their lineage folder to find one of each pattern.
+6. **"`getimg()` says cannot open file"** — file path or working directory. Have them run `getwd()` (should print `/home/rstudio/lab` for Docker/Binder, or the local repo path for Native), then `list.files("images/student-images")` to confirm the file is where they think.
 :::
 
 ---
@@ -495,9 +516,17 @@ For when a student asks "what does X mean?" in the middle of lab and you want a 
 - **m_dS** — average chromatic (saturation/hue) distance across edges. High m_dS = saturated, contrasty edges; low m_dS = subtle ones.
 - **m_dL** — same as m_dS but for luminance (brightness). High m_dL = bright/dark contrast at edges.
 
-# Appendix B — Pre-loaded student-fish library
+# Appendix B — Image folders
 
-Students assigned to each lineage have these 5 species pre-loaded in the repo at `images/student-fish/<lineage>/`:
+The repo's `images/` directory has THREE folders, and students will ask about all of them:
+
+| Folder | What's in it | Who puts files there |
+|---|---|---|
+| `images/demo/` | The 3 demo fish for Part A (sergeant major, cleaner wrasse, mandarin) | Instructor (don't touch in lab) |
+| `images/student-fish/<lineage>/` | 5 pre-loaded starter species per assigned lineage | Already curated — read-only by convention |
+| `images/student-images/` | Student uploads (custom fish photos) | Students put their JPGs here |
+
+Pre-loaded `student-fish/<lineage>/` species:
 
 | Lineage | Species |
 |---|---|
