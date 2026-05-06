@@ -65,11 +65,34 @@ RUN uvx --quiet --from "rembg[cpu,cli]" rembg --help >/dev/null 2>&1 || true
 # RStudio Server defaults to /home/rstudio as the working directory, but the
 # lab repo is bind-mounted at /home/rstudio/lab. Without help, every R command
 # students copy from walkthrough.R fails with "cannot open file" until they
-# remember to setwd("~/lab"). This .Rprofile auto-cds them on session start
-# IFF the lab is mounted, so the recipe in prep.html / pre-lab "just works".
-RUN printf 'if (interactive() && dir.exists("~/lab/images/demo/segmented")) {\n  setwd("~/lab")\n  message("Working directory set to ", getwd())\n}\n' \
-        > /home/rstudio/.Rprofile \
-    && chown rstudio:rstudio /home/rstudio/.Rprofile
+# remember to setwd("~/lab"). Two-pronged fix:
+#
+#   1. ~/.Rprofile with an rstudio.sessionInit hook + plain interactive
+#      autocd. The hook fires AFTER RStudio's own setwd — important because
+#      RStudio Server overrides whatever the .Rprofile body sets. Plain R
+#      (no RStudio) gets the body fallback.
+#
+#   2. ~/.config/rstudio/rstudio-prefs.json with initial_working_directory
+#      set to ~/lab — the canonical RStudio user-pref for "where new
+#      sessions land."
+RUN mkdir -p /home/rstudio/.config/rstudio && \
+    printf '{\n  "initial_working_directory": "~/lab"\n}\n' \
+        > /home/rstudio/.config/rstudio/rstudio-prefs.json && \
+    printf '%s\n' \
+        'setHook("rstudio.sessionInit", function(newSession) {' \
+        '  if (newSession && dir.exists("~/lab/images/demo/segmented")) {' \
+        '    setwd("~/lab")' \
+        '    message("Working directory set to ", getwd())' \
+        '  }' \
+        '}, action = "append")' \
+        '' \
+        'if (interactive() && !"tools:rstudio" %in% search() &&' \
+        '    dir.exists("~/lab/images/demo/segmented")) {' \
+        '  setwd("~/lab")' \
+        '  message("Working directory set to ", getwd())' \
+        '}' \
+        > /home/rstudio/.Rprofile && \
+    chown -R rstudio:rstudio /home/rstudio/.Rprofile /home/rstudio/.config
 
 # RStudio user defaults (rocker convention)
 ENV USER=rstudio
