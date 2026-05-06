@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libgeos-dev \
         libproj-dev \
         gfortran \
+        tcl tk \
         ca-certificates \
         curl \
     && rm -rf /var/lib/apt/lists/*
