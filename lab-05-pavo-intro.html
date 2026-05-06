@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#common-errors-and-their-fixes" id="toc-common-errors-and-their-fixes" class="nav-link" data-scroll-target="#common-errors-and-their-fixes">Common errors and their fixes</a></li>
   <li><a href="#what-this-lab-is-not" id="toc-what-this-lab-is-not" class="nav-link" data-scroll-target="#what-this-lab-is-not">What this lab is NOT</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab-05-pavo-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lab-05-pavo-intro.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="lab-05-pavo-intro.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -332,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://clipdrop.co/remove-background"><strong>clipdrop.co/remove-background</strong></a> — Stability-AI tool</li>
 </ul>
 <p>Each returns a transparent PNG. Save the PNG into your <code>images/student-fish/&lt;your-lineage&gt;/</code> folder. Then in R, use the <code>composite_to_white()</code> helper to add a white background and standardize the canvas:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/walkthrough.R"</span>)  <span class="co"># loads composite_to_white()</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)  <span class="co"># loads composite_to_white()</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.png"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This gives you the same <code>*-segmented.jpg</code> you’d get from <code>segment_fish()</code> — pavo’s classify-with-bkg path will work exactly the same way.</p>
@@ -404,7 +404,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>pick_col()</code>, <code>simple_coldists()</code>, <code>pick_white_bg()</code>, <code>segment_fish()</code>, and <code>flip_to_left_lateral()</code> are all defined in <code>scripts/walkthrough.R</code> — copy them into your session if you haven’t already.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Load the helpers FIRST
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All the helper functions (<code>pick_col()</code>, <code>simple_coldists()</code>, <code>pick_white_bg()</code>, <code>segment_fish()</code>, <code>composite_to_white()</code>, <code>flip_to_left_lateral()</code>) live in <code>scripts/helpers.R</code>. Run this <strong>once at the top of your session</strong> before anything else:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you skip this and try to call e.g.&nbsp;<code>simple_coldists(my_class)</code>, you’ll get <code>Error: could not find function "simple_coldists"</code>. Source it once and every helper is in scope for the rest of your session.</p>
+</div>
+</div>
 </section>
 <section id="step-3-record-your-results" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-record-your-results">Step 3: Record your results</h3>

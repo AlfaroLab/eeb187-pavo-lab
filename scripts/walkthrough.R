@@ -10,22 +10,26 @@
 
 
 # -----------------------------------------------------------------------------
-# Step 0 — Setup: load packages and confirm the environment
+# Step 0 — Setup: load packages, helpers, and confirm the environment
 # -----------------------------------------------------------------------------
 
 library(pavo)         # color analysis
 library(magick)       # image I/O backend
 library(tidyverse)    # data wrangling + ggplot
 
+# Load helper functions: segment_fish(), composite_to_white(),
+# flip_to_left_lateral(), simple_coldists(), pick_white_bg(), pick_col().
+# Defined in scripts/helpers.R, sourced here so every block below "just
+# works" — no need to step through function definitions in order.
+source("scripts/helpers.R")
+
 # Sanity check — should print 2.9.0 or higher
 packageVersion("pavo")
 
-# Set working directory to the lab bundle.
-# Adjust this path if you put the lab folder somewhere else.
-# In RStudio: Session → Set Working Directory → To Source File Location
-# is usually the easiest move.
-#
-# setwd("~/Documents/EEB187-pavo-lab/labs/demo-pavo-week6/")
+# Set working directory to the lab bundle if you're running R from
+# elsewhere. In Docker / Binder / Codespaces this happens automatically;
+# in a Native install run this once at session start:
+#   setwd("~/Documents/eeb187-pavo-lab")    # or wherever you cloned
 
 
 # -----------------------------------------------------------------------------

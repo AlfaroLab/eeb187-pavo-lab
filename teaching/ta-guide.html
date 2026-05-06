@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="EEB 187 — Ecology &amp; Evolution of Color">
-<meta name="dcterms.date" content="2026-05-05">
+<meta name="dcterms.date" content="2026-05-06">
 
 <title>TA Guide — Lab 5: pavo Introduction</title>
 <style>
@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#appendix-a-glossary-of-metrics" id="toc-appendix-a-glossary-of-metrics" class="nav-link" data-scroll-target="#appendix-a-glossary-of-metrics">Appendix A — Glossary of metrics</a></li>
   <li><a href="#appendix-b-pre-loaded-student-fish-library" id="toc-appendix-b-pre-loaded-student-fish-library" class="nav-link" data-scroll-target="#appendix-b-pre-loaded-student-fish-library">Appendix B — Pre-loaded student-fish library</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../ta-guide.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="../ta-guide.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="ta-guide.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 5, 2026</p>
+      <p class="date">May 6, 2026</p>
     </div>
   </div>
   
@@ -438,9 +438,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pavo)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>What’s happening:</strong> loading the three packages plus checking we’re on pavo ≥ 2.9. The <code>magick</code> package is the image-IO backend pavo uses internally; <code>tidyverse</code> is for <code>bind_rows</code>, <code>tibble</code>, <code>pivot_longer</code>, <code>ggplot</code>.</p>
-<p><strong>Why this matters:</strong> if any of these errors out, nothing downstream works. Get students to “all three loaded clean” before proceeding.</p>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)     <span class="co"># ← critical: loads simple_coldists,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="co">#   pick_white_bg, pick_col, segment_fish,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="co">#   composite_to_white, flip_to_left_lateral</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"pavo"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s happening:</strong> loading the three packages plus checking we’re on pavo ≥ 2.9. The <code>magick</code> package is the image-IO backend pavo uses internally; <code>tidyverse</code> is for <code>bind_rows</code>, <code>tibble</code>, <code>pivot_longer</code>, <code>ggplot</code>. The <code>source("scripts/helpers.R")</code> call brings in every function used downstream — without it, the first call to <code>simple_coldists()</code> errors with “could not find function”.</p>
+<p><strong>Why this matters:</strong> if any of these errors out, nothing downstream works. Get students to “all four loaded clean” before proceeding. The <code>source()</code> line is the one students forget when they jump into Part B from a fresh session — emphasize it.</p>
 <div class="callout callout-style-simple callout-warning callout-titled" title="Troubleshooting Step 0">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -550,6 +553,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>Error: object 'getimg' not found</code></td>
 <td><code>library(pavo)</code> skipped</td>
 <td>back to Step 0</td>
+</tr>
+<tr class="even">
+<td><code>Error: could not find function "simple_coldists"</code> (or <code>pick_white_bg</code>, etc.)</td>
+<td><code>source("scripts/helpers.R")</code> skipped</td>
+<td>back to Step 0; this is the most common Step 3 error in our test runs</td>
 </tr>
 </tbody>
 </table>
@@ -1060,7 +1068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="morning-of-lab" class="level2">
 <h2 class="anchored" data-anchor-id="morning-of-lab">Morning of lab</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">Restart your laptop’s RStudio. Run <code>library(pavo); library(magick); library(tidyverse)</code> to confirm everything still loads.</label></li>
+<li><label><input type="checkbox">Restart your laptop’s RStudio. Run <code>library(pavo); library(magick); library(tidyverse); source("scripts/helpers.R")</code> to confirm everything still loads.</label></li>
 <li><label><input type="checkbox">Test <code>segment_fish()</code> on one of the demo fish to confirm rembg + magick are still on PATH. If <code>uvx</code> was last used &gt; 1 month ago, the model cache may have been GC’d; running it once now downloads it.</label></li>
 <li><label><input type="checkbox">Take 5 student-fish images (3 you’ll demo + 2 you’ll reserve for “what if” student questions) and run them through the full pipeline as a smoke test.</label></li>
 </ul>

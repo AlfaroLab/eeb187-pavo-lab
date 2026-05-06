@@ -335,7 +335,7 @@ If you can pre-segment your 3 fish images at home, you'll spend lab time on the 
 **Path A — local with `segment_fish()` (best quality):** if your install of `uv` + `imagemagick` worked above, you already have the tool. Just run in R:
 
 ```r
-source("scripts/walkthrough.R")    # loads the segment_fish() helper
+source("scripts/helpers.R")    # loads the segment_fish() helper
 segment_fish("images/student-fish/<your-lineage>/your-fish.jpg")
 # Repeat for fish 2 and 3. Output: <name>-segmented.jpg in the same folder.
 ```
@@ -349,7 +349,7 @@ segment_fish("images/student-fish/<your-lineage>/your-fish.jpg")
 The output is a transparent PNG. Save it next to the original (e.g., `chaetodon-auriga.png`). Then in R, use the `composite_to_white()` helper from `walkthrough.R` to convert the transparent PNG to a white-background JPG that pavo expects:
 
 ```r
-source("scripts/walkthrough.R")
+source("scripts/helpers.R")
 composite_to_white("images/student-fish/<your-lineage>/chaetodon-auriga.png")
 # Output: chaetodon-auriga-segmented.jpg in the same folder.
 ```

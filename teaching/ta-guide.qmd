@@ -173,12 +173,15 @@ This is the section to keep open while you teach. Each subsection is one numbere
 library(pavo)
 library(magick)
 library(tidyverse)
+source("scripts/helpers.R")     # ← critical: loads simple_coldists,
+                                 #   pick_white_bg, pick_col, segment_fish,
+                                 #   composite_to_white, flip_to_left_lateral
 packageVersion("pavo")
 ```
 
-**What's happening:** loading the three packages plus checking we're on pavo ≥ 2.9. The `magick` package is the image-IO backend pavo uses internally; `tidyverse` is for `bind_rows`, `tibble`, `pivot_longer`, `ggplot`.
+**What's happening:** loading the three packages plus checking we're on pavo ≥ 2.9. The `magick` package is the image-IO backend pavo uses internally; `tidyverse` is for `bind_rows`, `tibble`, `pivot_longer`, `ggplot`. The `source("scripts/helpers.R")` call brings in every function used downstream — without it, the first call to `simple_coldists()` errors with "could not find function".
 
-**Why this matters:** if any of these errors out, nothing downstream works. Get students to "all three loaded clean" before proceeding.
+**Why this matters:** if any of these errors out, nothing downstream works. Get students to "all four loaded clean" before proceeding. The `source()` line is the one students forget when they jump into Part B from a fresh session — emphasize it.
 
 ::: {.callout-warning title="Troubleshooting Step 0"}
 | Symptom | Cause | Fix |
@@ -222,6 +225,7 @@ Pick any student and ask: "Which one will have the highest A? Why?" If they say 
 | `cannot open the connection` / `cannot open file` | working directory is wrong | `getwd()` to see where R thinks it is; `setwd()` to the lab folder, or use **Session → Set Working Directory → To Source File Location** |
 | Image loads but `plot()` shows it black or distorted | rare — corrupted JPG | re-clone the repo; check the file is non-empty (`file.size("images/demo/segmented/sergeant-major.jpg")`) |
 | `Error: object 'getimg' not found` | `library(pavo)` skipped | back to Step 0 |
+| `Error: could not find function "simple_coldists"` (or `pick_white_bg`, etc.) | `source("scripts/helpers.R")` skipped | back to Step 0; this is the most common Step 3 error in our test runs |
 :::
 
 ## Step 1.5 — Segmentation (the conceptual punchline)
@@ -460,7 +464,7 @@ The worksheet has three assessable sections. Suggested scoring out of 10:
 
 ## Morning of lab
 
-- [ ] Restart your laptop's RStudio. Run `library(pavo); library(magick); library(tidyverse)` to confirm everything still loads.
+- [ ] Restart your laptop's RStudio. Run `library(pavo); library(magick); library(tidyverse); source("scripts/helpers.R")` to confirm everything still loads.
 - [ ] Test `segment_fish()` on one of the demo fish to confirm rembg + magick are still on PATH. If `uvx` was last used > 1 month ago, the model cache may have been GC'd; running it once now downloads it.
 - [ ] Take 5 student-fish images (3 you'll demo + 2 you'll reserve for "what if" student questions) and run them through the full pipeline as a smoke test.
 

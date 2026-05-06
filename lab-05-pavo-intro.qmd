@@ -152,7 +152,7 @@ Drag-drop your fish JPG into one of these free tools:
 Each returns a transparent PNG. Save the PNG into your `images/student-fish/<your-lineage>/` folder. Then in R, use the `composite_to_white()` helper to add a white background and standardize the canvas:
 
 ```r
-source("scripts/walkthrough.R")  # loads composite_to_white()
+source("scripts/helpers.R")  # loads composite_to_white()
 seg_path <- composite_to_white("images/student-fish/<lineage>/your-fish.png")
 my_fish  <- getimg(seg_path)
 ```
@@ -231,7 +231,17 @@ my_metrics <- tibble(
 )
 ```
 
-`pick_col()`, `simple_coldists()`, `pick_white_bg()`, `segment_fish()`, and `flip_to_left_lateral()` are all defined in `scripts/walkthrough.R` — copy them into your session if you haven't already.
+::: {.callout-important}
+## Load the helpers FIRST
+
+All the helper functions (`pick_col()`, `simple_coldists()`, `pick_white_bg()`, `segment_fish()`, `composite_to_white()`, `flip_to_left_lateral()`) live in `scripts/helpers.R`. Run this **once at the top of your session** before anything else:
+
+```r
+source("scripts/helpers.R")
+```
+
+If you skip this and try to call e.g. `simple_coldists(my_class)`, you'll get `Error: could not find function "simple_coldists"`. Source it once and every helper is in scope for the rest of your session.
+:::
 
 ### Step 3: Record your results
 
