@@ -73,8 +73,18 @@
 <p style="color: var(--muted); margin-top: 0;">Quantifying reef-fish color patterns &middot; EEB 187, Spring 2026</p>
 
 <div class="lede">
-<strong>Action items before lab:</strong> (1) pick your install path; (2) download <strong>three fish images</strong> from your assigned lineage; (3) ideally segment them at home — see below. <span class="deadline">Don't show up Wednesday with a broken setup.</span>
+<strong>Read this whole thing — getting your laptop ready for Wednesday will take ~30–60 minutes of focused work.</strong> Don't leave it for the morning of lab. Software installs always have a 10% chance of going sideways, and the lab is hands-on R from the first minute. <span class="deadline">If you arrive Wednesday with a broken setup, you'll spend the lab on installation instead of biology.</span>
 </div>
+
+<h2>Tonight's checklist (do this tonight, not Wednesday)</h2>
+<ol>
+  <li><strong>Pick an install path</strong> from §1 below — most of you should pick <strong>Native</strong> or <strong>Docker</strong>. (Cloud paths are a backup for laptop trouble.)</li>
+  <li><strong>Get it working end-to-end</strong> — when you're done, <code>library(pavo)</code> in RStudio should load with no error.</li>
+  <li><strong>Make your images folder</strong> (commands in §2 below). It should be empty for now — you'll fill it in step 4.</li>
+  <li><strong>Pick three fish species</strong> from your assigned lineage that span three different pattern types (vertical bars, horizontal stripe, spotty/reticulate). The repo's <code>images/student-fish/&lt;lineage&gt;/</code> folder has 5 starter species per lineage if you'd rather not hunt around.</li>
+  <li><strong>Segment your three images at home</strong> — §3 below. This is the single thing that will save you the most time in lab.</li>
+</ol>
+<p>Min budget: 30 min for cloud paths, 45–60 min for Native or Docker. <strong>Schedule it. Do it tonight.</strong></p>
 
 <h2>1. Pick your install path</h2>
 
@@ -94,19 +104,24 @@
   <li><strong>Native install walkthrough:</strong> <a href="https://alfarolab.github.io/eeb187-pavo-lab/pre-lab-installation.html">pre-lab-installation</a></li>
 </ul>
 
-<h2>2. Where to put your fish images</h2>
+<h2>2. Where to put your fish images — MAKE THIS FOLDER TONIGHT</h2>
 
-<p>Use a consistent folder so the code in <code>walkthrough.R</code> works copy-paste:</p>
+<p>Use a consistent folder so every code example in <code>walkthrough.R</code> works copy-paste with one filename change. <strong>Make the folder now even before you have images in it</strong> — you'll thank yourself Wednesday.</p>
 
-<table>
-<tr><th>OS</th><th>Recommended folder</th></tr>
-<tr><td>macOS</td><td><code>~/Documents/eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;/</code></td></tr>
-<tr><td>Windows</td><td><code>Documents\eeb187-pavo-lab\images\student-fish\&lt;your-lineage&gt;\</code></td></tr>
-<tr><td>Linux</td><td><code>~/eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;/</code></td></tr>
-<tr><td>Binder / Codespaces</td><td>Upload via RStudio Files pane → <code>images/student-fish/&lt;your-lineage&gt;/</code></td></tr>
-</table>
+<p><strong>Did you clone the repo?</strong> If yes, the folder already exists at <code>eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;/</code> with 5 starter species pre-loaded. Use any 3 of those and skip the rest of this section.</p>
 
-<p>If you cloned the repo (<code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git</code>), <strong>that folder already exists with 5 starter species in it</strong>. You can use any three of those without uploading anything, or drop your own images alongside them.</p>
+<p><strong>Otherwise, create the folder now.</strong> Replace <code>&lt;your-lineage&gt;</code> with your assigned family in lowercase (chaetodontidae, pomacanthidae, balistidae, or acanthuridae):</p>
+
+<h3>macOS / Linux</h3>
+<pre><code>mkdir -p ~/Documents/eeb187-pavo-lab/images/student-fish/&lt;your-lineage&gt;</code></pre>
+<p>Then in R: <code>setwd("~/Documents/eeb187-pavo-lab")</code> at the top of every session.</p>
+
+<h3>Windows (PowerShell)</h3>
+<pre><code>mkdir $env:USERPROFILE\Documents\eeb187-pavo-lab\images\student-fish\&lt;your-lineage&gt; -Force</code></pre>
+<p>Then in R: <code>setwd("~/Documents/eeb187-pavo-lab")</code> at the top of every session (R on Windows still understands <code>~</code> as your user folder).</p>
+
+<h3>Binder / Codespaces (cloud)</h3>
+<p>Folder already exists when you launch. Upload your JPGs via the RStudio Files pane (bottom-right) → click <strong>Upload</strong> button → drop into <code>images/student-fish/&lt;your-lineage&gt;/</code>. <strong>Binder note:</strong> uploads are erased after 90 minutes of inactivity — finish lab in one sitting or use Codespaces / Native.</p>
 
 <h3>Image naming</h3>
 <p>Use <strong>lowercase, hyphenated</strong> filenames so paths stay clean:</p>
@@ -116,9 +131,9 @@
   <li><strong>Avoid spaces, capitals, parentheses, special characters</strong> — they break paths on some platforms</li>
 </ul>
 
-<h2>3. Pre-segment your images at home (recommended)</h2>
+<h2>3. Pre-segment your images at home (single biggest time-saver)</h2>
 
-<p>Each fish image needs its background removed before pavo can analyze it cleanly. <strong>If you can do this at home, you'll spend lab time on biology instead of image processing.</strong> Two paths — pick whichever is easier:</p>
+<p>Each fish image needs its background (water, reef, tank glass) removed before pavo's analysis works. <strong>Skip this step at home and you'll spend the first 30 minutes of lab on image processing instead of biology.</strong> Pick the easier of these two paths:</p>
 
 <h3>Path A — Local (best quality)</h3>
 <p>If your install of <code>uv</code> + <code>imagemagick</code> worked, run in R:</p>
