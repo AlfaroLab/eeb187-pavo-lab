@@ -261,12 +261,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Zero-hassle option (works in every launch path including Binder/Codespaces):</strong> the repo ships with 5 species per assigned lineage in <code>images/student-fish/&lt;your-lineage&gt;/</code>. Pick 3 of those and you’re done — no uploading, no internet hunting.</p>
-<p>If you want to use a fish that isn’t pre-loaded:</p>
+<p><strong>Zero-hassle option (works in every launch path):</strong> the repo ships with 5 species per assigned lineage in <code>images/student-fish/&lt;your-lineage&gt;/</code>. Pick 3 of those and you’re done — no uploading, no internet hunting.</p>
+<p>If you want to use a fish that isn’t pre-loaded, <strong>put it in the dedicated <code>images/student-images/</code> folder</strong> (kept separate from the curated starter library so it’s clear what’s yours):</p>
 <ul>
-<li><strong>Native install / Docker:</strong> save the JPG anywhere on your laptop and pass the full path to <code>segment_fish()</code> (e.g., <code>~/Downloads/my_fish.jpg</code>). Your work persists between RStudio sessions.</li>
-<li><strong>Binder (cloud, ephemeral):</strong> in RStudio’s <em>Files</em> pane (bottom-right by default), click the <strong>Upload</strong> button → pick your JPG → upload it into the project root or <code>images/student-fish/&lt;your-lineage&gt;/</code>. Then refer to it as <code>"images/student-fish/&lt;your-lineage&gt;/my_fish.jpg"</code>. <strong>Important — Binder sessions expire after 90 minutes of inactivity and uploaded files are NOT saved.</strong> Finish your worksheet in one sitting, or download the segmented JPG (Files pane → check the box → <em>More</em> → <em>Export</em>) before logging off.</li>
-<li><strong>Codespaces (cloud, persistent):</strong> drag-drop the JPG into the VS Code file explorer, then refer to it by relative path. Files persist between visits, so you can come back later.</li>
+<li><strong>Docker / Native:</strong> drop your JPG into <code>~/eeb187-pavo-lab/images/student-images/</code> on your laptop. The bind mount makes it visible inside the R session immediately. Refer to it as <code>"images/student-images/my-fish.jpg"</code>.</li>
+<li><strong>Binder (cloud, ephemeral):</strong> in RStudio’s <em>Files</em> pane (bottom-right), navigate to <code>images/student-images/</code>, click <strong>Upload</strong> → pick your JPG → OK. Refer to it as <code>"images/student-images/my-fish.jpg"</code>. <strong>Binder sessions expire after 90 min — finish in one sitting</strong>, or download segmented outputs before logging off.</li>
+<li><strong>Codespaces (cloud, persistent):</strong> drag-drop the JPG into the VS Code file explorer at <code>images/student-images/</code>. Files persist between visits.</li>
 </ul>
 </div>
 </div>
@@ -299,8 +299,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install imagemagick         <span class="co"># macOS</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install imagemagick     <span class="co"># Linux</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Per-fish use</strong> (in R during lab):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"path/to/raw_fish.jpg"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the same relative path students see in the Files pane —</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># images/student-images/&lt;filename&gt;.jpg for fish you uploaded yourself,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># images/student-fish/&lt;lineage&gt;/&lt;filename&gt;.jpg for the pre-loaded library.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"images/student-images/your-fish.jpg"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The result is a JPG with the fish on a clean white background, saved as <code>&lt;name&gt;-segmented.jpg</code>. If <code>segment_fish()</code> errors out, fall back to Path 2.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -331,9 +334,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://www.photoroom.com/tools/background-remover"><strong>photoroom.com</strong></a> — also free</li>
 <li><a href="https://clipdrop.co/remove-background"><strong>clipdrop.co/remove-background</strong></a> — Stability-AI tool</li>
 </ul>
-<p>Each returns a transparent PNG. Save the PNG into your <code>images/student-fish/&lt;your-lineage&gt;/</code> folder. Then in R, use the <code>composite_to_white()</code> helper to add a white background and standardize the canvas:</p>
+<p>Each returns a transparent PNG. Save the PNG into the <code>images/student-images/</code> folder (your personal upload area). Then in R, use the <code>composite_to_white()</code> helper to add a white background and standardize the canvas:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/helpers.R"</span>)  <span class="co"># loads composite_to_white()</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.png"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-images/your-fish.png"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This gives you the same <code>*-segmented.jpg</code> you’d get from <code>segment_fish()</code> — pavo’s classify-with-bkg path will work exactly the same way.</p>
 </section>

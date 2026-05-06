@@ -577,18 +577,21 @@ metrics %>%
 # Open the worksheet (lab-05-pavo-intro.qmd). Pick THREE fish from your
 # assigned lineage that span three different pattern types.
 #
-# WHERE TO FIND YOUR IMAGES:
-#   - Zero-hassle (works in every launch path):  images/student-fish/<lineage>/
-#     ships pre-loaded with 5 species per assigned lineage. Just refer to them
-#     by relative path, e.g., "images/student-fish/chaetodontidae/chaetodon-auriga.jpg"
-#   - Bringing your own JPG?
-#       * Native / Docker: save it anywhere on disk, pass the full path.
-#       * Binder (cloud, ephemeral): RStudio Files pane (bottom-right) →
-#         click "Upload" → pick your JPG. Upload into the project root or
-#         images/student-fish/<lineage>/. NOTE: Binder sessions expire after
-#         90 min and uploads are lost — finish in one sitting or Export the
-#         segmented JPG before logging off.
-#       * Codespaces (persistent): drag-drop into VS Code file explorer.
+# WHERE TO FIND YOUR IMAGES (the repo has TWO image folders for Part B):
+#
+#   images/student-fish/<lineage>/   pre-loaded starter species (5 per
+#                                    lineage, ready to use, don't modify)
+#   images/student-images/            YOUR custom uploads go here
+#
+# How to put your own JPG into images/student-images/:
+#   * Native / Docker: drop the JPG into ~/eeb187-pavo-lab/images/student-images/
+#     on your laptop. The bind mount makes it appear inside RStudio.
+#   * Binder (cloud, ephemeral): RStudio Files pane → navigate to
+#     images/student-images/ → click "Upload" → pick your JPG.
+#     NOTE: Binder sessions expire after 90 min and uploads are LOST —
+#     finish in one sitting or Export the segmented JPG before logging off.
+#   * Codespaces (persistent): drag-drop into VS Code file explorer at
+#     images/student-images/.
 #
 # IMPORTANT: REGISTER each of your three fish to LEFT-LATERAL view BEFORE
 # running classify(). If your image has the head pointing RIGHT, flip it with
@@ -598,10 +601,14 @@ metrics %>%
 
 # # Step A: SEGMENT (background removal). Pick ONE of two paths.
 # #   Path 1 (recommended) — rembg via segment_fish() helper above:
+# #   For pre-loaded starter species use the student-fish/<lineage>/ path:
 # seg_path <- segment_fish("images/student-fish/chaetodontidae/chaetodon-auriga.jpg")
+# #   For your own uploaded fish use the student-images/ folder:
+# # seg_path <- segment_fish("images/student-images/my-fish.jpg")
+# #
 # #   Path 2 (fallback) — pre-crop the fish manually in Preview.app, save
-# #   the cropped JPG, then skip segment_fish() and load directly:
-# # seg_path <- "images/student-fish/chaetodontidae/chaetodon-auriga-cropped.jpg"
+# #   the cropped JPG into images/student-images/, then skip segment_fish():
+# # seg_path <- "images/student-images/my-fish-cropped.jpg"
 #
 # # Step B: REGISTER (left-lateral, head on left) — flip if needed
 # # flip_to_left_lateral(seg_path)

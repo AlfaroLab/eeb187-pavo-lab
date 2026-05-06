@@ -332,11 +332,16 @@ Use lowercase, hyphenated filenames so the helper functions and your code are ro
 
 If you can pre-segment your 3 fish images at home, you'll spend lab time on the *biology* (predict-and-test, comparison) instead of on image processing. **Two paths, both fine:**
 
+**First, decide where your image lives.** The repo has a dedicated folder for student uploads, kept separate from the curated starter species:
+
+- **`images/student-fish/<your-lineage>/`** — pre-loaded starter species, already segmented. Don't add your own files here.
+- **`images/student-images/`** — drop YOUR uploaded JPGs here.
+
 **Path A — local with `segment_fish()` (best quality):** if your install of `uv` + `imagemagick` worked above, you already have the tool. Just run in R:
 
 ```r
 source("scripts/helpers.R")    # loads the segment_fish() helper
-segment_fish("images/student-fish/<your-lineage>/your-fish.jpg")
+segment_fish("images/student-images/your-fish.jpg")
 # Repeat for fish 2 and 3. Output: <name>-segmented.jpg in the same folder.
 ```
 
@@ -346,12 +351,12 @@ segment_fish("images/student-fish/<your-lineage>/your-fish.jpg")
 - [**photoroom.com**](https://www.photoroom.com/tools/background-remover) — free, no signup
 - [**clipdrop.co/remove-background**](https://clipdrop.co/remove-background) — free, no signup
 
-The output is a transparent PNG. Save it next to the original (e.g., `chaetodon-auriga.png`). Then in R, use the `composite_to_white()` helper from `walkthrough.R` to convert the transparent PNG to a white-background JPG that pavo expects:
+The output is a transparent PNG. Save it into `images/student-images/`. Then in R, use the `composite_to_white()` helper to convert the transparent PNG to a white-background JPG that pavo expects:
 
 ```r
 source("scripts/helpers.R")
-composite_to_white("images/student-fish/<your-lineage>/chaetodon-auriga.png")
-# Output: chaetodon-auriga-segmented.jpg in the same folder.
+composite_to_white("images/student-images/your-fish.png")
+# Output: your-fish-segmented.jpg in the same folder.
 ```
 
 Either way, you arrive at lab with three `<species>-segmented.jpg` files ready for `getimg()`. **Don't show up empty-handed.** If you don't know your lineage assignment, ask in the channel by Tuesday evening.

@@ -111,9 +111,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-b.1-pick-three-species" id="toc-step-b.1-pick-three-species" class="nav-link" data-scroll-target="#step-b.1-pick-three-species">Step B.1 — Pick three species</a></li>
   <li><a href="#step-b.2-segment-your-own-fish" id="toc-step-b.2-segment-your-own-fish" class="nav-link" data-scroll-target="#step-b.2-segment-your-own-fish">Step B.2 — Segment your own fish</a>
   <ul class="collapse">
-  <li><a href="#path-1-local-with-segment_fish" id="toc-path-1-local-with-segment_fish" class="nav-link" data-scroll-target="#path-1-local-with-segment_fish">Path 1 — Local with <code>segment_fish()</code></a></li>
-  <li><a href="#path-2-web-tool" id="toc-path-2-web-tool" class="nav-link" data-scroll-target="#path-2-web-tool">Path 2 — Web tool</a></li>
-  <li><a href="#path-3-manual-crop" id="toc-path-3-manual-crop" class="nav-link" data-scroll-target="#path-3-manual-crop">Path 3 — Manual crop</a></li>
+  <li><a href="#how-to-write-the-path-to-your-fish-image" id="toc-how-to-write-the-path-to-your-fish-image" class="nav-link" data-scroll-target="#how-to-write-the-path-to-your-fish-image">How to write the path to your fish image</a></li>
+  <li><a href="#path-1-local-with-segment_fish-recommended-if-installed" id="toc-path-1-local-with-segment_fish-recommended-if-installed" class="nav-link" data-scroll-target="#path-1-local-with-segment_fish-recommended-if-installed">Path 1 — Local with <code>segment_fish()</code> (recommended if installed)</a></li>
+  <li><a href="#path-2-web-tool-no-install" id="toc-path-2-web-tool-no-install" class="nav-link" data-scroll-target="#path-2-web-tool-no-install">Path 2 — Web tool (no install)</a></li>
+  <li><a href="#path-3-manual-crop-always-works-no-segmentation-tools-needed" id="toc-path-3-manual-crop-always-works-no-segmentation-tools-needed" class="nav-link" data-scroll-target="#path-3-manual-crop-always-works-no-segmentation-tools-needed">Path 3 — Manual crop (always works, no segmentation tools needed)</a></li>
   </ul></li>
   <li><a href="#step-b.3-run-the-same-pipeline" id="toc-step-b.3-run-the-same-pipeline" class="nav-link" data-scroll-target="#step-b.3-run-the-same-pipeline">Step B.3 — Run the same pipeline</a></li>
   </ul></li>
@@ -290,7 +291,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="path-b-bring-your-own-fish-photos" class="level3">
 <h3 class="anchored" data-anchor-id="path-b-bring-your-own-fish-photos">Path B — Bring your own fish photos</h3>
-<p><strong>You’ll do this in two steps:</strong> (1) name your photo correctly, (2) get it into the lab folder. The “how” is different per launch path.</p>
+<p><strong>You’ll do this in two steps:</strong> (1) name your photo correctly, (2) get it into the <code>images/student-images/</code> folder. The “how” is different per launch path.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Why a separate `student-images/` folder?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why a separate <code>student-images/</code> folder?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The lab repo has three image folders:</p>
+<ul>
+<li><code>images/demo/</code> — the 3 demo fish for Part A (don’t touch)</li>
+<li><code>images/student-fish/&lt;lineage&gt;/</code> — the <strong>pre-loaded starter species</strong> (don’t add your own files here, so you can always tell what’s curated vs.&nbsp;what’s yours)</li>
+<li><code>images/student-images/</code> — <strong>this is where YOUR uploads go</strong></li>
+</ul>
+<p>Putting your fish in <code>student-images/</code> keeps the curated library clean and makes it obvious which photos are yours vs.&nbsp;ours.</p>
+</div>
+</div>
 <section id="step-b1-name-your-file-properly" class="level4">
 <h4 class="anchored" data-anchor-id="step-b1-name-your-file-properly">Step B1 — Name your file properly</h4>
 <p>Filename rules — these matter because R is sensitive to spaces and capital letters:</p>
@@ -298,8 +318,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Format: lowercase, hyphenated, <strong><code>.jpg</code> extension</strong>, named after the species (<code>genus-species.jpg</code>).</p>
 <p>If you’re not sure of the species name, look it up on FishBase or Wikipedia first. If you have multiple photos of the same species, append a number: <code>chaetodon-auriga-1.jpg</code>, <code>chaetodon-auriga-2.jpg</code>.</p>
 </section>
-<section id="step-b2-get-the-file-into-your-lab-folder" class="level4">
-<h4 class="anchored" data-anchor-id="step-b2-get-the-file-into-your-lab-folder">Step B2 — Get the file into your lab folder</h4>
+<section id="step-b2-get-the-file-into-imagesstudent-images" class="level4">
+<h4 class="anchored" data-anchor-id="step-b2-get-the-file-into-imagesstudent-images">Step B2 — Get the file into <code>images/student-images/</code></h4>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Docker users — the path of least resistance">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -315,15 +335,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p>Open <strong>Finder</strong>.</p></li>
 <li><p>From the top menu: <strong>Go → Home</strong> (or press <code>Cmd-Shift-H</code>). You see your home folder.</p></li>
-<li><p>Double-click <strong><code>eeb187-pavo-lab</code></strong> → <strong><code>images</code></strong> → <strong><code>student-fish</code></strong> → your lineage folder (e.g., <code>chaetodontidae</code>).</p></li>
+<li><p>Double-click <strong><code>eeb187-pavo-lab</code></strong> → <strong><code>images</code></strong> → <strong><code>student-images</code></strong>.</p></li>
 <li><p><strong>Drag your renamed JPG into that folder.</strong></p></li>
 <li><p>Switch back to RStudio in your browser. In the Files pane (bottom-right), click the small refresh icon (🔄). You should see the new JPG appear.</p></li>
 <li><p><strong>Verify</strong> in the R Console:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-fish/chaetodontidae"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-images"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Your file should be in the list.</p></li>
 </ol>
-<p>For Windows, replace step 2 with <strong>Open File Explorer → <code>Documents → eeb187-pavo-lab → images → student-fish → &lt;lineage&gt;</code></strong>.</p>
-<p>For Linux, use your file manager to navigate to <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code>.</p>
+<p>For Windows, replace step 2 with <strong>Open File Explorer → <code>Documents → eeb187-pavo-lab → images → student-images</code></strong>.</p>
+<p>For Linux, use your file manager to navigate to <code>~/eeb187-pavo-lab/images/student-images/</code>.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Binder users — use the Upload button">
@@ -338,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>Binder is cloud-based, so you can’t drag files into a Mac/Windows folder. Instead use RStudio’s built-in upload:</p>
 <ol type="1">
-<li>In RStudio’s <strong>Files pane</strong> (bottom-right), click the folder names to navigate: <code>images</code> → <code>student-fish</code> → your lineage (e.g., <code>chaetodontidae</code>). The breadcrumb at the top of the Files pane should now read <code>Home &gt; images &gt; student-fish &gt; chaetodontidae</code>.</li>
+<li>In RStudio’s <strong>Files pane</strong> (bottom-right), click the folder names to navigate: <code>images</code> → <code>student-images</code>. The breadcrumb at the top of the Files pane should now read <code>Home &gt; images &gt; student-images</code>.</li>
 <li>In the same Files pane toolbar, click <strong>Upload</strong> (third button, has an upward arrow icon).</li>
 <li>A dialog appears. Click <strong>Choose File</strong>, pick your JPG from your computer, then click <strong>OK</strong>.</li>
 <li>The file uploads and appears in the file list.</li>
@@ -357,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Same as Docker — drag-drop the JPG into the VS Code file explorer at <code>images/student-fish/&lt;lineage&gt;/</code>. Files persist between visits.</p>
+<p>Same as Docker — drag-drop the JPG into the VS Code file explorer at <code>images/student-images/</code>. Files persist between visits.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Native (local R + RStudio) users">
@@ -370,19 +390,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You already have everything on your laptop. Drop your JPG into <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code> using Finder/File Explorer/your file manager — same as your everyday file workflow.</p>
+<p>You already have everything on your laptop. Drop your JPG into <code>~/eeb187-pavo-lab/images/student-images/</code> using Finder/File Explorer/your file manager — same as your everyday file workflow.</p>
 </div>
 </div>
 </section>
 <section id="step-b3-confirm-you-can-see-your-file-from-r" class="level4">
 <h4 class="anchored" data-anchor-id="step-b3-confirm-you-can-see-your-file-from-r">Step B3 — Confirm you can see your file from R</h4>
 <p>Whichever path you used, after the file is in place, run this in the R Console:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-fish/&lt;your-lineage&gt;/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-images"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You should see your filename in the output. If not:</p>
 <ul>
-<li><strong>Docker:</strong> check the file is actually in <code>~/eeb187-pavo-lab/images/student-fish/&lt;lineage&gt;/</code> on your Mac/PC (use Finder/File Explorer)</li>
+<li><strong>Docker:</strong> check the file is actually in <code>~/eeb187-pavo-lab/images/student-images/</code> on your Mac/PC (use Finder/File Explorer)</li>
 <li><strong>Binder:</strong> check the file appears in the RStudio Files pane (you may need to click the refresh icon)</li>
-<li><strong>Both:</strong> verify you spelled the lineage folder name correctly (<code>chaetodontidae</code>, <code>pomacanthidae</code>, <code>balistidae</code>, <code>acanthuridae</code>)</li>
+<li><strong>Both:</strong> verify the folder name is spelled <code>student-images</code> (with an “s”, with a hyphen)</li>
 </ul>
 </section>
 <section id="step-b4-segment-the-photo-background-removal" class="level4">
@@ -832,50 +852,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-b.2-segment-your-own-fish" class="level2">
 <h2 class="anchored" data-anchor-id="step-b.2-segment-your-own-fish">Step B.2 — Segment your own fish</h2>
-<p>If your three picks are from the pre-loaded <code>student-fish/&lt;lineage&gt;/</code> library, <strong>they’re already cropped</strong> and you can skip ahead to Step B.3 with <code>getimg()</code> directly.</p>
-<p>If you brought a raw photo with water/reef in the background, segment it first — pick the path that works for your install:</p>
-<section id="path-1-local-with-segment_fish" class="level3">
-<h3 class="anchored" data-anchor-id="path-1-local-with-segment_fish">Path 1 — Local with <code>segment_fish()</code></h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.jpg"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If your three picks are from the pre-loaded <code>student-fish/&lt;lineage&gt;/</code> library, <strong>they’re already cropped and segmented</strong> — skip ahead to Step B.3 and load them directly with <code>getimg()</code>.</p>
+<p>If you uploaded your own raw photo (with water/reef/aquarium glass in the background), segment it first.</p>
+<section id="how-to-write-the-path-to-your-fish-image" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-write-the-path-to-your-fish-image">How to write the path to your fish image</h3>
+<div class="callout callout-style-simple callout-tip callout-titled" title="What is a 'path' and how do I write one?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What is a ‘path’ and how do I write one?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>path</strong> is just R’s way of finding your file. In this lab, every path is <strong>relative to the lab repo root</strong> — meaning R looks for files starting from your <code>eeb187-pavo-lab</code> folder. You don’t need to type your full computer’s directory; just the part inside the lab repo.</p>
+<p>The folder structure for images:</p>
+<pre><code>eeb187-pavo-lab/
+└── images/
+    ├── demo/                       ← demo fish (Part A)
+    ├── student-fish/&lt;lineage&gt;/     ← pre-loaded starter species
+    │   ├── chaetodon-auriga.jpg
+    │   ├── chaetodon-lunulatus.jpg
+    │   └── …
+    └── student-images/             ← YOUR uploads
+        └── your-fish.jpg           ← whatever you put here</code></pre>
+<p>To refer to a file, write the path with <strong>forward slashes</strong> (<code>/</code>), starting from <code>images/</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Image you want</th>
+<th>Path you write</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A pre-loaded chaetodontid</td>
+<td><code>"images/student-fish/chaetodontidae/chaetodon-auriga.jpg"</code></td>
+</tr>
+<tr class="even">
+<td>A fish you uploaded yourself</td>
+<td><code>"images/student-images/my-fish.jpg"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>RStudio can complete paths for you.</strong> In the Console, type the opening quote and the first letter — <code>"i</code> — then press the <strong>Tab</strong> key. RStudio shows a dropdown of files and folders. Keep tabbing as you type to navigate folders. This is the easiest way to avoid typos.</p>
+</div>
+</div>
 </section>
-<section id="path-2-web-tool" class="level3">
-<h3 class="anchored" data-anchor-id="path-2-web-tool">Path 2 — Web tool</h3>
-<p>Drag-drop your fish JPG into <a href="https://www.remove.bg/">remove.bg</a>, <a href="https://www.photoroom.com/tools/background-remover">photoroom.com</a>, or <a href="https://clipdrop.co/remove-background">clipdrop.co/remove-background</a>. Save the transparent PNG into the same folder. Then:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-fish/&lt;lineage&gt;/your-fish.png"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="path-1-local-with-segment_fish-recommended-if-installed" class="level3">
+<h3 class="anchored" data-anchor-id="path-1-local-with-segment_fish-recommended-if-installed">Path 1 — Local with <code>segment_fish()</code> (recommended if installed)</h3>
+<p>This is the rembg-based approach — same one used to make the demo fish. Run from the R Console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If your fish is at images/student-images/my-fish.jpg:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">segment_fish</span>(<span class="st">"images/student-images/my-fish.jpg"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The output goes back to <code>images/student-images/my-fish-segmented.jpg</code>. <code>seg_path</code> will be that string, ready to pass to <code>getimg()</code>.</p>
+<div class="callout callout-style-simple callout-tip callout-titled" title="Don't know what to type for the path?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Don’t know what to type for the path?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Easy way 1 — let RStudio find it for you:</strong> In the Files pane (bottom-right), navigate to your file, click the file name (just once, don’t open it), then click <strong>More → Copy Path…</strong> in the Files pane toolbar. RStudio puts the relative path on your clipboard. Paste it inside <code>segment_fish("...")</code>.</p>
+<p><strong>Easy way 2 — use list.files() to read the name:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"images/student-images"</span>)    <span class="co"># returns a character vector of files</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can copy a filename from the printed output.</p>
+<p><strong>Easy way 3 — Tab completion:</strong> type <code>segment_fish("im</code> then press Tab. RStudio fills in <code>"images/</code>. Press Tab again to drop into folders.</p>
+</div>
+</div>
 </section>
-<section id="path-3-manual-crop" class="level3">
-<h3 class="anchored" data-anchor-id="path-3-manual-crop">Path 3 — Manual crop</h3>
-<p>Open in Preview.app (macOS) or Photos (Windows). Drag a tight rectangle around the fish, <strong>Tools → Crop</strong>, save. Then load directly with <code>getimg(...)</code> — skip the segment helpers.</p>
+<section id="path-2-web-tool-no-install" class="level3">
+<h3 class="anchored" data-anchor-id="path-2-web-tool-no-install">Path 2 — Web tool (no install)</h3>
+<p>Drag-drop your fish JPG into one of:</p>
+<ul>
+<li><a href="https://www.remove.bg/">remove.bg</a> — fastest, no signup</li>
+<li><a href="https://www.photoroom.com/tools/background-remover">photoroom.com</a> — also free</li>
+<li><a href="https://clipdrop.co/remove-background">clipdrop.co/remove-background</a> — Stability-AI tool</li>
+</ul>
+<p>Each returns a <strong>transparent PNG</strong>. Save the PNG into your <code>images/student-images/</code> folder (same as Step B2 in <a href="#path-b-bring-your-own-fish-photos">Section 2</a>). Then in R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>seg_path <span class="ot">&lt;-</span> <span class="fu">composite_to_white</span>(<span class="st">"images/student-images/my-fish.png"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="path-3-manual-crop-always-works-no-segmentation-tools-needed" class="level3">
+<h3 class="anchored" data-anchor-id="path-3-manual-crop-always-works-no-segmentation-tools-needed">Path 3 — Manual crop (always works, no segmentation tools needed)</h3>
+<p>Open the JPG in Preview.app (macOS) or Photos (Windows). Drag a tight rectangle around the fish, then <strong>Tools → Crop</strong> (Preview) or <strong>Edit → Crop</strong> (Photos). Save. Move the cropped JPG into <code>images/student-images/</code>. Then in R, <strong>load directly</strong> — skip the segment helpers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>my_fish <span class="ot">&lt;-</span> <span class="fu">getimg</span>(<span class="st">"images/student-images/my-fish-cropped.jpg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>⚠️ Manual crop leaves some background pixels in the corners — your A values will be less dramatic than the demo (closer to 1). The directional A claim still holds; just smaller effect sizes.</p>
 </section>
 </section>
 <section id="step-b.3-run-the-same-pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="step-b.3-run-the-same-pipeline">Step B.3 — Run the same pipeline</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)                <span class="co"># path from Step B.2</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_fish)                                <span class="co"># confirm head on LEFT (left-lateral)</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="co"># if not: flip_to_left_lateral(seg_path); my_fish &lt;- getimg(seg_path)</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>my_k     <span class="ot">&lt;-</span> <span class="dv">4</span>                                <span class="co"># = visible fish colors + 1 (for white bg)</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>my_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(my_fish, <span class="at">kcols =</span> my_k)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_class)                               <span class="co"># does this match the original pattern?</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>my_cd    <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(my_class)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>my_bkg   <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(my_class)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>my_adj   <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">coldists =</span> my_cd, <span class="at">bkgID =</span> my_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>my_metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish =</span> <span class="st">"your_species_name"</span>,</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>my_fish  <span class="ot">&lt;-</span> <span class="fu">getimg</span>(seg_path)                <span class="co"># path from Step B.2</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_fish)                                <span class="co"># confirm head on LEFT (left-lateral)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="co"># if not: flip_to_left_lateral(seg_path); my_fish &lt;- getimg(seg_path)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>my_k     <span class="ot">&lt;-</span> <span class="dv">4</span>                                <span class="co"># = visible fish colors + 1 (for white bg)</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>my_class <span class="ot">&lt;-</span> <span class="fu">classify</span>(my_fish, <span class="at">kcols =</span> my_k)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(my_class)                               <span class="co"># does this match the original pattern?</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>my_cd    <span class="ot">&lt;-</span> <span class="fu">simple_coldists</span>(my_class)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>my_bkg   <span class="ot">&lt;-</span> <span class="fu">pick_white_bg</span>(my_class)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>my_adj   <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">coldists =</span> my_cd, <span class="at">bkgID =</span> my_bkg, <span class="at">exclude =</span> <span class="st">"background"</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>my_metrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">fish =</span> <span class="st">"your_species_name"</span>,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">k    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"k"</span>, <span class="st">"kcols"</span>)),</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m"</span>, <span class="st">"m_r"</span>)),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">A    =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"Asp"</span>)),</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jc   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jc"</span>)),</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jt   =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"Jt"</span>)),</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dS =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dS"</span>, <span class="st">"Cs_dS"</span>)),</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_dL =</span> <span class="fu">pick_col</span>(my_adj, <span class="fu">c</span>(<span class="st">"m_dL"</span>, <span class="st">"Cs_dL"</span>)),</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Do this <strong>three times</strong> (once per fish), record the values in the worksheet’s Part B metric table.</p>
 <div class="callout callout-style-simple callout-tip callout-titled" title="Manual-crop fallback uses different code">
 <div class="callout-header d-flex align-content-center">
@@ -888,7 +986,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <p>If you used <strong>Path 3 (manual crop)</strong> in Step B.2, your image doesn’t have a white background class. <strong>Drop the <code>bkgID = my_bkg, exclude = "background"</code> arguments from <code>adjacent()</code></strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>my_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>, <span class="at">coldists =</span> my_cd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>my_adj <span class="ot">&lt;-</span> <span class="fu">adjacent</span>(my_class, <span class="at">xpts =</span> <span class="dv">200</span>, <span class="at">xscale =</span> <span class="dv">5</span>, <span class="at">coldists =</span> my_cd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Your A values will be slightly less dramatic than the demo (closer to 1) because background pixels pollute the analysis. Note this in your worksheet — the rubric accommodates it.</p>
 </div>
 </div>

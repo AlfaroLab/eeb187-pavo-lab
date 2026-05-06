@@ -32,6 +32,21 @@ RUN if [ -f /etc/ImageMagick-6/policy.xml ]; then \
       sed -i 's/rights="none" pattern="PNG"/rights="read|write" pattern="PNG"/' /etc/ImageMagick-6/policy.xml || true ; \
     fi
 
+# Ubuntu's `imagemagick` apt package ships ImageMagick 6 (legacy `convert` /
+# `identify` as separate binaries). pavo's segment_fish() helper calls IM 7's
+# unified `magick` entrypoint. Provide a thin shim so the helper works.
+RUN printf '#!/bin/bash\nif [ "$1" = "identify" ]; then shift; exec identify "$@"; fi\nif [ "$1" = "convert" ];  then shift; exec convert  "$@"; fi\nexec convert "$@"\n' \
+        > /usr/local/bin/magick \
+    && chmod +x /usr/local/bin/magick
+
+# Make /home/rstudio/.local/bin (where uv/uvx/rembg get installed) visible
+# to R sessions, not just bash. R reads Renviron.site at startup; setting
+# PATH there is the most reliable way to make Sys.which() see uv tools.
+# (Per-user ~/.Renviron is overridden in some rocker configurations; the
+# system-wide file always wins.)
+RUN echo 'PATH=/home/rstudio/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' \
+        >> /usr/local/lib/R/etc/Renviron.site
+
 # ---- back to NB_USER: install R + Python deps as the binder user ---------
 USER ${NB_USER}
 
@@ -57,3 +72,22 @@ RUN Rscript /tmp/install.R
 COPY --chown=${NB_USER}:${NB_USER} . /home/${NB_USER}/
 
 WORKDIR /home/${NB_USER}
+
+# Build-time smoke test: prove pavo loads from R, the magick CLI shim
+# resolves, Sys.which() finds both uvx + magick from the R PATH (which
+# is what segment_fish()'s tool detection actually does), and a real
+# segment_fish() roundtrip succeeds end-to-end. Catches the silent
+# regressions we hit during the Docker image work this morning.
+RUN R -e "suppressPackageStartupMessages({library(pavo); library(magick); library(tidyverse)}); \
+          source('scripts/helpers.R'); \
+          stopifnot(nzchar(Sys.which('uvx'))); \
+          stopifnot(nzchar(Sys.which('magick'))); \
+          seg <- segment_fish('images/demo/raw/sergeant-major.jpg'); \
+          stopifnot(file.exists(seg)); \
+          img <- getimg(seg); \
+          stopifnot(inherits(img, 'rimg')); \
+          cat('Binder smoke OK — pavo:', as.character(packageVersion('pavo')), \
+              ', uvx + magick + segment_fish roundtrip OK\n'); \
+          unlink(seg)" \
+    && magick -version | head -1 \
+    && echo "Binder image build verified."

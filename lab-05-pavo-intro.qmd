@@ -61,13 +61,13 @@ Your group has been assigned a reef fish lineage (typically a family). Today's j
 ### Step 1: Pick three fish
 
 ::: {.callout-note title="Where to find images depending on your launch path"}
-**Zero-hassle option (works in every launch path including Binder/Codespaces):** the repo ships with 5 species per assigned lineage in `images/student-fish/<your-lineage>/`. Pick 3 of those and you're done — no uploading, no internet hunting.
+**Zero-hassle option (works in every launch path):** the repo ships with 5 species per assigned lineage in `images/student-fish/<your-lineage>/`. Pick 3 of those and you're done — no uploading, no internet hunting.
 
-If you want to use a fish that isn't pre-loaded:
+If you want to use a fish that isn't pre-loaded, **put it in the dedicated `images/student-images/` folder** (kept separate from the curated starter library so it's clear what's yours):
 
-- **Native install / Docker:** save the JPG anywhere on your laptop and pass the full path to `segment_fish()` (e.g., `~/Downloads/my_fish.jpg`). Your work persists between RStudio sessions.
-- **Binder (cloud, ephemeral):** in RStudio's *Files* pane (bottom-right by default), click the **Upload** button → pick your JPG → upload it into the project root or `images/student-fish/<your-lineage>/`. Then refer to it as `"images/student-fish/<your-lineage>/my_fish.jpg"`. **Important — Binder sessions expire after 90 minutes of inactivity and uploaded files are NOT saved.** Finish your worksheet in one sitting, or download the segmented JPG (Files pane → check the box → *More* → *Export*) before logging off.
-- **Codespaces (cloud, persistent):** drag-drop the JPG into the VS Code file explorer, then refer to it by relative path. Files persist between visits, so you can come back later.
+- **Docker / Native:** drop your JPG into `~/eeb187-pavo-lab/images/student-images/` on your laptop. The bind mount makes it visible inside the R session immediately. Refer to it as `"images/student-images/my-fish.jpg"`.
+- **Binder (cloud, ephemeral):** in RStudio's *Files* pane (bottom-right), navigate to `images/student-images/`, click **Upload** → pick your JPG → OK. Refer to it as `"images/student-images/my-fish.jpg"`. **Binder sessions expire after 90 min — finish in one sitting**, or download segmented outputs before logging off.
+- **Codespaces (cloud, persistent):** drag-drop the JPG into the VS Code file explorer at `images/student-images/`. Files persist between visits.
 :::
 
 Browse the available images for your assigned lineage. (FishView, FishBase, your group's curated set, or `images/student-fish/<your-lineage>/` which is pre-loaded for every launch path.) Pick three species that look as different as you can find — for example:
@@ -110,7 +110,10 @@ sudo apt install imagemagick     # Linux
 **Per-fish use** (in R during lab):
 
 ```r
-seg_path <- segment_fish("path/to/raw_fish.jpg")
+# Use the same relative path students see in the Files pane —
+# images/student-images/<filename>.jpg for fish you uploaded yourself,
+# images/student-fish/<lineage>/<filename>.jpg for the pre-loaded library.
+seg_path <- segment_fish("images/student-images/your-fish.jpg")
 my_fish  <- getimg(seg_path)
 ```
 
@@ -149,11 +152,11 @@ Drag-drop your fish JPG into one of these free tools:
 - [**photoroom.com**](https://www.photoroom.com/tools/background-remover) — also free
 - [**clipdrop.co/remove-background**](https://clipdrop.co/remove-background) — Stability-AI tool
 
-Each returns a transparent PNG. Save the PNG into your `images/student-fish/<your-lineage>/` folder. Then in R, use the `composite_to_white()` helper to add a white background and standardize the canvas:
+Each returns a transparent PNG. Save the PNG into the `images/student-images/` folder (your personal upload area). Then in R, use the `composite_to_white()` helper to add a white background and standardize the canvas:
 
 ```r
 source("scripts/helpers.R")  # loads composite_to_white()
-seg_path <- composite_to_white("images/student-fish/<lineage>/your-fish.png")
+seg_path <- composite_to_white("images/student-images/your-fish.png")
 my_fish  <- getimg(seg_path)
 ```
 

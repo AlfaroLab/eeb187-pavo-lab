@@ -123,7 +123,17 @@ Pick three, write their filenames in your worksheet, and skip Path B.
 
 ### Path B — Bring your own fish photos
 
-**You'll do this in two steps:** (1) name your photo correctly, (2) get it into the lab folder. The "how" is different per launch path.
+**You'll do this in two steps:** (1) name your photo correctly, (2) get it into the `images/student-images/` folder. The "how" is different per launch path.
+
+::: {.callout-note title="Why a separate `student-images/` folder?"}
+The lab repo has three image folders:
+
+- `images/demo/` — the 3 demo fish for Part A (don't touch)
+- `images/student-fish/<lineage>/` — the **pre-loaded starter species** (don't add your own files here, so you can always tell what's curated vs. what's yours)
+- `images/student-images/` — **this is where YOUR uploads go**
+
+Putting your fish in `student-images/` keeps the curated library clean and makes it obvious which photos are yours vs. ours.
+:::
 
 #### Step B1 — Name your file properly
 
@@ -136,7 +146,7 @@ Format: lowercase, hyphenated, **`.jpg` extension**, named after the species (`g
 
 If you're not sure of the species name, look it up on FishBase or Wikipedia first. If you have multiple photos of the same species, append a number: `chaetodon-auriga-1.jpg`, `chaetodon-auriga-2.jpg`.
 
-#### Step B2 — Get the file into your lab folder
+#### Step B2 — Get the file into `images/student-images/`
 
 ::: {.callout-tip title="Docker users — the path of least resistance"}
 Your lab repo on your Mac and the RStudio session inside the container are connected. **Anything you save into the host folder appears inside RStudio automatically. No "upload" needed.**
@@ -145,26 +155,26 @@ Step-by-step (Mac):
 
 1. Open **Finder**.
 2. From the top menu: **Go → Home** (or press `Cmd-Shift-H`). You see your home folder.
-3. Double-click **`eeb187-pavo-lab`** → **`images`** → **`student-fish`** → your lineage folder (e.g., `chaetodontidae`).
+3. Double-click **`eeb187-pavo-lab`** → **`images`** → **`student-images`**.
 4. **Drag your renamed JPG into that folder.**
 5. Switch back to RStudio in your browser. In the Files pane (bottom-right), click the small refresh icon (🔄). You should see the new JPG appear.
 6. **Verify** in the R Console:
 
    ```r
-   list.files("images/student-fish/chaetodontidae")
+   list.files("images/student-images")
    ```
 
    Your file should be in the list.
 
-For Windows, replace step 2 with **Open File Explorer → `Documents → eeb187-pavo-lab → images → student-fish → <lineage>`**.
+For Windows, replace step 2 with **Open File Explorer → `Documents → eeb187-pavo-lab → images → student-images`**.
 
-For Linux, use your file manager to navigate to `~/eeb187-pavo-lab/images/student-fish/<lineage>/`.
+For Linux, use your file manager to navigate to `~/eeb187-pavo-lab/images/student-images/`.
 :::
 
 ::: {.callout-tip title="Binder users — use the Upload button"}
 Binder is cloud-based, so you can't drag files into a Mac/Windows folder. Instead use RStudio's built-in upload:
 
-1. In RStudio's **Files pane** (bottom-right), click the folder names to navigate: `images` → `student-fish` → your lineage (e.g., `chaetodontidae`). The breadcrumb at the top of the Files pane should now read `Home > images > student-fish > chaetodontidae`.
+1. In RStudio's **Files pane** (bottom-right), click the folder names to navigate: `images` → `student-images`. The breadcrumb at the top of the Files pane should now read `Home > images > student-images`.
 2. In the same Files pane toolbar, click **Upload** (third button, has an upward arrow icon).
 3. A dialog appears. Click **Choose File**, pick your JPG from your computer, then click **OK**.
 4. The file uploads and appears in the file list.
@@ -175,11 +185,11 @@ Binder is cloud-based, so you can't drag files into a Mac/Windows folder. Instea
 :::
 
 ::: {.callout-tip title="Codespaces users"}
-Same as Docker — drag-drop the JPG into the VS Code file explorer at `images/student-fish/<lineage>/`. Files persist between visits.
+Same as Docker — drag-drop the JPG into the VS Code file explorer at `images/student-images/`. Files persist between visits.
 :::
 
 ::: {.callout-tip title="Native (local R + RStudio) users"}
-You already have everything on your laptop. Drop your JPG into `~/eeb187-pavo-lab/images/student-fish/<lineage>/` using Finder/File Explorer/your file manager — same as your everyday file workflow.
+You already have everything on your laptop. Drop your JPG into `~/eeb187-pavo-lab/images/student-images/` using Finder/File Explorer/your file manager — same as your everyday file workflow.
 :::
 
 #### Step B3 — Confirm you can see your file from R
@@ -187,14 +197,14 @@ You already have everything on your laptop. Drop your JPG into `~/eeb187-pavo-la
 Whichever path you used, after the file is in place, run this in the R Console:
 
 ```r
-list.files("images/student-fish/<your-lineage>/")
+list.files("images/student-images")
 ```
 
 You should see your filename in the output. If not:
 
-- **Docker:** check the file is actually in `~/eeb187-pavo-lab/images/student-fish/<lineage>/` on your Mac/PC (use Finder/File Explorer)
+- **Docker:** check the file is actually in `~/eeb187-pavo-lab/images/student-images/` on your Mac/PC (use Finder/File Explorer)
 - **Binder:** check the file appears in the RStudio Files pane (you may need to click the refresh icon)
-- **Both:** verify you spelled the lineage folder name correctly (`chaetodontidae`, `pomacanthidae`, `balistidae`, `acanthuridae`)
+- **Both:** verify the folder name is spelled `student-images` (with an "s", with a hyphen)
 
 #### Step B4 — Segment the photo (background removal)
 
@@ -495,29 +505,87 @@ Write your three picks in the worksheet's Part B Step 1.
 
 ## Step B.2 — Segment your own fish
 
-If your three picks are from the pre-loaded `student-fish/<lineage>/` library, **they're already cropped** and you can skip ahead to Step B.3 with `getimg()` directly.
+If your three picks are from the pre-loaded `student-fish/<lineage>/` library, **they're already cropped and segmented** — skip ahead to Step B.3 and load them directly with `getimg()`.
 
-If you brought a raw photo with water/reef in the background, segment it first — pick the path that works for your install:
+If you uploaded your own raw photo (with water/reef/aquarium glass in the background), segment it first.
 
-### Path 1 — Local with `segment_fish()`
+### How to write the path to your fish image
+
+::: {.callout-tip title="What is a 'path' and how do I write one?"}
+A **path** is just R's way of finding your file. In this lab, every path is **relative to the lab repo root** — meaning R looks for files starting from your `eeb187-pavo-lab` folder. You don't need to type your full computer's directory; just the part inside the lab repo.
+
+The folder structure for images:
+
+```
+eeb187-pavo-lab/
+└── images/
+    ├── demo/                       ← demo fish (Part A)
+    ├── student-fish/<lineage>/     ← pre-loaded starter species
+    │   ├── chaetodon-auriga.jpg
+    │   ├── chaetodon-lunulatus.jpg
+    │   └── …
+    └── student-images/             ← YOUR uploads
+        └── your-fish.jpg           ← whatever you put here
+```
+
+To refer to a file, write the path with **forward slashes** (`/`), starting from `images/`:
+
+| Image you want | Path you write |
+|---|---|
+| A pre-loaded chaetodontid | `"images/student-fish/chaetodontidae/chaetodon-auriga.jpg"` |
+| A fish you uploaded yourself | `"images/student-images/my-fish.jpg"` |
+
+**RStudio can complete paths for you.** In the Console, type the opening quote and the first letter — `"i` — then press the **Tab** key. RStudio shows a dropdown of files and folders. Keep tabbing as you type to navigate folders. This is the easiest way to avoid typos.
+:::
+
+### Path 1 — Local with `segment_fish()` (recommended if installed)
+
+This is the rembg-based approach — same one used to make the demo fish. Run from the R Console:
 
 ```r
-seg_path <- segment_fish("images/student-fish/<lineage>/your-fish.jpg")
+# If your fish is at images/student-images/my-fish.jpg:
+seg_path <- segment_fish("images/student-images/my-fish.jpg")
 my_fish  <- getimg(seg_path)
 ```
 
-### Path 2 — Web tool
+The output goes back to `images/student-images/my-fish-segmented.jpg`. `seg_path` will be that string, ready to pass to `getimg()`.
 
-Drag-drop your fish JPG into [remove.bg](https://www.remove.bg/), [photoroom.com](https://www.photoroom.com/tools/background-remover), or [clipdrop.co/remove-background](https://clipdrop.co/remove-background). Save the transparent PNG into the same folder. Then:
+::: {.callout-tip title="Don't know what to type for the path?"}
+**Easy way 1 — let RStudio find it for you:** In the Files pane (bottom-right), navigate to your file, click the file name (just once, don't open it), then click **More → Copy Path...** in the Files pane toolbar. RStudio puts the relative path on your clipboard. Paste it inside `segment_fish("...")`.
+
+**Easy way 2 — use list.files() to read the name:**
+```r
+list.files("images/student-images")    # returns a character vector of files
+```
+You can copy a filename from the printed output.
+
+**Easy way 3 — Tab completion:** type `segment_fish("im` then press Tab. RStudio fills in `"images/`. Press Tab again to drop into folders.
+:::
+
+### Path 2 — Web tool (no install)
+
+Drag-drop your fish JPG into one of:
+
+- [remove.bg](https://www.remove.bg/) — fastest, no signup
+- [photoroom.com](https://www.photoroom.com/tools/background-remover) — also free
+- [clipdrop.co/remove-background](https://clipdrop.co/remove-background) — Stability-AI tool
+
+Each returns a **transparent PNG**. Save the PNG into your `images/student-images/` folder (same as Step B2 in [Section 2](#path-b-bring-your-own-fish-photos)). Then in R:
 
 ```r
-seg_path <- composite_to_white("images/student-fish/<lineage>/your-fish.png")
+seg_path <- composite_to_white("images/student-images/my-fish.png")
 my_fish  <- getimg(seg_path)
 ```
 
-### Path 3 — Manual crop
+### Path 3 — Manual crop (always works, no segmentation tools needed)
 
-Open in Preview.app (macOS) or Photos (Windows). Drag a tight rectangle around the fish, **Tools → Crop**, save. Then load directly with `getimg(...)` — skip the segment helpers.
+Open the JPG in Preview.app (macOS) or Photos (Windows). Drag a tight rectangle around the fish, then **Tools → Crop** (Preview) or **Edit → Crop** (Photos). Save. Move the cropped JPG into `images/student-images/`. Then in R, **load directly** — skip the segment helpers:
+
+```r
+my_fish <- getimg("images/student-images/my-fish-cropped.jpg")
+```
+
+⚠️ Manual crop leaves some background pixels in the corners — your A values will be less dramatic than the demo (closer to 1). The directional A claim still holds; just smaller effect sizes.
 
 ## Step B.3 — Run the same pipeline
 
