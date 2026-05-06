@@ -130,16 +130,15 @@ debugging at 9 AM Wednesday.</p>
 
   <div class="card gold">
     <h3>4 · Docker <span class="badge badge-local">local</span></h3>
-    <div class="meta">~10 min build · skips Homebrew / pip / Rtools entirely</div>
+    <div class="meta">~2 min pull · skips Homebrew / pip / Rtools entirely</div>
     <p>Best escape hatch if Homebrew, pip, or Rtools are giving you grief. Everything (R, RStudio, ImageMagick, rembg) is pre-baked. You only need <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>.</p>
-    <p>From a terminal:</p>
+    <p>From a terminal, in a folder where you'd like the lab repo to live:</p>
     <pre><code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
 cd eeb187-pavo-lab
-docker build -t pavo-lab .
 docker run --rm -p 8787:8787 \
   -e PASSWORD=eeb187 \
   -v "$(pwd):/home/rstudio/lab" \
-  pavo-lab</code></pre>
+  ghcr.io/alfarolab/eeb187-pavo-lab:latest</code></pre>
     <p style="font-size:.88rem">Then open <code>http://localhost:8787</code> · login <code>rstudio</code> / <code>eeb187</code>.</p>
     <div class="verify">
       <strong>Ready when:</strong> RStudio loads in your browser at port 8787 and <code>library(pavo)</code> works without error.
@@ -192,12 +191,12 @@ Rscript scripts/verify_pipeline.R</code></pre>
 <h3>Docker (any OS — needs Docker Desktop)</h3>
 <pre><code>git clone https://github.com/AlfaroLab/eeb187-pavo-lab.git
 cd eeb187-pavo-lab
-docker build -t pavo-lab .              # ~10 min, one time
 docker run --rm -p 8787:8787 \
   -e PASSWORD=eeb187 \
   -v "$(pwd):/home/rstudio/lab" \
-  pavo-lab
-# → open http://localhost:8787  (user: rstudio, password: eeb187)</code></pre>
+  ghcr.io/alfarolab/eeb187-pavo-lab:latest
+# → open http://localhost:8787  (user: rstudio, password: eeb187)
+# First run pulls the image (~2 GB compressed); subsequent runs are instant.</code></pre>
 
 <hr>
 
