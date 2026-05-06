@@ -1,10 +1,5 @@
-.DS_Store
+*-backup-pre-update.pptx
+.quarto/
 .Rproj.user/
 .Rhistory
 .RData
-.Ruserdata
-.quarto/
-_site/
-*-segmented.jpg
-*-rembg-tmp.png
-Rplots.pdf
